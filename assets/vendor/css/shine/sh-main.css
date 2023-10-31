@@ -1,0 +1,37 @@
+/*****windyLogo*****/
+/*****nav*****/
+.navbar-brand {
+    display: none;
+  }
+  @media ( max-width : 992px ) {
+    .navbar-brand {
+      display: block;
+    }
+
+  }
+#logo { display: none;}
+/*****bottom******/
+.progress-bar {
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+    top: -70px;
+    transition: width ease-in-out .7s
+  }
+  .progress-line, #playpause {
+    margin-top: 25px;
+  }
+  /*****bottom******/
+
+
+  
+
+
+
+
+
+
+ 
+
+
+
