@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sh-drilldown.css">
+    <link rel="stylesheet" href="sh-livedata.css">
+    <style>
+        .box1 {
+            width: 40%;
+            border: 1px solid #000;
+        }
+        .box2 {
+            width: 40%;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div id="sh-drilldown"></div>
+    </div>
+    <div class="box2">
+        <div id="sh-livedata">g</div>
+    </div>
+    <div class="ld-row">
+        <label class="ld-label">
+            Enable Polling
+        </label>
+        <input type="checkbox" checked="checked" id="enablePolling"/>
+    </div>
+    <div class="ld-row">
+        <label class="ld-label">
+            Polling Time (Seconds)
+        </label>
+        <input class="ld-time-input" type="number" value="2" id="pollingTime"/>
+    </div>
+    <div class="ld-row">
+        <label class="ld-label">
+            CSV URL
+        </label>
+        <input class="ld-url-input" type="text" id="fetchURL"/>
+    </div>
+
+    <script src="/assets/code/highcharts.js"></script>
+    <script src="/assets/code/modules/data.js"></script>
+    <script src="/assets/code/modules/exporting.js"></script>
+    <script src="/assets/code/modules/export-data.js"></script>
+    <script src="/assets/code/modules/accessibility.js"></script>
+    <script src="/assets/code/modules/drilldown.js"></script>
+    
+    <script src="sh-highchart.js"></script>
+    <script type="text/javascript"></script>
+</body>
+</html> 
