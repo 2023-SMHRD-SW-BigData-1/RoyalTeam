@@ -1093,6 +1093,10 @@ progress {
     flex: 0 0 auto;
     width: 16.66666667%;
   }
+  .col-md-2-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
   .col-md-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -24087,4 +24091,19 @@ a.bg-vimeo:hover, a.bg-vimeo:focus {
 }
 .footer.bg-lighter hr {
   border-color: rgba(207, 211, 236, 0.15);
+}
+.bdr {
+  border: 1px solid red;
+}
+.bdb {
+  border: 1px solid blue;
+}
+.bdg {
+  border: 1px solid green;
+}
+.bdy {
+  border: 1px solid yellow;
+}
+.bd {
+  border: 1px solid black;
 }

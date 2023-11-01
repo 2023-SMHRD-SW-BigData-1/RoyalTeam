@@ -33,22 +33,19 @@
 <link rel="stylesheet" href="/assets/vendor/fonts/flag-icons.css" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="/assets/vendor/css/rtl/core.css"
-	class="template-customizer-core-css" />
-<link rel="stylesheet" href="/assets/vendor/css/rtl/theme-default.css"
-	class="template-customizer-theme-css" />
+<link rel="stylesheet" href="/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
 <link rel="stylesheet" href="/assets/css/demo.css" />
 
 <!-- Vendors CSS -->
-<link rel="stylesheet"
-	href="/assets/vendor/libs/node-waves/node-waves.css" />
-<link rel="stylesheet"
-	href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-<link rel="stylesheet"
-	href="/assets/vendor/libs/typeahead-js/typeahead.css" />
+<link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
+<link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+<link rel="stylesheet" href="/assets/vendor/libs/typeahead-js/typeahead.css" />
 
-<!-- Sh Main CSS-->
-<link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+ <!-- Sh Main CSS-->
+ <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+ <link rel="stylesheet" href="/assets/vendor/css/shine/sh-drilldown.css">
+ <link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
 
 
 
@@ -314,8 +311,7 @@
 	<script src="/assets/vendor/libs/popper/popper.js"></script>
 	<script src="/assets/vendor/js/bootstrap.js"></script>
 	<script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
-	<script
-		src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 	<script src="/assets/vendor/libs/hammer/hammer.js"></script>
 	<script src="/assets/vendor/libs/i18n/i18n.js"></script>
 	<script src="/assets/vendor/libs/typeahead-js/typeahead.js"></script>
@@ -328,5 +324,17 @@
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
 	<script src="/assets/js/sh-main-windy.js"></script>
+	
+	<!-- high chart -->
+	<script src="/assets/code/highcharts.js"></script>
+	<script src="/assets/code/modules/data.js"></script>
+	<script src="/assets/code/modules/exporting.js"></script>
+	<script src="/assets/code/modules/export-data.js"></script>
+	<script src="/assets/code/modules/accessibility.js"></script>
+	<script src="/assets/code/modules/drilldown.js"></script>
+	
+	<!-- shine chart js-->
+	<script src="/assets/vendor/js/sh-highchart.js"></script>
+	<script type="text/javascript"></script>
 </body>
 </html>

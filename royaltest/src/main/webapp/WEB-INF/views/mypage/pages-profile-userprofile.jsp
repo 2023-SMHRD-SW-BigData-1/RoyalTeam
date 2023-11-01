@@ -52,8 +52,8 @@
 
   <!-- shine-CSS-->
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
-  <link rel="stylesheet" href="/assets/vendor/css/shine/sh-highchart-pages-main.css">
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-pages-myprofile.css">
+  <link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
 
   <!-- Helpers -->
   <script src="/assets/vendor/js/helpers.js"></script>
@@ -936,7 +936,6 @@
   <!-- Main JS -->
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/sh-highchart-liveData.js"></script>
-
 
   <!-- Page JS -->
   <script src="/assets/js/pages-auth.js"></script>

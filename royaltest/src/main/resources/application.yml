@@ -1,5 +1,5 @@
 server:
-  port: 8586
+  port: 8582
 
 spring:
   main:

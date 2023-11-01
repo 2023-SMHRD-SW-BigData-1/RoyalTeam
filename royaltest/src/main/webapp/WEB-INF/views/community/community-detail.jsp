@@ -121,6 +121,12 @@
 											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
 										</div>
 									</div>
+									<div class="me-1 mr-5">
+										<a href="community-form.html"
+											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">수정</a>
+										<a href="community-form.html"
+											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">삭제</a>
+									</div>
 									<!-- title -->
 									<hr class="my-2" />
 									<!-- user info -->
@@ -178,19 +184,26 @@
 											<!-- user info -->
 											<div
 												class="d-flex justify-content-between align-items-center user-name">
-												<div class="d-flex">
+												<div class="d-flex w-100">
 													<div class="avatar-wrapper">
 														<div class="avatar me-2">
 															<img src="/assets/img/avatars/11.png" alt="Avatar"
 																class="rounded-circle" />
 														</div>
 													</div>
-													<div class="d-flex flex-column">
-														<span class="fw-medium">${detailMap.getCommuCreateNm() }</span>
+													<div class="d-flex flex-column w-100">
+														<div class="d-flex justify-content-between">
+															<span class="fw-medium">${detailMap.getCommuCreateNm() }</span>
+															<span class="fw-medium">
+																<button
+																	class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
+																<button
+																	class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
+															</span>
+														</div>
 														<div class="sh-comm-comment w-100">
-															<p class="border">코드에서 왼쪽 class="border"지우고 "댓글은 이 곳"
-															</p>
-
+															<p class="border-none">코드에서 왼쪽 class="border"지우고 "댓글은
+																이 곳"</p>
 														</div>
 														<small class="text-muted">2023.10.17<span
 															class="mx-2">18:00</span></small>
@@ -211,16 +224,18 @@
 													</div>
 
 
-													<textarea name="replyContents"
-														class="form-control border-none" id="replyContents"
+													<textarea id="replyContents" name="replyContents"
+														class="form-control border-none" 
 														rows="2" placeholder="내용을 입력해주세요"></textarea>
 
 
 													<div class="w-100">
 														<div class="ml-auto w-10">
+
+
 															<button id="btn_reply_regist" type="submit"
 																name="replySubmit"
-																class="w-100 p-2 bg-transparent border-none"
+																class="w-100 p-2 btn btn-primary bg-transparent border-none btn-no-boxshadow"
 																style="color: gray;">댓글등록</button>
 														</div>
 													</div>
@@ -230,8 +245,9 @@
 									</div>
 								</div>
 							</div>
-						</div><!--/ Content -->
-						
+						</div>
+						<!--/ Content -->
+
 
 						<!-- Footer -->
 						<footer class="content-footer footer bg-footer-theme">
@@ -245,13 +261,18 @@
 									</div>
 								</div>
 							</div>
-						</footer><!-- / Footer -->
+						</footer>
+						<!-- / Footer -->
 						<div class="content-backdrop fade"></div>
-					</div><!--/ Content wrapper -->
-				</div><!--/ Layout container -->
-			</div><!-- Content wrapper -->
-		</div><!-- Layout container -->
-		
+					</div>
+					<!--/ Content wrapper -->
+				</div>
+				<!--/ Layout container -->
+			</div>
+			<!-- Content wrapper -->
+		</div>
+		<!-- Layout container -->
+
 
 		<!-- Overlay -->
 		<div class="layout-overlay layout-menu-toggle"></div>

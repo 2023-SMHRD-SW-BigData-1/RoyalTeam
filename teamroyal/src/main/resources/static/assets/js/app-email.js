@@ -211,11 +211,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Empty compose email message inputs when modal is hidden
-    // emailCompose.addEventListener('hidden.bs.modal', event => {
-      // document.querySelector('.email-editor .ql-editor').innerHTML = '';
-      // $('#emailContacts').val('');
-      // initSelect2();
-     // });
+    emailCompose.addEventListener('hidden.bs.modal', event => {
+      document.querySelector('.email-editor .ql-editor').innerHTML = '';
+      $('#emailContacts').val('');
+      initSelect2();
+    });
 
     // Delete multiple email
     if (emailListDelete) {
