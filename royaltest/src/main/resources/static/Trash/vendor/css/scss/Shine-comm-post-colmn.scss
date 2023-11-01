@@ -1,0 +1,67 @@
+/***********comm-post-column**********/
+.Shine-post-column-ctt {
+}
+
+.Shine-post-column-ctt-second {
+  overflow: scroll;
+}
+.Shine-post-column-ctt-title, .Shine-post-column-ctt-ctt {
+  width: 100%;
+  >li {
+    width: 20%;
+    margin: 10px 0 0 -1px;
+    &:first-child {
+      background-color: #ddd;
+      text-align: center;
+    }
+    &:last-child {
+      width: 80%;
+    }
+  }
+}
+.Shine-post-column-ctt-img {
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.Shine-post-column-ctt-input {
+  padding: 10px;
+  width: 100%;
+  line-height: 125px;
+}
+/***********comm-modification**********/
+
+
+/***********comm-modification**********/
+.filebox .upload-name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  width: 78%;
+  color: #999999;
+}
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 40px;
+  margin-left: 10px;
+}
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+/***********comm-modification**********/
+
+.reddot {
+  color: red;
+}

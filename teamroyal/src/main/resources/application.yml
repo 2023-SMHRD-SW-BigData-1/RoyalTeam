@@ -1,0 +1,22 @@
+server:
+  port: 8582
+
+spring:
+  main:
+    allow-circular-references: true
+  # JSP 경로 설정
+  mvc:
+    view:
+      prefix: /WEB-INF/views
+      suffix: .jsp
+  # DB 연결정보
+  datasource:
+    url: jdbc:oracle:thin:@project-db-campus.smhrd.com:1524:xe
+    username: royal
+    password: r1234
+    driver-class-name: oracle.jdbc.OracleDriver
+
+mybatis:
+  mapper-locations: mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.user.dao.UserDAO">
+	
+	<select id="userSelectList" parameterType="String" resultType="com.user.vo.UserVO">
+		SELECT 
+			USER_NICK AS userNick
+			, USER_EMAIL AS userEmail
+			, USER_PW AS userPw
+			, USER_NAME AS userNm
+			, USER_ADD AS userAdd
+			, USER_PHONE AS userPhone
+			, USER_ISDELETED AS userIsdeleted
+			, USER_CREATE_AT AS userCreateAt
+			, USER_CREATE_NAME AS userCreateNm
+			, USER_MODIFY_AT AS userModifyAt
+			, USER_MODIFY_NAME AS userModifyNm
+			, USER_ROLE AS userRole
+		FROM ROYAL.TB_USER
+		WHERE 1=1
+		<if test="userNick != null and userNick != ''">
+			AND USER_NICK = #{userNick}
+		</if>
+		
+		
+	</select>
+	
+</mapper>    
