@@ -239,12 +239,9 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--/ Content -->
-				</div>
-				<!-- Content wrapper -->
-			</div>
-			<!-- Layout container -->
+					</div><!--/ Content -->
+					
+		
 
 			<!-- Footer -->
 			<footer class="content-footer footer bg-footer-theme">
@@ -260,12 +257,12 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 						</div>
 					</div>
 				</div>
-			</footer>
-			<!-- / Footer -->
-
+			</footer><!-- / Footer -->
 			<div class="content-backdrop fade"></div>
-		</div>
-	</div>
+          </div><!--/ Content wrapper -->
+        </div><!--/ Layout container -->
+      </div><!-- Content wrapper -->
+    </div><!-- Layout container -->
 
 
 	<!-- Overlay -->

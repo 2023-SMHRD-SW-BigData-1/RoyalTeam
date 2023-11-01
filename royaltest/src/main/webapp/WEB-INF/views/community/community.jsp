@@ -153,13 +153,10 @@
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
-          </div>
-          <!--/ Content wrapper -->
-        </div>
-
-        <!--/ Layout container -->
-      </div>
-    </div>
+          </div><!--/ Content wrapper -->
+        </div><!--/ Layout container -->
+      </div><!-- Content wrapper -->
+    </div><!-- Layout container -->
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>

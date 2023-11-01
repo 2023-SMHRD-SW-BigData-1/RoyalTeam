@@ -876,14 +876,11 @@
                         </label>
                         <input class="ld-url-input" type="text" id="fetchURL" />
                       </div>
-                      
                     </div>
                     <div class="text-end mb-4">
                       <a href="/html/power/power-plant.html">View More Power Plant</a>
                     </div>
                   </div> <!--/ min profit -->
-
-                  
                 </div> <!--/ right side-->
               </div> <!--/ content-->
             </div> <!--/ container box-->
@@ -901,8 +898,7 @@
                   </div>
                 </div>
               </div>
-            </footer>
-            <!-- / Footer -->
+            </footer><!-- / Footer -->
             <div class="content-backdrop fade"></div>
           </div><!--/ Content -->
         </div><!--/ Content wrapper -->

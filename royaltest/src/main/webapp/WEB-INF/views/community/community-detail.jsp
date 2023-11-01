@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-compact"
@@ -79,18 +80,17 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link " href="/user/Success">MAIN</a>
-							<a class="nav-item nav-link active" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
-							<a class="nav-item nav-link" href="/community/email">MAIL</a>
-							<a class="nav-item nav-link" href="/auction/auction">AUCTION</a>
-							<a class="nav-item nav-link" href="/power">POWER PLANT</a>
+							<a class="nav-item nav-link " href="/user/Success">MAIN</a> <a
+								class="nav-item nav-link active" href="/community/list">COMMUNITY</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link" href="/auction/auction">AUCTION</a> <a
+								class="nav-item nav-link" href="/power">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
 								href="/user/login/userProfile"><i
-									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> 
-									Profile</a>
+									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
 									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
@@ -206,7 +206,8 @@
 												<form action="/community/list/post/reply" method="post">
 
 													<div class="d-flex flex-column pl-3">
-														<span class="fw-medium fw-bolder"><sec:authentication property="principal.userNick"/></span>
+														<span class="fw-medium fw-bolder"><sec:authentication
+																property="principal.userNick" /></span>
 													</div>
 
 
@@ -217,21 +218,20 @@
 
 													<div class="w-100">
 														<div class="ml-auto w-10">
-															<button id="btn_reply_regist" type="submit" name="replySubmit"
+															<button id="btn_reply_regist" type="submit"
+																name="replySubmit"
 																class="w-100 p-2 bg-transparent border-none"
 																style="color: gray;">댓글등록</button>
 														</div>
 													</div>
 												</form>
 											</div>
-
-
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!--/ Content -->
+						</div><!--/ Content -->
+						
 
 						<!-- Footer -->
 						<footer class="content-footer footer bg-footer-theme">
@@ -240,24 +240,18 @@
 									class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
 									<div>
 										©
-										<script>
-                      document.write(new Date().getFullYear());
-                    </script>
+										<script>document.write(new Date().getFullYear());</script>
 										, made with ❤️ by Royal
 									</div>
 								</div>
 							</div>
-						</footer>
-						<!-- / Footer -->
-
+						</footer><!-- / Footer -->
 						<div class="content-backdrop fade"></div>
-					</div>
-					<!--/ Content wrapper -->
-				</div>
-
-				<!--/ Layout container -->
-			</div>
-		</div>
+					</div><!--/ Content wrapper -->
+				</div><!--/ Layout container -->
+			</div><!-- Content wrapper -->
+		</div><!-- Layout container -->
+		
 
 		<!-- Overlay -->
 		<div class="layout-overlay layout-menu-toggle"></div>

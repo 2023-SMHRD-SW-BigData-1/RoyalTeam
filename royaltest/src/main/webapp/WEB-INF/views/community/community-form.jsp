@@ -114,9 +114,7 @@
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
-
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row my-4">
                 <div class="col">
@@ -180,17 +178,12 @@
                   </div>
                 </div>
               </div>
-            </footer>
-            <!-- / Footer -->
-
+            </footer><!-- / Footer -->
             <div class="content-backdrop fade"></div>
-          </div>
-          <!--/ Content wrapper -->
-        </div>
-
-        <!--/ Layout container -->
-      </div>
-    </div>
+          </div><!--/ Content wrapper -->
+        </div><!--/ Layout container -->
+      </div><!-- Content wrapper -->
+    </div><!-- Layout container -->
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
