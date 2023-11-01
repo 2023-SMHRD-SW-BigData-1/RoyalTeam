@@ -15,8 +15,15 @@ spring:
     username: royal
     password: r1234
     driver-class-name: oracle.jdbc.OracleDriver
+    
+  servlet:
+    multipart: 
+      location: C:\\royal\\commuImg
+      max-file-size: 50MB
+      max-request-size: 50MB
 
 mybatis:
   mapper-locations: mappers/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    

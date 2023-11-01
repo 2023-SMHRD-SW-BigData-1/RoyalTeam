@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.community.dao.CommuDAO">
+
+	<!-- 게시글 조회 -->
+	<select id="commuListPost" resultType="com.community.vo.CommuVO" parameterType="com.community.vo.CommuVO">
+		SELECT
+		COMMU_NO as commuNo
+		, USER_NICK as userNick
+		, COMMU_TITLE as commuTitle
+		, COMMU_TEXT as commuText
+		, COMMU_ISDELETED as commuIsDeleted
+		, COMMU_CRETATE_AT as commuCreateAt
+		, COMMU_CRETATE_NAME as commuCreateNm
+		, COMMU_MODIFY_AT as commuModifyAt
+		, COMMU_MODIFY_NAME as commuModifyNm
+		FROM ROYAL.TB_COMMU
+		ORDER BY COMMU_NO DESC
+	</select>
+
+	<!-- 게시글 작성 -->
+	<insert id="commuWrite" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_COMMU (
+		USER_NICK
+		<if test="commuTitle != null and commuTitle != ''">
+			,COMMU_TITLE
+		</if>
+		<if test="commuText != null and commuText != ''">
+			,COMMU_TEXT
+		</if>
+		,COMMU_CRETATE_AT
+		,COMMU_CRETATE_NAME
+		) VALUES (
+		#{loginUser}
+		<if test="commuTitle != null and commuTitle != ''">
+			,#{commuTitle}
+		</if>
+		<if test="commuText != null and commuText != ''">
+			,#{commuText}
+		</if>
+		,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		,#{loginUser}
+		)
+		<selectKey keyColumn="COMMU_NO" keyProperty="commuNo" resultType="com.community.vo.CommuVO" order="AFTER">
+			SELECT MAX(COMMU_NO) AS
+			commuNo FROM ROYAL.TB_COMMU
+		</selectKey>
+	</insert>
+	
+	<!-- 게시글 이미지 저장 -->
+	<insert id="commuWriteImg" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.IMG_MASTER(
+		<if test="commuImgPath != null and commuImgPath != ''">
+			IMG_PATH,
+		</if>
+		<if test="commuImgNm != null and commuImgNm != ''">
+			IMG_NAME,
+		</if>
+		<if test="commuImgU != null and commuImgU != ''">
+			IMG_UUID,
+		</if>
+		<if test="commuImgEx != null and commuImgEx != ''">
+			IMG_EXTENSION,
+		</if>
+		<if test="commuImgSize != null and commuImgSize != ''">
+			IMG_SIZE,
+		</if>
+		IMG_CREATE_AT
+		, IMG_CREATE_NAME
+		)VALUES(
+		<if test="commuImgPath != null and commuImgPath != ''">
+			#{commuImgPath},
+		</if>
+		<if test="commuImgNm != null and commuImgNm != ''">
+			#{commuImgNm},
+		</if>
+		<if test="commuImgU != null and commuImgU != ''">
+			#{commuImgU},
+		</if>
+		<if test="commuImgEx != null and commuImgEx != ''">
+			#{commuImgEx},
+		</if>
+		<if test="commuImgSize != null and commuImgSize != ''">
+			#{commuImgSize},
+		</if>
+		TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
+		#{loginUser}
+		)
+		<selectKey keyColumn="IMG_NO" keyProperty="commuImgNo" resultType="com.community.vo.CommuVO" order="AFTER">
+			SELECT MAX(IMG_NO) AS commuImgNo 
+			FROM ROYAL.IMG_MASTER
+		</selectKey>
+	</insert>
+
+	<!-- 게시글 조회 -->
+	<select id="commuListPostDetail" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
+		SELECT
+		COMMU_NO as commuNo
+		, USER_NICK as userNick
+		, COMMU_TITLE as commuTitle
+		, COMMU_TEXT as commuText
+		, COMMU_ISDELETED as commuIsDeleted
+		, COMMU_CRETATE_AT as commuCreateAt
+		, COMMU_CRETATE_NAME as commuCreateNm
+		, COMMU_MODIFY_AT as commuModifyAt
+		, COMMU_MODIFY_NAME as commuModifyNm
+		FROM ROYAL.TB_COMMU
+		WHERE
+		<if test="commuNo != null and commuNo != ''">
+			COMMU_NO=#{commuNo}
+		</if>
+		ORDER BY COMMU_NO DESC
+	</select>
+	
+	<!-- 이미지 조회 -->
+	<select id="commuListPostImg" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
+		SELECT IMG_NO as commuImgNo
+		, IMG_PATH as commuImgPath
+		, IMG_NAME as commuImgNm
+		, IMG_UUID as commuImgU
+		, IMG_EXTENSION as commuImgEx
+		, IMG_SIZE as commuImgSize
+		, IMG_CREATE_AT as commuImgCreateAt
+		, IMG_CREATE_NAME as commuImgCreateNm
+		FROM ROYAL.IMG_MASTER
+		WHERE IMG_NAME =#{commuImgNm}
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="commuModify" parameterType="com.community.vo.CommuVO">
+		UPDATE ROYAL.TB_COMMU
+		SET
+		<if test="commuTitle != null and commuTitle != ''">
+			COMMU_TITLE = #{modifyTitle}
+		</if>
+		<if test="commuText != null and commuText != ''">
+			,COMMU_TEXT = #{modifyText}
+		</if>
+		, COMMU_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, COMMU_MODIFY_NAME=#{loginUser}
+		WHERE COMMU_NO=#{commuNo};
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="commuDelete" parameterType="com.community.vo.CommuVO">
+		DELETE FROM ROYAL.TB_COMMU
+		WHERE COMMU_NO=#{commuNo};
+	</delete>
+
+	<!-- 댓글 조회 -->
+	<select id="replyList" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
+		SELECT *
+		FROM ROYAL.TB_REPLY
+		WHERE 1=1
+		<if test="replyNo != null and replyNo  != ''">
+			AND REPLY_NO = #{replyNo}
+		</if>
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="commentWrite" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_REPLY(
+		USER_NICK
+		, REPLY_TEXT
+		, COMMU_NO
+		, REPLY_CREATE_NAME
+		) VALUES (
+		#{userNick}
+		<if test="replyText != null and replyText != ''">
+			,#{replyText}
+		</if>
+		, #{commuNo}
+		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, 'USER'
+		);
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="commentModify" parameterType="com.community.vo.CommuVO">
+		UPDATE ROYAL.TB_REPLY
+		SET
+		<if test="replyText != null and replyText != ''">
+			REPLY_TEXT = #{replyText}
+		</if>
+		, REPLY_MODIFY_AT=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, REPLY_MODIFY_NAME='USER'
+		WHERE REPLY_NO=#{replyNo}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="commentDelete" parameterType="com.community.vo.CommuVO">
+		DELETE FROM ROYAL.TB_REPLY
+		WHERE REPLY_NO=#{replyNo}
+	</delete>
+
+
+</mapper>

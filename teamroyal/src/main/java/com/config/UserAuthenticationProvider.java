@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.user.service.UserService;
@@ -23,6 +24,7 @@ import com.user.vo.UserVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Component
 @Slf4j
 @Service
 public class UserAuthenticationProvider implements AuthenticationProvider {
@@ -41,12 +43,14 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		String userId = authentication.getName();
 		String userPw = authentication.getCredentials().toString();
 		
-		log.info(userId + "로그인 시도를 하였습니다.");
+		System.out.println(userId + "로그인 시도를 하였습니다.");
 		
 		List<UserVO> userList = userService.userSelectList(userId);
+		
+		System.out.println("userList >>>" + userList);
 
 		if(userList == null || userList.size() < 1) {
-			throw new UsernameNotFoundException(messages.getMessage("userMapper.selectUserList.notFound",new Object[] { userId }, "{0} 사용자가 존재하지 않습니다."));
+			throw new UsernameNotFoundException(messages.getMessage("User.notFound",new Object[] { userId }, "{0} 사용자가 존재하지 않습니다."));
 		}
 		
 		UserVO userVo = userList.get(0);

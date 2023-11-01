@@ -3,6 +3,7 @@
     
 <mapper namespace="com.user.dao.UserDAO">
 	
+	<!-- 회원 조회 -->
 	<select id="userSelectList" parameterType="String" resultType="com.user.vo.UserVO">
 		SELECT 
 			USER_NICK AS userNick
@@ -22,8 +23,80 @@
 		<if test="userNick != null and userNick != ''">
 			AND USER_NICK = #{userNick}
 		</if>
-		
-		
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="userLogin" parameterType="com.user.vo.UserVO" resultType="com.user.vo.UserVO">
+		SELECT *
+		FROM ROYAL.TB_USER
+		WHERE USER_NICK=#{userNick} AND USER_PW=#{userPw}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="userInfoInsert" parameterType="com.user.vo.UserVO">
+		INSERT INTO ROYAL.TB_USER (
+			USER_NICK
+			,USER_EMAIL
+			,USER_PW
+			,USER_NAME
+			,USER_ADD
+			,USER_PHONE
+			<if test="userIsdeleted != null and userIsdeleted != ''">
+				, USER_ISDELETED
+			</if>
+			, USER_CREATE_AT
+			, USER_CREATE_NAME
+			,USER_ROLE
+		)VALUES(
+			#{userNick}
+			,#{userEmail}
+			,#{userPw}
+			,#{userNm}
+			,#{userAdd}
+			,#{userPhone}
+			<if test="userIsdeleted != null and userIsdeleted != ''">
+				,#{userIsdeleted}
+			</if>
+			, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			, 'USER'
+			,'USER'
+		)
+	</insert>
+	
+	<!-- 회원정보 수정 -->
+	<update id="userInfoUpdate" parameterType="com.user.vo.UserVO">
+		UPDATE ROYAL.TB_USER SET 
+			USER_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			, USER_MODIFY_NAME = 'USER'
+			<if test="userPw != null and userPw != ''">
+				,USER_PW = #{userPw}
+			</if>
+			<if test="userNm != null and userNm != ''">
+				,USER_NAME = #{userNm}
+			</if>
+			<if test="userAdd != null and userAdd != ''">
+				,USER_ADD = #{userAdd}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				,USER_PHONE = #{userPhone}
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				,USER_EMAIL = #{userEmail}
+			</if>
+		WHERE USER_NICK = #{userNick}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="userInfoDelete" parameterType="com.user.vo.UserVO">
+		DELETE FROM ROYAL.TB_USER
+		WHERE USER_NICK = #{userNick};
+	</delete>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="userFindPw" parameterType="com.user.vo.UserVO">
+		SELECT *
+		FROM ROYAL.TB_USER
+		WHERE USER_EMAIL = #{userEmail} AND USER_PHONE = #{userPhone}
 	</select>
 	
 </mapper>    

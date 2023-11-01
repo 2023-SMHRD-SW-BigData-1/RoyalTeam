@@ -19,15 +19,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	
+	
 	private RequestCache requestCache = new HttpSessionRequestCache();
 	private String targetUrlParameter;
-	private String defaultUrl;
+	private String defaultUrl = "/main/index";
 	private boolean useReferer;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
 	public LoginSuccessHandler() {
 		targetUrlParameter = "";
-		defaultUrl = "/";
+		defaultUrl = "/user/Success";
 		useReferer = false;		
 	}
 	
@@ -53,13 +54,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	/**
 	 * session clear
 	 * @param request
+	 * @return 
 	 */
 	private void clearAuthenticationAttributes(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			return;
 		}
-		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 	}
 	
 	//메뉴 path는 권한을 통해 받기에 디폴트로 로그인

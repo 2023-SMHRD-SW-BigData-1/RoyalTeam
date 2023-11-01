@@ -27,7 +27,6 @@ public class LoginInfoVO implements UserDetails {
 		private String userAdd; //주소
 		private String userPhone; //전화번호
 		
-		
 		//권한
 		private List<String> auths;
 
@@ -74,5 +73,7 @@ public class LoginInfoVO implements UserDetails {
 			this.password = userVo.getUserPw();
 			this.username = userVo.getUserNick();
 		}
+
+		
 		
 }
