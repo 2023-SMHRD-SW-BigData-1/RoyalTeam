@@ -1,6 +1,7 @@
 package com.user.controller;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.community.vo.CommuVO;
 import com.user.service.UserService;
 import com.user.vo.UserVO;
 
@@ -36,11 +39,11 @@ public class UserController {
 		System.out.println("teste11");
 		return "/main/index-non";
 	}
-	
-	@RequestMapping(value = "/Success", method = { RequestMethod.GET, RequestMethod.POST })
+		
+	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginSuccess(Model model, HttpSession session, HttpServletResponse response) {
 		System.out.println("teste22");
-		
+			
 		return "/main/index";
 	}
 	
@@ -89,14 +92,24 @@ public class UserController {
 	}
 
 	// 회원정보 페이지로 이동
-	@RequestMapping(value = "/login/userProfile", method = RequestMethod.GET)
-	public String userProfile() {
+	@RequestMapping(value = "/login/userProfile/{userNick}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String userProfile(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
+		
+		UserVO userMap = userService.userModifyList(userNick);
+		
+		model.addAttribute("userMap", userMap);
+		
 		return "/mypage/pages-profile-userprofile";
 	}
 
 	// 회원정보 수정 페이지로 이동
-	@RequestMapping(value = "/login/userProfile/modify", method = RequestMethod.GET)
-	public String userProfileModify() {
+	@RequestMapping(value = "/login/userProfile/modify/{userNick}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String userProfileModify(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
+		
+		UserVO userMap = userService.userModifyList(userNick);
+		
+		model.addAttribute("userMap", userMap);
+		
 		return "/mypage/pages-profile-account";
 	}
 
@@ -110,21 +123,28 @@ public class UserController {
 	 * ------------이력------------ 
 	 * 2023.10.24 / 정윤지 / 최초 적용
 	 */
-	@RequestMapping(value = "/login/userProfile/modify/success", method = RequestMethod.POST)
-	public Map<String, Object> modify(@ModelAttribute UserVO userVo, HttpSession session) {
+	@RequestMapping(value = "/login/userProfile/modify/{userNick}/success", method = { RequestMethod.GET, RequestMethod.POST })
+	public String modify(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
 		
 		System.out.println("회원수정진입");
+		
+		UserVO userMap = userService.userModifyList(userNick);
+		
+		model.addAttribute("userMap", userMap);
+		
 		Map<String, Object> updateReMap = userService.userInfoUpdate(userVo);
 		
 		String reString = updateReMap.get("updateReCode").toString();
 		if (reString.equals("22")) {
 			System.out.println("회원수정 성공");
+			return "redirect:/login/userProfile/"+userNick;
 		} else if (reString.equals("01")) {
 			System.out.println("회원수정 필수값 오류");
+			return "redirect:/login/userProfile/modify/"+userNick+"/success";
 		} else {
 			System.out.println("관리자 확인이 필요합니다.");
+			return "redirect:/login/userProfile/modify/"+userNick+"/success";
 		}
-		return updateReMap;
 	}
 
 	/**
@@ -136,8 +156,8 @@ public class UserController {
 	 * 2023.10.24 / 정윤지 / 최초 적용
 	 */
 	@RequestMapping(value = "/login/userDelete/{userNick}")
-	public Map<String, Object> delete(@ModelAttribute UserVO userVo) {
-
+	public Map<String, Object> delete(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo) {
+		
 		Map<String, Object> deleteMap = userService.userInfoDelete(userVo);
 
 		String reString = deleteMap.get("deleteReCode").toString();
@@ -189,7 +209,7 @@ public class UserController {
 	}
 
 	// 관리자 manager 페이지 이동
-	@RequestMapping(value = "/login/userProfile/Manager", method = RequestMethod.GET)
+	@RequestMapping(value = "/login/userProfile/manager", method = RequestMethod.GET)
 	public String userProfileManager() {
 		return "/mypage/pages-profile-magnager";
 	}

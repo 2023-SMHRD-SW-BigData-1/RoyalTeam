@@ -22,13 +22,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	
 	private RequestCache requestCache = new HttpSessionRequestCache();
 	private String targetUrlParameter;
-	private String defaultUrl = "/main/index";
+	private String defaultUrl = "/user/index";
 	private boolean useReferer;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
 	public LoginSuccessHandler() {
 		targetUrlParameter = "";
-		defaultUrl = "/user/Success";
+		defaultUrl = "/user/index";
 		useReferer = false;		
 	}
 	

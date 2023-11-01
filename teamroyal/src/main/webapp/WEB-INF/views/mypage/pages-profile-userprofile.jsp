@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
@@ -112,12 +113,12 @@
               <div class="col-md-12">
                 <ul class="nav nav-pills flex-column flex-sm-row mb-4">
                   <li class="nav-item">
-                    <a class="nav-link active" href="./pages-profile-userprofile.html"><i
+                    <a class="nav-link active" href="/user/login/userProfile"><i
                         class="ti-xs ti ti-user-check me-1"></i>
                       Profile</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-notifications.html"><i class="ti-xs ti ti-bell me-1"></i>
+                    <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
                       notification</a>
                     </li>
                     <!-- <li class="nav-item">
@@ -133,7 +134,7 @@
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-magnager.html"><i
+                    <a class="nav-link" href="/user/login/userProfile/manager"><i
                         class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
                   </li>
                 </ul>
@@ -179,10 +180,11 @@
 
 
                               <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalCenter">
+                              <a href="/user/login/userProfile/modify/${userMap.getUserNick() }">
+                              <button type="button" class="btn btn-primary">
                                 <i class="ti ti-link me-1"></i>회원정보수정
                               </button>
+                              </a>
                               <!-- Modal -->
                               <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -194,10 +196,9 @@
                                     <div class="container-xxl">
                                       <div class="authentication-wrapper authentication-basic container-p-y">
                                         <div class="authentication-inner py-4">
-                                          <!-- Forgot Password -->
+                                        <!-- 
                                           <div class="card">
                                             <div class="card-body">
-                                              <!-- Logo -->
                                               <div class="app-brand justify-content-center mb-4 mt-2">
                                                 <a href="index.html" class="app-brand-link gap-2">
                                                   <span class="app-brand-logo demo" style="width: 60px; height: 60px;">
@@ -206,7 +207,6 @@
                                                   <span class="app-brand-text demo text-body fw-bold">SHINE</span>
                                                 </a>
                                               </div>
-                                              <!-- /Logo -->
                                               <h4 class="mb-1 pt-2">🔒회원정보수정</h4>
                                               <p class="mb-4">이메일을 입력하세요
                                               </p>
@@ -221,7 +221,7 @@
                                               </form>
                                             </div>
                                           </div>
-                                          <!-- /Forgot Password -->
+                                           -->
                                         </div>
                                       </div>
                                     </div>
@@ -254,23 +254,23 @@
                       <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">별명:</span>
-                          <span><sec:authentication property="principal.userNick"/></span>
+                          <span>${userMap.getUserNick() }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-check text-heading"></i><span class="fw-medium mx-2 text-heading">이름:</span>
-                          <span><sec:authentication property="principal.userNm"/></span>
+                          <span>${userMap.getUserNm() }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">Email:</span>
-                          <span><sec:authentication property="principal.userEmail"/></span>
+                          <span>${userMap.getUserEmail() }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-flag text-heading"></i><span class="fw-medium mx-2 text-heading">주소:</span>
-                          <span><sec:authentication property="principal.userAdd"/></span>
+                          <span>${userMap.getUserAdd() }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">연락처:</span>
-                          <span><sec:authentication property="principal.userPhone"/></span>
+                          <span>${userMap.getUserPhone() }</span>
                         </li>
                       </ul>
                     </div>

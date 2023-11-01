@@ -62,10 +62,20 @@ public class CommuServiceImp implements CommuService {
 
 			String imgFileName = id + of;
 			
-			int imgDataCnt = commuDao.commuWriteImg(commuVo);
-
 			System.out.println("=== 이미지 등록 ===");
 
+			System.out.println("getSize" + file.getSize());
+			System.out.println("getContentType" + file.getContentType());
+			System.out.println("getName" + file.getName());
+			System.out.println("getOriginalFilename" + file.getOriginalFilename());
+			
+			commuVo.setCommuImgNm(imgFileName);
+			commuVo.setCommuImgU(id);
+			commuVo.setCommuImgSize(file.getSize());
+			commuVo.setCommuImgEx(imgFileName.substring(imgFileName.lastIndexOf(".") + 1));
+
+			int imgDataCnt = commuDao.commuWriteImg(commuVo);
+			
 			try {
 				file.transferTo(new File(imgFileName));
 			} catch (IllegalStateException e) {
@@ -73,13 +83,6 @@ public class CommuServiceImp implements CommuService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-			commuVo.setCommuImgNm(imgFileName);
-			System.out.println(commuVo.getCommuImgNm());
-			commuVo.setCommuImgU(id);
-			System.out.println(commuVo.getCommuImgSize());
-			commuVo.setCommuImgSize(file.getSize());
-			commuVo.setCommuImgEx(imgFileName.substring(imgFileName.lastIndexOf(".") + 1));
 			
 			if (imgDataCnt == 1) {
 				imgMap.put("imgMsg", "이미지등록 완료");

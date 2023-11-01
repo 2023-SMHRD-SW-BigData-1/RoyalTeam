@@ -1,8 +1,5 @@
 package com.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
@@ -11,16 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 
 @Configuration
@@ -47,7 +41,7 @@ public class SecurityConfig {
     			.and()
     		.formLogin()
     			.loginPage("/user/login")
-    			.loginProcessingUrl("/user/Success")
+    			.loginProcessingUrl("/user/signup")
     			.successHandler(loginSuccessHandler)
     			.failureHandler(loginFailureHandler())
     			.usernameParameter("securedUsername")
@@ -71,16 +65,10 @@ public class SecurityConfig {
     		.disable()
             .build();
     }
-    
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        Map<String, PasswordEncoder> encoders = new HashMap<>(); 
-        String idForEncode = "Encoders"; 
-        encoders.put(idForEncode, new BCryptPasswordEncoder()); 
-        encoders.put("noop", NoOpPasswordEncoder.getInstance()); 
-        encoders.put("pbkdf2", new Pbkdf2PasswordEncoder()); 
-        encoders.put("sha256", new StandardPasswordEncoder()); 
-        return new DelegatingPasswordEncoder(idForEncode, encoders);
+    public BCryptPasswordEncoder bcPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -106,6 +94,12 @@ public class SecurityConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
       return new WebMvcConfigurer() {
+          @Override
+          public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(loginInterceptor).addPathPatterns("/**"); // 모든 요청에 대해 인터셉터를 적용합니다.
+            LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+            registry.addInterceptor(localeChangeInterceptor);
+          }
     	  
       };
     }

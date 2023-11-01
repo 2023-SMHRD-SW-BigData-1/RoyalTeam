@@ -76,14 +76,24 @@ public class UserServiceImp implements UserService {
 		}
 		return loginMap;
 	}
+	
+	// 사용자 수정 조회
+	@Override
+	public UserVO userModifyList(String userNick) {
+		
+		return userDao.userModifyList(userNick);
+	}
 
 	// 사용자 수정
 	@Override
 	public Map<String, Object> userInfoUpdate(UserVO userVo) {
 		
+		System.out.println("===========>> 수정 진입");
+		
 		Map<String, Object> updateMap = new HashMap<String, Object>();
 		
 		if (userVo.getUserNick() != null && userVo.getUserPw() != null) {
+			userVo.setUserPw(passencoder.encode(userVo.getUserPw().toString()));
 			System.out.println(userVo.getUserNick() + "회원정보수정");
 			int updateDataCnt = userDao.userInfoUpdate(userVo);
 			if (updateDataCnt == 1) {

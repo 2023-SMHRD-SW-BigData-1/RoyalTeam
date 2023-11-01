@@ -638,3 +638,18 @@ if (typeof $ !== 'undefined') {
     }
   });
 }
+const options = {
+    // Required: API key
+    key: 'BYAVf6FAuDCtLxDkiuQYnDXSP4WNHuks', // REPLACE WITH YOUR KEY !!!
+    
+    // Put additional console output
+    verbose: true,
+    
+    // Optional: Initial state of the map
+    lat: 35.160717,
+    lon: 126.881989,
+    zoom: 5,
+  };
+
+
+    

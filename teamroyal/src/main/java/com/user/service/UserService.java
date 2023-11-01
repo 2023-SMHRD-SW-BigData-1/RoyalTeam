@@ -16,6 +16,9 @@ public interface UserService {
 	//사용자 등록
 	Map<String, Object> userInfoInsert(UserVO userVo);
 	
+	// 사용자 수정 조회
+	UserVO userModifyList(String userNick);
+	
 	//사용자 수정
 	Map<String, Object> userInfoUpdate(UserVO userVo);
 	

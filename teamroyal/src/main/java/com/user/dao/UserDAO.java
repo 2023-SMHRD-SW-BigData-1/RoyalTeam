@@ -17,6 +17,9 @@ public interface UserDAO {
 
 	// 사용자 등록
 	int userInfoInsert(UserVO userVo);
+	
+	// 사용자 수정조회
+	UserVO userModifyList(String userNick);
 
 	// 사용자 수정
 	int userInfoUpdate(UserVO userVo);

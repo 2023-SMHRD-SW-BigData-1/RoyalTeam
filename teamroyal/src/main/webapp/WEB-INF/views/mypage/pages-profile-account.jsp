@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 
 <html
@@ -110,28 +111,29 @@
               <div class="col-md-12">
                 <ul class="nav nav-pills flex-column flex-sm-row mb-4">
                   <li class="nav-item">
-                    <a class="nav-link active" href="./pages-profile-userprofile.html"><i class="ti-xs ti ti-user-check me-1"></i>
+                    <a class="nav-link active" href="/user/login/userProfile"><i
+                        class="ti-xs ti ti-user-check me-1"></i>
                       Profile</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-notifications.html"><i
-                      class="ti-xs ti ti-bell me-1"></i> notification</a>
+                    <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
+                      notification</a>
                     </li>
                     <!-- <li class="nav-item">
-                      <a class="nav-link" href="./pages-profile-email.html"><i
-                          class="ti-xs ti ti-mail me-1"></i> email</a>
+                      <a class="nav-link" href="./pages-profile-email.html"><i class="ti-xs ti ti-mail me-1"></i>
+                        email</a>
                     </li> -->
                   <!-- <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-teams.html"><i 
-                      class="ti-xs ti ti-users me-1"></i> Teams</a>
+                    <a class="nav-link" href="./pages-profile-teams.html"><i class="ti-xs ti ti-users me-1"></i>
+                      Teams</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-projects.html"><i 
-                      class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
+                    <a class="nav-link" href="./pages-profile-projects.html"><i
+                        class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
-                    <a class="nav-link" href="./pages-profile-magnager.html"><i 
-                      class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
+                    <a class="nav-link" href="/user/login/userProfile/manager"><i
+                        class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
                   </li>
                 </ul>
               </div>
@@ -161,27 +163,27 @@
             </div>
             <hr class="my-0" />
             <div class="card-body">
-              <form action="/login/userProfile/modify/success" id="formAccountSettings" method="POST" onsubmit="return false">
+              <form action="/user/login/userProfile/modify/${userMap.getUserNick() }/success" id="formAccountSettings" method="POST">
                 <div class="row">
                   <div class="mb-3 col-md-6">
                     <label for="firstName" class="form-label">별명</label>
                     <input class="form-control" type="text" id="firstName" name="userNick" placeholder="별명"
-                      autofocus value="<sec:authentication property="principal.userNick"/>" />
+                      autofocus value="${userMap.getUserNick() }" />
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="lastName" class="form-label">이름</label>
                     <input class="form-control" type="text" name="userNm" id="lastName" placeholder="이름" 
-                    value="<sec:authentication property="principal.userNm"/>"/>
+                    value="${userMap.getUserNm() }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="email" class="form-label">E-mail</label>
                     <input class="form-control" type="text" id="email" name="userEmail" placeholder="Shine@example.com"
-                      placeholder="john.doe@example.com" value="<sec:authentication property="principal.userEmail"/>"/>
+                      placeholder="john.doe@example.com" value="${userMap.getUserEmail() }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="address" class="form-label">주소</label>
                     <input type="text" class="form-control" id="address" name="userAdd" placeholder="주소" 
-                    value="<sec:authentication property="principal.userAdd"/>"/>
+                    value="${userMap.getUserAdd() }"/>
                   </div>
                   <div class="mb-3 col-md-6 form-password-toggle">
                     <label class="form-label" for="newPassword">New Password</label>
@@ -196,7 +198,7 @@
                     <div class="input-group input-group-merge">
                       <span class="input-group-text">KR (+82)</span>
                       <input type="text" id="phoneNumber" name="userPhone" class="form-control"
-                        placeholder="202 555 0111" value="<sec:authentication property="principal.userPhone"/>"/>
+                        placeholder="202 555 0111" value="${userMap.getUserPhone() }"/>
                     </div>
                   </div>
                   <!-- 
