@@ -60,7 +60,7 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
-        <!-- Navbar -->
+      	<!----------------------------------------- Navbar ----------------------------------------->
         <nav class="navbar navbar-expand-lg bg-navbar-theme">
           <div class="container-fluid">
             <a class="navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -74,7 +74,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
               <div class="navbar-nav me-auto">
-                <a class="nav-item nav-link" href="/">MAIN</a>
+                <a class="nav-item nav-link active" href="/">MAIN</a>
                 <!-- <a class="nav-item nav-link" href="/html/community/community.html">COMMUNITY</a>
                 <a class="nav-item nav-link" href="/html/community/chat.html">CHAT</a>
                 <a class="nav-item nav-link" href="/html/community/community-mail.html">MAIL</a>
@@ -101,6 +101,7 @@
           </div>
         </nav>
         <!-- / Navbar -->
+			<!----------------------------------------- Navbar ----------------------------------------->
 
         <!-- Layout container -->
         <div class="layout-page">

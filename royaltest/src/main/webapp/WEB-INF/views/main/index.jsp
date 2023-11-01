@@ -79,10 +79,10 @@
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link" href="/auction/auction">MAIL</a> <a
-								class="nav-item nav-link" href="/power">POWER PLANT</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link" href="/community/email">MAIL</a>
+							<a class="nav-item nav-link active" href="/auction/auction">AUCTION</a>
+							<a class="nav-item nav-link" href="/power">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
