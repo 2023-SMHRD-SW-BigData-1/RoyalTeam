@@ -434,8 +434,9 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 								</div>
 							</div>
 						</div>
-					</div><!--/ Content -->
-					
+					</div>
+					<!--/ Content -->
+
 
 
 					<!-- Footer -->
@@ -460,7 +461,7 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 			</div><!--/ Layout container -->
 		</div><!-- Content wrapper -->
 	</div><!-- Layout container -->
-	
+
 	<!-- Overlay -->
 	<div class="layout-overlay layout-menu-toggle"></div>
 

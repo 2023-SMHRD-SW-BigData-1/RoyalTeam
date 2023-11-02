@@ -122,10 +122,15 @@
 										</div>
 									</div>
 									<div class="me-1 mr-5">
-										<a href="community-form.html"
-											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">수정</a>
-										<a href="community-form.html"
-											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">삭제</a>
+										<a
+											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
+											href="/community/list/detail/${detailMap.getCommuNo() }/modify">
+											<button>수정</button>
+										</a> <a
+											class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
+											href="/community/list/detail/${detailMap.getCommuNo() }/delete">
+											<button>삭제</button>
+										</a>
 									</div>
 									<!-- title -->
 									<hr class="my-2" />
@@ -162,6 +167,7 @@
 									<div class="card academy-content shadow-none border">
 										<div class="p-2">
 											<div class="cursor-pointer">
+												<!-- 
 												<video class="w-100"
 													poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
 													id="plyr-video-player" playsinline controls>
@@ -169,6 +175,9 @@
 														src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
 														type="video/mp4" />
 												</video>
+												
+												 <img alt="" src="data:image/png;base64,${imgMap.getCommuImgNm() }">
+												 -->
 											</div>
 										</div>
 										<div class="card-body">
@@ -177,8 +186,7 @@
 
 
 											<hr class="mb-4 mt-2" />
-											<h5 class="mb-2">댓글</h5>
-											<hr class="mb-4 mt-2" />
+											<h5 class="mb-4">댓글</h5>
 
 
 											<!-- user info -->
@@ -224,9 +232,9 @@
 													</div>
 
 
-													<textarea id="replyContents" name="replyContents"
-														class="form-control border-none" 
-														rows="2" placeholder="내용을 입력해주세요"></textarea>
+													<textarea name="replyContents"
+														class="form-control border-none" id="replyText" rows="2"
+														placeholder="내용을 입력해주세요"></textarea>
 
 
 													<div class="w-100">
@@ -264,14 +272,11 @@
 						</footer>
 						<!-- / Footer -->
 						<div class="content-backdrop fade"></div>
-					</div>
-					<!--/ Content wrapper -->
-				</div>
-				<!--/ Layout container -->
-			</div>
-			<!-- Content wrapper -->
-		</div>
-		<!-- Layout container -->
+					</div><!--/ Content wrapper -->
+				</div><!--/ Layout container -->
+			</div><!-- Content wrapper -->
+		</div><!-- Layout container -->
+		
 
 
 		<!-- Overlay -->

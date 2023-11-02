@@ -69,10 +69,10 @@
 	<div
 		class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
 		<div class="layout-container">
-			<!-- Navbar -->
+			<!----------------------------------------- Navbar ----------------------------------------->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/user/Success">Navbar</a>
+					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
 						<span class="navbar-toggler-icon"></span>
@@ -80,10 +80,11 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link" href="/user/Success">MAIN</a> <a
-								class="nav-item nav-link" href="/community/list">COMMUNITY</a> <a
-								class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+							<a class="nav-item nav-link " href="/user/Success">MAIN</a> <a
+								class="nav-item nav-link active" href="/community/list">COMMUNITY</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
 								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link" href="/auction/auction">AUCTION</a> <a
 								class="nav-item nav-link" href="/power">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -91,6 +92,9 @@
 								href="/user/login/userProfile"><i
 									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
+							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
+									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
+									Login</a></li> -->
 							<li class="nav-item"><a class="nav-link" href="/logout"><i
 									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
 									Logout</a></li>
@@ -99,6 +103,7 @@
 				</div>
 			</nav>
 			<!-- / Navbar -->
+			<!----------------------------------------- Navbar ----------------------------------------->
 
 			<!-- Layout container -->
 			<div class="layout-page">
@@ -112,19 +117,25 @@
 									<!-- title -->
 									<div
 										class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
+
 										<div class="me-1">
 											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
 										</div>
-
-										<a
-											href="/community/list/detail/${detailMap.getCommuNo() }/modify">
-											<button>수정</button>
-										</a> <a
-											href="/community/list/detail/${detailMap.getCommuNo() }/delete">
-											<button>삭제</button>
-										</a>
+										<div class="me-1 mr-5">
+											<a
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
+												href="/community/list/detail/${detailMap.getCommuNo() }/modify">수정</a>
+											<a
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
+												href="/community/list/detail/${detailMap.getCommuNo() }/delete">삭제</a>
+										</div>
 									</div>
 									<!-- title -->
+
+
+
+
+
 									<hr class="my-2" />
 									<!-- user info -->
 									<div
@@ -142,15 +153,15 @@
 											</div>
 										</div>
 										<div class="d-flex align-items-center">
-											<a href="chat.html" class="d-flex mx-2"> <i
-												class="ti ti-message ti-sm"></i>
-												<p>채팅</p>
-											</a> <a href="chat.html" class="d-flex mx-2"> <i
-												class="ti ti-mail ti-sm"></i>
-												<p>메일</p>
-											</a> <a href="chat.html" class="d-flex mx-2"> <i
-												class="ti ti-bookmarks ti-sm"></i>
-												<p>${detailMap.getCommuCreateNm() }님의게시글더보기></p>
+											<a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
+												class="ti ti-message ti-sm"></i>채팅
+												
+											</a> <a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
+												class="ti ti-mail ti-sm"></i>메일
+												
+											</a> <a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
+												class="ti ti-bookmarks ti-sm"></i>${detailMap.getCommuCreateNm() }님의게시글더보기>
+												
 											</a>
 										</div>
 									</div>
@@ -178,29 +189,35 @@
 
 
 											<hr class="mb-4 mt-2" />
-											<h5 class="mb-2">댓글</h5>
-											<hr class="mb-4 mt-2" />
+											<h5 class="mb-4">댓글</h5>
 
 
 											<!-- user info -->
 											<div
 												class="d-flex justify-content-between align-items-center user-name">
-												<div class="d-flex">
+												<div class="d-flex w-100">
 													<div class="avatar-wrapper">
 														<div class="avatar me-2">
 															<img src="/assets/img/avatars/11.png" alt="Avatar"
 																class="rounded-circle" />
 														</div>
 													</div>
-													<div class="d-flex flex-column">
+													<div class="d-flex flex-column w-100">
+
+
 														<table align="center" width="500" border="1">
 
-															<c:forEach items="${replyList }" var="replyList" varStatus="i">
+															<c:forEach items="${replyList }" var="replyList"
+																varStatus="i">
 																<tr>
 																	<td width="100">${replyList.replyCreateNm }</td>
 																	<td>${replyList.replyText }</td>
 																	<td>${replyList.replyCreateAt }</td>
-																	<td><button type="button">수정</button> <a href="#">삭제</a>
+																	<td>
+																		<button
+																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
+																		<button
+																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
 																</tr>
 
 															</c:forEach>
@@ -215,96 +232,98 @@
 
 											<div class="border mt-5">
 												<form action="/community/list/post/reply" method="post">
-													<input type="hidden" name="commuNo" value="${detailMap.getCommuNo() }">
+													<input type="hidden" name="commuNo"
+														value="${detailMap.getCommuNo() }">
 													<div class="d-flex flex-column pl-3">
 														<span class="fw-medium fw-bolder">${user.userNick }</span>
 													</div>
 
 
 													<textarea name="replyContents"
-														class="form-control border-none" id="replyText"
-														rows="2" placeholder="내용을 입력해주세요"></textarea>
+														class="form-control border-none" id="replyText" rows="2"
+														placeholder="내용을 입력해주세요"></textarea>
 
 
 													<div class="w-100">
 														<div class="ml-auto w-10">
 															<button id="btn_reply_regist" type="submit"
 																name="rSubmit"
-																class="w-100 p-2 bg-transparent border-none"
+																class="w-100 p-2 btn btn-primary bg-transparent border-none btn-no-boxshadow"
 																style="color: gray;">댓글등록</button>
 														</div>
 													</div>
 												</form>
 											</div>
 
-
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!--/ Content -->
+					</div>
+					<!--/ Content -->
 
-						<!-- Footer -->
-						<footer class="content-footer footer bg-footer-theme">
-							<div class="container-xxl">
-								<div
-									class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
-									<div>
-										©
-										<script>
+					<!-- Footer -->
+					<footer class="content-footer footer bg-footer-theme">
+						<div class="container-xxl">
+							<div
+								class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+								<div>
+									©
+									<script>
                       document.write(new Date().getFullYear());
                     </script>
-										, made with ❤️ by Royal
-									</div>
+									, made with ❤️ by Royal
 								</div>
 							</div>
-						</footer>
-						<!-- / Footer -->
-
-						<div class="content-backdrop fade"></div>
-					</div>
-					<!--/ Content wrapper -->
+						</div>
+					</footer>
+					<!-- / Footer -->
+					<div class="content-backdrop fade"></div>
 				</div>
-
-				<!--/ Layout container -->
+				<!--/ Content wrapper -->
 			</div>
+			<!--/ Layout container -->
 		</div>
-
-		<!-- Overlay -->
-		<div class="layout-overlay layout-menu-toggle"></div>
-
-		<!-- Drag Target Area To SlideIn Menu On Small Screens -->
-		<div class="drag-target"></div>
-
-		<!--/ Layout wrapper -->
-
-		<!-- Core JS -->
-		<!-- build:js assets/vendor/js/core.js -->
-
-		<script src="/assets/vendor/libs/jquery/jquery.js"></script>
-		<script src="/assets/vendor/libs/popper/popper.js"></script>
-		<script src="/assets/vendor/js/bootstrap.js"></script>
-		<script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
-		<script
-			src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-		<script src="/assets/vendor/libs/hammer/hammer.js"></script>
-		<script src="/assets/vendor/libs/i18n/i18n.js"></script>
-		<script src="/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-		<script src="/assets/vendor/js/menu.js"></script>
-
-		<!-- endbuild -->
-
-		<!-- Vendors JS -->
-
-		<!-- Main JS -->
-		<script src="/assets/js/main.js"></script>
-
-		<!-- Page JS -->
+		<!-- Content wrapper -->
+	</div>
+	<!-- Layout container -->
 
 
+	<!-- Overlay -->
+	<div class="layout-overlay layout-menu-toggle"></div>
 
-		<script type="text/javascript">
+	<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+	<div class="drag-target"></div>
+
+	<!--/ Layout wrapper -->
+
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/core.js -->
+
+	<script src="/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="/assets/vendor/libs/popper/popper.js"></script>
+	<script src="/assets/vendor/js/bootstrap.js"></script>
+	<script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
+	<script
+		src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="/assets/vendor/libs/hammer/hammer.js"></script>
+	<script src="/assets/vendor/libs/i18n/i18n.js"></script>
+	<script src="/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+	<script src="/assets/vendor/js/menu.js"></script>
+
+	<!-- endbuild -->
+
+	<!-- Vendors JS -->
+
+	<!-- Main JS -->
+	<script src="/assets/js/main.js"></script>
+
+	<!-- Page JS -->
+
+
+
+	<script type="text/javascript">
 		
 		<!-- 댓글 조회 -->
 		var $tableBody = $('#rtb tbody'); 
