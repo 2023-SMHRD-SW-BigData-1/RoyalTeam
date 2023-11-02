@@ -16,6 +16,11 @@
 		, COMMU_MODIFY_AT as commuModifyAt
 		, COMMU_MODIFY_NAME as commuModifyNm
 		FROM ROYAL.TB_COMMU
+		WHERE 1=1
+		<if test="commuNo != null and commuNo != ''">
+			AND COMMU_NO = ${commuNo}
+		</if>
+		
 		ORDER BY COMMU_NO DESC
 	</select>
 
@@ -92,6 +97,17 @@
 			FROM ROYAL.IMG_MASTER
 		</selectKey>
 	</insert>
+	
+	<!-- 게시글 매핑 테이블 -->
+	<insert id="commuWriteMap" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_COMMU_MAPPING (
+		COMMU_NO
+		, IMG_NO
+		)VALUES(
+		${commuNo}
+		, ${commuImgNo}
+		)
+	</insert>
 
 	<!-- 게시글 조회 -->
 	<select id="commuListPostDetail" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
@@ -152,10 +168,11 @@
 	<select id="replyList" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
 		SELECT *
 		FROM ROYAL.TB_REPLY
-		WHERE 1=1
+		WHERE
 		<if test="replyNo != null and replyNo  != ''">
-			AND REPLY_NO = #{replyNo}
+			REPLY_NO = #{replyNo}
 		</if>
+		ORDER BY REPLY_NO DESC
 	</select>
 
 	<!-- 댓글 작성 -->
@@ -165,14 +182,15 @@
 		, REPLY_TEXT
 		, COMMU_NO
 		, REPLY_CREATE_NAME
+		, REPLY_CREATE_AT
 		) VALUES (
-		#{userNick}
+		#{loginUser}
 		<if test="replyText != null and replyText != ''">
 			,#{replyText}
 		</if>
 		, #{commuNo}
+		, #{loginUser}
 		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
-		, 'USER'
 		);
 	</insert>
 

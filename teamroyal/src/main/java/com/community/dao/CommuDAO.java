@@ -18,6 +18,9 @@ public interface CommuDAO {
 	
 	// 게시판 이미지등록
 	int commuWriteImg(CommuVO commuVo);
+	
+	// 게시판 매핑테이블
+	int commuWriteMap(CommuVO commuVo);
 		
 	// 게시판 글수정
 	int commuModify(CommuVO commuVo);
@@ -32,7 +35,7 @@ public interface CommuDAO {
 	CommuVO commuListPostImg(CommuVO commuVo);
 	
 	// 게시판 댓글조회
-	Map<String,Object> replyList(CommuVO commuVo);
+	List<CommuVO> replyList(CommuVO commuVo);
 	
 	// 게시판 댓글등록
 	int commentWrite(CommuVO commuVo);

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -86,12 +87,16 @@ public class CommuController {
 		Map<String, Object> writeMap = commuSerivce.commuWrite(commuVo);
 		
 		Map<String, Object> imgMap = commuSerivce.commuWriteImg(commuVo);
+		
+		Map<String, Object> mappingMap = commuSerivce.commuWriteMap(commuVo);
 
 		String reString = writeMap.get("writeCode").toString();
 		
 		String imgString = imgMap.get("imgCode").toString();
 		
-		if (reString.equals("20") && imgString.equals("21")) {
+		String mapString = mappingMap.get("mappingCode").toString();
+		
+		if (reString.equals("20") && imgString.equals("21") && mapString.equals("22")) {
 			System.out.println("글쓰기 성공");
 			request.setAttribute("message", "success");
 			return "redirect:/community/list";
@@ -125,23 +130,23 @@ public class CommuController {
 
 		model.addAttribute("detailMap", detailMap);
 		
-		File file = new File("C:\\royal\\commuImg\\"+commuVo.getCommuImgNm());
-		
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-		String fileStringValue = null;
-		try {
-		fileStringValue = converter.convert(file);
-		System.out.println(fileStringValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		commuVo.setCommuImgNm(fileStringValue);
-		
-		CommuVO imgMap = commuSerivce.commuListPostImg(commuVo);
-		
-		model.addAttribute("imgMap", imgMap);
+//		File file = new File("C:\\royal\\commuImg\\"+commuVo.getCommuImgNm());
+//		
+//		ImageConverter<File, String> converter = new ImageToBase64();
+//		
+//		String fileStringValue = null;
+//		try {
+//		fileStringValue = converter.convert(file);
+//		System.out.println(fileStringValue);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		commuVo.setCommuImgNm(fileStringValue);
+//		
+//		CommuVO imgMap = commuSerivce.commuListPostImg(commuVo);
+//		
+//		model.addAttribute("imgMap", imgMap);
 
 		return "/community/community-detail";
 	}
@@ -199,7 +204,7 @@ public class CommuController {
 	 *         최초 적용
 	 */
 	@RequestMapping(value = "/list/detail/{commuNo}/delete", method = RequestMethod.POST)
-	public String postDelete(@ModelAttribute CommuVO commuVo, HttpSession session) {
+	public String postDelete(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, HttpSession session) {
 
 		Map<String, Object> deleteMap = commuSerivce.commuDelete(commuVo);
 
@@ -224,37 +229,17 @@ public class CommuController {
 	 * @param HttpServletResponse response
 	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.30 / 정윤지 / 최초 적용
 	 */
-	@RequestMapping(value = "/reply/replyList.wow")
-	public Map<String,Object> replyList(@ModelAttribute CommuVO commuVo, Model model, HttpServletResponse response) {
+	@RequestMapping(value = "/list/detail/{commuNo}", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+	public String replyList(@RequestParam("commuNo") int commuNo) {
 		
-		Map<String,Object> replyList=commuSerivce.replyList(commuVo);
+		int bno = (commuNo == 0) ? 1 : commuNo;
 		
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("result", true);
-		map.put("data", replyList);
-		map.put("size", replyList.size());
-		return map;
+		
+
+		return null;
 	}
 
-	// 댓글쓰기
-	@RequestMapping(value = "/list/{commuNo}/commentWrite", method = RequestMethod.POST)
-	public String commentWrite(@ModelAttribute CommuVO commuVo, HttpSession session, Principal principal) {
-
-		commuVo.setLoginUser(principal.getName().toString());
-		Map<String, Object> commentWriteMap = commuSerivce.commentWrite(commuVo);
-
-		String reString = commentWriteMap.get("commentWriteCode").toString();
-		if (reString.equals("12")) {
-			System.out.println("댓글쓰기 성공");
-			return "redirect:/community/list/{commuNo}";
-		} else if (reString.equals("01")) {
-			System.out.println("필수값 오류");
-			return "redirect:/community/list/{commuNo}";
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list/{commuNo}";
-		}
-	}
+	
 
 	// 댓글수정
 	@RequestMapping(value = "/list/{commuNo}/commentModify", method = RequestMethod.POST)

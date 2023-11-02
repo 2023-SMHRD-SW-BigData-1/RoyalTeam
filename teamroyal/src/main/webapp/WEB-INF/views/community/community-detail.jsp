@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-compact"
@@ -71,7 +72,7 @@
 			<!-- Navbar -->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
-				<a class="navbar-brand" href="/user/Success">Navbar</a>
+					<a class="navbar-brand" href="/user/Success">Navbar</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
 						<span class="navbar-toggler-icon"></span>
@@ -86,17 +87,14 @@
 								class="nav-item nav-link" href="/power">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="/user/login/userProfile"
-                    ><i class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout"
-                    ><i class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i> Logout</a
-                  >
-                </li>
-              </ul>
+							<li class="nav-item"><a class="nav-link"
+								href="/user/login/userProfile"><i
+									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="/logout"><i
+									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
+									Logout</a></li>
+						</ul>
 					</div>
 				</div>
 			</nav>
@@ -117,11 +115,12 @@
 										<div class="me-1">
 											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
 										</div>
-										
-										<a href="/community/list/detail/${detailMap.getCommuNo() }/modify">
+
+										<a
+											href="/community/list/detail/${detailMap.getCommuNo() }/modify">
 											<button>수정</button>
-										</a>
-										<a href="/community/list/detail/${detailMap.getCommuNo() }/delete">
+										</a> <a
+											href="/community/list/detail/${detailMap.getCommuNo() }/delete">
 											<button>삭제</button>
 										</a>
 									</div>
@@ -160,7 +159,7 @@
 									<div class="card academy-content shadow-none border">
 										<div class="p-2">
 											<div class="cursor-pointer">
-											<!-- 
+												<!-- 
 												<video class="w-100"
 													poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
 													id="plyr-video-player" playsinline controls>
@@ -168,8 +167,9 @@
 														src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
 														type="video/mp4" />
 												</video>
-												 -->
+												
 												 <img alt="" src="data:image/png;base64,${imgMap.getCommuImgNm() }">
+												 -->
 											</div>
 										</div>
 										<div class="card-body">
@@ -193,14 +193,18 @@
 														</div>
 													</div>
 													<div class="d-flex flex-column">
-														<span class="fw-medium">${detailMap.getCommuCreateNm() }</span>
-														<div class="sh-comm-comment w-100">
-															<p class="border">코드에서 왼쪽 class="border"지우고 "댓글은 이 곳"
-															</p>
+														<table align="center" width="500" border="1">
 
-														</div>
-														<small class="text-muted">2023.10.17<span
-															class="mx-2">18:00</span></small>
+															<c:forEach items="${replyList }" var="replyList" varStatus="i">
+																<tr>
+																	<td width="100">${replyList.replyCreateNm }</td>
+																	<td>${replyList.replyText }</td>
+																	<td>${replyList.replyCreateAt }</td>
+																	<td><button type="button">수정</button> <a href="#">삭제</a>
+																</tr>
+
+															</c:forEach>
+														</table>
 													</div>
 												</div>
 											</div>
@@ -211,20 +215,21 @@
 
 											<div class="border mt-5">
 												<form action="/community/list/post/reply" method="post">
-
+													<input type="hidden" name="commuNo" value="${detailMap.getCommuNo() }">
 													<div class="d-flex flex-column pl-3">
-														<span class="fw-medium fw-bolder"><sec:authentication property="principal.userNick"/></span>
+														<span class="fw-medium fw-bolder">${user.userNick }</span>
 													</div>
 
 
 													<textarea name="replyContents"
-														class="form-control border-none" id="replyContents"
+														class="form-control border-none" id="replyText"
 														rows="2" placeholder="내용을 입력해주세요"></textarea>
 
 
 													<div class="w-100">
 														<div class="ml-auto w-10">
-															<button id="btn_reply_regist" type="submit" name="replySubmit"
+															<button id="btn_reply_regist" type="submit"
+																name="rSubmit"
 																class="w-100 p-2 bg-transparent border-none"
 																style="color: gray;">댓글등록</button>
 														</div>
@@ -298,137 +303,131 @@
 		<!-- Page JS -->
 
 
-		<!-- 댓글 -->
+
 		<script type="text/javascript">
-var params={"curPage":1, "rowSizePerPage" : 10
-		,"reCategory" : "FREE", "reParentNo": ${freeBoard.boNo} };
-	
-function fn_reply_list(){
-	$.ajax({
-		url : "<c:url value='/community/list/post/reply' />"
-		,type: "POST"
-		,data : params
-		,dataType: 'JSON' 
-		, success: function(data){
-			console.log(data);
-			$.each(data.data, function(index, element) {
-				var str="";
-				 str=str+'<div class="row" data-re-no="'+ replyMap.getReplyNo() +'">'
-			        +'<div class="col-sm-2 text-right" >'+replyMap.getReplyCreateNm()+ '</div>'
-			        +'<div class="col-sm-6"><pre>'+replyMap.getReplyText()+ '</pre></div>'
-			        +'<div class="col-sm-2" >'+replyMap.getReplyCreateAt() +'</div>'
-			        +'<div class="col-sm-2">';	
-			        if(replyMap.getReplyCreateNm()=="${loginUser.getName()}"){		
-			          str=str+   '<button name="btn_reply_edit" type="button" class=" btn btn-sm btn-info" >수정</button>'
-			                 +  '<button name="btn_reply_delete" type="button" class="btn btn-sm btn-danger" >삭제</button>';
-			        	}
-			       str=str+'</div>'
-			            +'</div>';
-			       $('#id_reply_list_area').append(str);
-			});
-			       params.curPage+=1;
-		}//success
-	});	//ajax
-}//function fn_reply_list
-
-$(document).ready(function(){ //documnet가 준비될 때 
-	fn_reply_list();  //freeView처음에 댓글 10개 보여주기
-	// 등록버튼,     수정,삭제버튼,  모달의 등록버튼
-	//더보기 버튼
-	$("#id_reply_list_more").on("click",function(e){
-		e.preventDefault();
-		fn_reply_list();
-	});
-	
-	//등록버튼
-	$("#btn_reply_regist").on("click",function(e){
-		e.preventDefault();
-		$form=$(this).closest("form[name='frm_reply']");
-		$.ajax({
-			url:"<c:url value='/reply/replyRegist.wow'/>"
-			,type : "POST"
-			,dataType :"JSON"
-			,data : $form.serialize()
-			,success: function(data){
-				console.log(data);
-				$form.find("textarea[name='reContent']").val('');
-				$("#id_reply_list_area").html('');
-				params.curPage=1;
-				fn_reply_list();
-			}
-			,error : function(req,st,err){
-				if(req.status==401){
-					location.href="<c:url value='/login/login.wow'  />";				
-				}
-			}
-		});//ajax 
-	});//등록버튼
-	
-	//수정버튼  function(){}은 동적으로 생긴 태그에도 적용이 되는거같아.. 
-	//$().on("click") 동적으로생긴 태그에 적용됨
-	$("#id_reply_list_area").on("click", 'button[name="btn_reply_edit"]'
-			,function(e){
-		//modal 아이디=id_reply_edit_modal
-		//현재 버튼의  상위 div(하나의 댓글 전체)를 찾으세요
-		// 그 div에서 현재 댓글의 내용 =modal에 있는 textarea에 복사 
-		// 그 div태그의 data-re-no에 있는 값   $().data('re-no')
-		//=modal에 있는  < input name=reNo>태그에 값으로 복사  
-		//2개 복사했으면   $('#id_reply_edit_modal').modal('show')
-		$btn=$(this);  //수정버튼
-		$div=$btn.closest('div.row');   //버튼의 댓글 div
-		$modal=$('#id_reply_edit_modal'); //modal div 
-		$pre=$div.find('pre'); 
-		 var content=$pre.html(); 
-		 $textarea=$modal.find('textarea'); 
 		
-		 $textarea.val(content);  
-		 var reNo=$div.data('re-no');	
-		 $modal.find('input[name=reNo]').val(reNo);
-		 $modal.modal('show');
-	});//수정버튼
-	
+		<!-- 댓글 조회 -->
+		var $tableBody = $('#rtb tbody'); 
+		for ( var i in result) {
+										var $tr = $("<tr>");
+										var $rWriter = $("<td width='100'>").text(
+												result[i].replyWirter);
+										var $rContent = $("<td>").text(
+												result[i].replyContents);
+										var $rCreatDate = $("<td width='100'>").text(
+												result[i].rCreateDate);
+										var $btnArea = $("<td width='80'>").append(
+												"<a href='modifyreply(${board.boardNo})'>수정</a>").append(
+												"<a href='#'>삭제</a>");
 
-	//모달창 저장 버튼
-	$("#btn_reply_modify").on("click", function(e){
-		e.preventDefault(); 
-		$form= $(this).closest('form[name="frm_reply_edit"]');
-		$.ajax({
-			url : "<c:url value='/reply/replyModify.wow' />"
-			,type : "POST"
-			,data : $form.serialize()
-			,dataType : "JSON"
-			,success: function(){
-				$modal=$('#id_reply_edit_modal'); 
-				$modal.modal('hide');
+										$tr.append($rWriter);
+										$tr.append($rContent);
+										$tr.append($rCreatDate);
+										$tr.append($btnArea);
+										$tableBody.append($tr);
+
+									}
+		
+		
+			function replyList(){
+				var commuNo = "${detialMap.commuNo}";
 				
-				var reNo=$modal.find('input[name=reNo]').val();
-				var reContent=$modal.find('textarea').val();
-				$("#id_reply_list_area").find("div[data-re-no='"+reNo+"']").find("pre").html(reContent);
+				$.ajax({
+					url : "/community/list/detail/{commuNo}",
+					type : "GET",
+					data : {"commuNo" : commuNo},
+					dataType : "json",
+					success : function(data){
+						console.log(data);
+						/*
+						var $rArea = $("#replyListArea");
+						
+						if(replyList == ""){
+							$rArea.html("<li>등록된 댓글이 없습니다.</li>");
+						}else{
+							$rArea.html("");
+							
+							$.each(replyList : function(i){
+								var $li = $("<li>");
+								var $rWriter = $("<span>").addClass("rWriter").html(replyList[i]).replyCreateNm);
+								var $rDate = $("<span>").addClass("wDate").html(replyList[i].replyCreateAt);
+								var $rContent = $("<p>").addClass("replyContent").html(replyList[i].replyText)
+								var $hr = $("<hr>");
+								
+								$li.append($rWriter).append($rDate).append("$rContent");
+								$rArea.append($li).append($hr);
+							});
+						}
+						*/
+						
+						var $tableBody = $('#rtb tbody');
+						$tableBody.html('');
+						$('#rCount').text("댓글 ("+result.length+")")
+						if (result != null) {
+							console.log(result);
+							for ( var i in result) {
+								var $tr = $("<tr>");
+								var $rWriter = $("<td width='100'>").text(
+										result[i].replyWirter);
+								var $rContent = $("<td>").text(
+										result[i].replyContents);
+								var $rCreatDate = $("<td width='100'>").text(
+										result[i].rCreateDate);
+								var $btnArea = $("<td width='80'>").append(
+										"<a href='modifyreply(${detailMap.commuNo})'>수정</a>").append(
+										"<a href='#'>삭제</a>");
+
+								$tr.append($replyCreateNm);
+								$tr.append($replyText);
+								$tr.append($replyCreateAt);
+								$tr.append($btnArea);
+								$tableBody.append($tr);
+					},
+					error : function(){
+						consol.log("댓글 목록 조회 실패");
+					}
+				})
 			}
-		});//ajax
-	});//모달창 저장버튼
-	
-	
-	//삭제버튼
-	$("#id_reply_list_area").on("click", 'button[name="btn_reply_delete"]'
-			,function(e){
-		e.preventDefault();
-		$div=$(this).closest('.row');
-		reNo=$div.data('re-no');
-		reMemId="${USER_INFO.userId}";
-		$.ajax({
-			url : "<c:url value='/reply/replyDelete.wow' />"
-			,type : "POST"
-			,data : {"reNo" : reNo, "reMemId" : reMemId}
-			,dataType : 'JSON'
-			,success : function(){
-				$div.remove();
-			}
-		});//ajax
-	}); //삭제버튼
-	
-	
-});
+			
+		<!-- 댓글 등록 -->
+		$("#addReply#").on("click", finction(){
+			var userNick;
+			var commuNo = "${detailMap.commuNo}";
+			var replyText = $("#replyText").val();
+			
+			$.ajax({
+				url : "/community/list/detail/{commuNo}",
+				type : "post",
+				data : {"replyText" : replyText,
+					"commuNo" : commuNo,
+					"userNick" : userNick},
+				success : function(result){
+					var msg;
+					
+					switch(result){
+					
+					alert("등록성공")
+					$("#replyText").val('')
+					getReplyList()
+					
+					case 1 :
+						msg = "댓글 등록 성공";
+						$("#replyText").val("");
+						replyList();
+						break;
+						
+					case 0 : 
+						msg = "댓글 등록 실패";
+						break;
+					case -1 :
+						msg = "댓글 등록 오류 발생";
+						break;
+					}
+				}
+				}
+			})
+			
+		}
 
 </script>
 </body>

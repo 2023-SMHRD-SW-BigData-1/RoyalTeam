@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +25,7 @@ public class CommuServiceImp implements CommuService {
 	// 게시판 조회
 	@Override
 	public List<CommuVO> commuListPost(CommuVO commuVo) {
-			return commuDao.commuListPost(commuVo);
+		return commuDao.commuListPost(commuVo);
 	}
 
 	// 게시판 글쓰기
@@ -31,9 +33,9 @@ public class CommuServiceImp implements CommuService {
 	public Map<String, Object> commuWrite(CommuVO commuVo) {
 		Map<String, Object> writeMap = new HashMap<String, Object>();
 		if (commuVo.getCommuTitle() != null) {
-			
+
 			int WriteDataCnt = commuDao.commuWrite(commuVo);
-			
+
 			if (WriteDataCnt == 1) {
 				writeMap.put("writeMsg", "글등록 완료");
 				writeMap.put("writeCode", "20");
@@ -47,12 +49,12 @@ public class CommuServiceImp implements CommuService {
 		}
 		return writeMap;
 	}
-	
+
 	// 게시판 이미지 등록
 	@Override
 	public Map<String, Object> commuWriteImg(CommuVO commuVo) {
 		Map<String, Object> imgMap = new HashMap<String, Object>();
-		
+
 		if (commuVo.getCommuImg() != null) {
 
 			MultipartFile file = commuVo.getCommuImg();
@@ -61,21 +63,17 @@ public class CommuServiceImp implements CommuService {
 			String id = UUID.randomUUID().toString();
 
 			String imgFileName = id + of;
-			
+
 			System.out.println("=== 이미지 등록 ===");
 
-			System.out.println("getSize" + file.getSize());
-			System.out.println("getContentType" + file.getContentType());
-			System.out.println("getName" + file.getName());
-			System.out.println("getOriginalFilename" + file.getOriginalFilename());
-			
 			commuVo.setCommuImgNm(imgFileName);
+			commuVo.setCommuImgPath("C:\\royal\\commuImg");
 			commuVo.setCommuImgU(id);
 			commuVo.setCommuImgSize(file.getSize());
 			commuVo.setCommuImgEx(imgFileName.substring(imgFileName.lastIndexOf(".") + 1));
 
 			int imgDataCnt = commuDao.commuWriteImg(commuVo);
-			
+
 			try {
 				file.transferTo(new File(imgFileName));
 			} catch (IllegalStateException e) {
@@ -83,7 +81,7 @@ public class CommuServiceImp implements CommuService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			if (imgDataCnt == 1) {
 				imgMap.put("imgMsg", "이미지등록 완료");
 				imgMap.put("imgCode", "21");
@@ -98,18 +96,41 @@ public class CommuServiceImp implements CommuService {
 		return imgMap;
 	}
 
+	// 게시판 매핑테이블
+	@Override
+	public Map<String, Object> commuWriteMap(CommuVO commuVo) {
+		Map<String, Object> mappingMap = new HashMap<String, Object>();
+
+		if (commuVo.getCommuNo() != 0) {
+
+			int mappingCnt = commuDao.commuWriteMap(commuVo);
+
+			if (mappingCnt == 1) {
+				mappingMap.put("mappingMsg", "매핑 완료");
+				mappingMap.put("mappingCode", "22");
+			} else {
+				mappingMap.put("mappingMsg", "매핑 실패");
+				mappingMap.put("mappingCode", "82");
+			}
+		} else {
+			mappingMap.put("mappingMsg", "필수값 오류");
+			mappingMap.put("mappingCode", "01");
+		}
+		return mappingMap;
+	}
+
 	// 게시판 글상세 조회
 	@Override
 	public CommuVO commuListPostDetail(int commuNo) {
-		
+
 		System.out.println("글상세 test");
 		return commuDao.commuListPostDetail(commuNo);
 	}
-	
+
 	// 게시판 이미지 조회
 	@Override
 	public CommuVO commuListPostImg(CommuVO commuVo) {
-		
+
 		System.out.println("글상세 test");
 		return commuDao.commuListPostImg(commuVo);
 	}
@@ -162,29 +183,16 @@ public class CommuServiceImp implements CommuService {
 
 	// 게시판 댓글조회
 	@Override
-	public Map<String,Object> replyList(CommuVO commuVo) {
-		return commuDao.replyList(commuVo);
+	public List<CommuVO> replyList(CommuVO commuVo) {
+		List<CommuVO> replyList = commuDao.replyList(commuVo);
+		return replyList;
 	}
 
 	// 게시판 댓글쓰기
 	@Override
-	public Map<String, Object> commentWrite(CommuVO commuVo) {
-		Map<String, Object> commentWriteMap = new HashMap<String, Object>();
-		if (commuVo.getLoginUser() != null && commuVo.getReplyText() != null) {
-			System.out.println(commuVo.getReplyText() + "댓글 등록");
-			int commentWriteDataCnt = commuDao.commentWrite(commuVo);
-			if (commentWriteDataCnt == 1) {
-				commentWriteMap.put("commentWriteMsg", "댓글등록 완료");
-				commentWriteMap.put("commentWriteCode", "12");
-			} else {
-				commentWriteMap.put("commentWriteMsg", "댓글등록 실패");
-				commentWriteMap.put("commentWriteCode", "18");
-			}
-		} else {
-			commentWriteMap.put("commentWriteMsg", "필수값 오류");
-			commentWriteMap.put("commentWriteCode", "01");
-		}
-		return commentWriteMap;
+	public int commentWrite(CommuVO commuVo) {
+		int result = commuDao.commentWrite(commuVo);
+		return result;
 	}
 
 	// 게시판 댓글수정

@@ -21,6 +21,9 @@ public interface CommuService {
 	// 게시판 이미지등록
 	Map<String, Object> commuWriteImg(CommuVO commuVo);
 	
+	// 게시판 매핑테이블
+	Map<String, Object> commuWriteMap(CommuVO commuVo);
+	
 	// 게시판 글상세
 	CommuVO commuListPostDetail(int commuNo);
 	
@@ -34,10 +37,10 @@ public interface CommuService {
 	Map<String, Object> commuDelete(CommuVO commuVo);
 	
 	// 게시판 댓글조회
-	Map<String,Object> replyList(CommuVO commuVo);
+	List<CommuVO> replyList(CommuVO commuVo);
 	
 	// 게시판 댓글쓰기
-	Map<String, Object> commentWrite(CommuVO commuVo);
+	int commentWrite(CommuVO commuVo);
 		
 	// 게시판 댓글수정
 	Map<String, Object> commentModify(CommuVO commuVo);
