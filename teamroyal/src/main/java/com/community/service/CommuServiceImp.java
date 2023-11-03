@@ -218,10 +218,10 @@ public class CommuServiceImp implements CommuService {
 	@Override
 	public Map<String, Object> commentModify(CommuVO commuVo) {
 		Map<String, Object> commentModifyMap = new HashMap<String, Object>();
-		if (commuVo.getLoginUser() != null && commuVo.getReplyText() != null) {
+		if (commuVo.getLoginUser() != null && commuVo.getReplyText() != null && commuVo.getReplyNo() != 0) {
 			System.out.println(commuVo.getReplyText() + "댓글 수정");
 
-			int commentModifyDataCnt = commuDao.commuWrite(commuVo);
+			int commentModifyDataCnt = commuDao.commentModify(commuVo);
 			if (commentModifyDataCnt == 1) {
 				commentModifyMap.put("commentModifyMsg", "댓글수정 완료");
 				commentModifyMap.put("commentModifyCode", "13");

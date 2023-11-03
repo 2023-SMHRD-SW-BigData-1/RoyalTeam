@@ -48,40 +48,44 @@ public class CommuRestController {
 
 	/**
 	 * 댓글등록
-	 * @param CommuVO commuVo
+	 * 
+	 * @param CommuVO     commuVo
 	 * @param HttpSession session
 	 * @param Map<String, Object>
-	 * @return Map<String, Object>
-	 * ------------ 이력 ------------
-	 * 2023.11.02 / 정윤지 / 최초 적용
+	 * @return Map<String, Object> ------------ 이력 ------------ 2023.11.02 / 정윤지 /
+	 *         최초 적용
 	 */
 	@RequestMapping(value = "/list/post/reply", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> commentWrite(@ModelAttribute CommuVO commuVo, HttpSession session) {
-		
-		LoginInfoVO user = (LoginInfoVO) session.getAttribute("user");
-		
+	public Map<String, Object> commentWrite(@ModelAttribute CommuVO commuVo, HttpSession session, Principal principal) {
+
 		System.out.println("===> 댓글진입");
-		commuVo.setLoginUser(user.getUserEmail().toString());
-		String replyCreateNm = commuVo.getLoginUser();
-		commuVo.setReplyCreateNm(replyCreateNm);
+		commuVo.setLoginUser(principal.getName().toString());
+		commuVo.setReplyCreateNm(principal.getName().toString());
+		
 		Map<String, Object> dbReMaap = commuService.communityReplyInsert(commuVo);
+		
 		dbReMaap.put("commuNo", commuVo.getCommuNo());
 		return dbReMaap;
 	}
-	
-//	// 댓글조회
-//		@RequestMapping(value = "/list/post/{commuNo}", method = RequestMethod.GET)
-//		@ResponseBody
-//		public List<CommuVO> replyList(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, Model model) {
-//			
-//			System.out.println("=====> 댓글 조회 진입");
-//
-//			List<CommuVO> replyMap = commuService.replyList(commuVo);
-//
-//			model.addAttribute("replyMap", replyMap);
-//
-//			System.out.println(replyMap.size());
-//			return replyMap;
-//		}
+
+	/**
+	 * 댓글수정
+	 * 
+	 * @param mv
+	 * @param reply
+	 * @return
+	 */
+	@RequestMapping(value = "/list/post/replyModify", method = RequestMethod.POST)
+	public Map<String, Object> commentModify(@ModelAttribute CommuVO commuVo, HttpSession session, Principal principal) {
+
+		System.out.println("===> 댓글수정진입");
+		commuVo.setLoginUser(principal.getName().toString());
+		commuVo.setReplyModifyNm(principal.getName().toString());
+		
+		Map<String, Object> dbReMaap = commuService.commentModify(commuVo);
+		
+		dbReMaap.put("commuNo", commuVo.getCommuNo());
+		return dbReMaap;
+	}
 }

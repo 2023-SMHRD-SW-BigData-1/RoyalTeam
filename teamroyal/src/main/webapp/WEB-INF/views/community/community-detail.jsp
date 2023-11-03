@@ -62,6 +62,40 @@
 <script src="/assets/vendor/js/template-customizer.js"></script>
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="/assets/js/config.js"></script>
+
+<script type="text/javascript">
+
+
+	function replyModify(replyNo) {
+		$.ajax({
+			url : "/community/list/post/replyModify",
+			data : {
+				"replyText" : $("#reply"+replyNo).val(),
+				"replyNo" : replyNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("등록 성공")
+			},
+			error : function() {
+				alert("등록 실패")
+
+			}
+		});
+	    
+	    // Add your logic to modify the reply here.
+	}
+
+	function modifyView(modiId) {
+		$("#"+modiId).css('display','');
+	}
+
+    $('#mSubmit').on("click", function() {
+		var replyText = $("#replyText").val();
+		var commuNo = "${detailMap.getCommuNo()}"
+	})
+	
+</script>
 </head>
 
 <body>
@@ -118,8 +152,8 @@
 									<div
 										class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
 
-										<div class="me-1 ">
-											<h3 class="mb-1">${detailMap.getCommuTitle() }</h3>
+										<div class="me-1">
+											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
 										</div>
 										<div class="me-1 mr-5">
 											<a
@@ -136,7 +170,7 @@
 
 
 
-									
+									<hr class="my-2" />
 									<!-- user info -->
 									<div
 										class="d-flex justify-content-between align-items-center user-name">
@@ -168,7 +202,7 @@
 											</a>
 										</div>
 									</div>
-									<hr class="my-2 mb-4" />
+									<br>
 									<!-- user info -->
 									<!-- user content-->
 									<div class="card academy-content shadow-none border">
@@ -188,7 +222,6 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<h5>내용</h5>
 											<p class="mb-4">${detailMap.getCommuText() }</p>
 
 
@@ -200,46 +233,46 @@
 											<div
 												class="d-flex justify-content-between align-items-center user-name">
 												<div class="d-flex w-100">
-													<div class="avatar-wrapper">
-														<div class="avatar me-2">
-															<img src="/assets/img/avatars/11.png" alt="Avatar"
-																class="rounded-circle" />
-														</div>
-													</div>
+
 													<div class="d-flex flex-column w-100">
 
-
 														<div id="comment-list" class="d-flex flex-column w-100 ">
-															<c:forEach items="${replyMap }" var="replyMap">
+															<c:forEach items="${replyMap }" var="replyMap" varStatus="replyBegin">
 																<div class="d-flex justify-content-between">
 																	<div class="d-flex justify-content-between ml-2 ">
-																		<span class="fw-medium">"${replyMap.getReplyCreateNm()}"</span>
-																		<small class="text-muted ml-2">"${replyMap.getReplyCreateAt()}"</small>
+																		<span class="fw-medium">${replyMap.getReplyCreateNm()}</span>
+																		<small <c:if test="${replyMap.getReplyCreateNm() != user.userEmail }"> colspan ="2"</c:if>
+																		 class="text-muted ml-2">${replyMap.getReplyCreateAt()}</small>
 																	</div>
-																	<div class="fw-medium">
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
-																	</div>
+																	<c:if test="${replyMap.getReplyCreateNm() == user.userEmail }">
+																		<div class="fw-medium">
+																			<button type="button" onclick='modifyView("modify${replyBegin.count}")' id="modify${i.count }" class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
+																		</div>
+																	</c:if>
 																</div>
 																<div class="sh-comm-comment w-100">
-																	<p class="border-none ml-4 mt-n2">"${replyMap.getReplyText()}"</p>
+																	<p class="border-none ml-4 mt-n2">${replyMap.getReplyText()}</p>
 																</div>
-
+																
+																<div id="modify${replyBegin.count}" class="border" style="display: none; width : 800px; border:2px solid gray !important; border-radius:10px;">
+																	<input type="hidden" name="replyNo" value="${replyMap.getReplyNo() }"> 
+																	<input type="hidden" name="commuNo" value="${detailMap.getCommuNo() }"> 
+																	<input type="hidden" name="replyCreateNm" value="${replyMap.getReplyCreateNm() }">
+																	<textarea class="form-control border-none" placeholder="내용을 작성하세요" name="replyText" required="required" id="reply${replyMap.getReplyNo() }">${replyMap.getReplyText() }</textarea>
+																		<div class="fw-medium" style="display:flex; justify-content:end;">
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow" onclick='replyModify("${replyMap.getReplyNo() }")'>수정</button>
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow">취소</button>
+																		</div>
+																</div>
+																<br>
 															</c:forEach>
 														</div>
-
-
-
 
 													</div>
 												</div>
 											</div>
 											<!-- user info -->
-
-
-
 
 											<div class="border mt-5">
 												<form action="/community/list/post/reply" method="post">
@@ -248,7 +281,6 @@
 													<div class="d-flex flex-column pl-3">
 														<span class="fw-medium fw-bolder">${user.userNick }</span>
 													</div>
-
 
 													<textarea name="replyContents"
 														class="form-control border-none" id="replyText" rows="2"
@@ -334,6 +366,17 @@
 
 
 	<script type="text/javascript">
+
+	
+	var modifyViews = document.getElementsByClassName('modifyViews')
+	for (var i = 0; i < modifyViews.length; i++) {
+		modifyViews[i].style.display = 'none'
+	}
+	function modifyCancle(idI) {
+		var modifiId = document.getElementById(idI);
+		modifiId.parentElement.parentElement.style.display = '';
+		modifiId.parentElement.parentElement.nextElementSibling.style.display = 'none';
+	}
 		
 	<!-- 댓글 등록 -->
 	$('#rSubmit').on("click", function() {
@@ -386,19 +429,42 @@
 	    }
 	    const listReq = () => {
 	        console.log("목록 요청");
-	        const page = [[${commuNo}]];
-	        location.href = "/community/list/detail/"+commuNo;
+	        const page = [[${detailMap.getCommuNo()}]];
+	        location.href = "/community/list/detail/${detailMap.getCommuNo()}";
 	    }
 	    const updateReq = () => {
 	        console.log("수정 요청");
-	        const id = [[${rpelyMap.replyCreateNm}]];
-	        location.href = "/community/list/reply/modify" + id;
+	        const id = [[${rpelyMap.getReplyCreateNm()}]];
+	        location.href = "/community/list/reply/modify/${rpelyMap.getReplyCreateNm()}";
 	    }
 	    const deleteReq = () => {
 	        console.log("삭제 요청");
-	        const id = [[${rpelyMap.replyCreateNm}]];
-	        location.href = "/community/list/reply/delete" + id;
+	        const id = [[${rpelyMap.getReplyCreateNm()}]];
+	        location.href = "/community/list/reply/delete/${rpelyMap.getReplyCreateNm()}";
 	    }
+	    
+	    $('#mSubmit').on("click", function() {
+			var replyText = $("#replyText").val();
+			var commuNo = "${detailMap.getCommuNo()}"
+			$.ajax({
+				url : "/community/list/post/reply",
+				data : {
+					"replyText" : replyText,
+					"commuNo" : commuNo
+				},
+				type : "POST",
+				success : function(result) {
+					alert("등록 성공")
+					$('#replyContents').val('')
+					getReplyList();
+				},
+				error : function() {
+					alert("등록 실패")
+
+				}
+			});
+		})
+		
 
 </script>
 </body>

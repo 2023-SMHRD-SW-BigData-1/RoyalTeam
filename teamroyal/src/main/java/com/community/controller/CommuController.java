@@ -80,10 +80,10 @@ public class CommuController {
 	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.27 / 정윤지 / 최초 적용
 	 */
 	@RequestMapping(value = "/list/post/write", method = RequestMethod.POST)
-	public String postWrite(@ModelAttribute CommuVO commuVo,@ModelAttribute LoginInfoVO loginInfoVo, Principal principal, HttpServletRequest request, HttpServletResponse response) {
+	public String postWrite(@ModelAttribute CommuVO commuVo, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 		
-		commuVo.setLoginUser(loginInfoVo.getUserEmail().toString());
-
+		commuVo.setLoginUser(principal.getName().toString());
+		
 		Map<String, Object> writeMap = commuSerivce.commuWrite(commuVo);
 		
 		Map<String, Object> imgMap = commuSerivce.commuWriteImg(commuVo);
@@ -227,42 +227,22 @@ public class CommuController {
 		}
 	}
 
-	/**
-	 * 댓글 조회
-	 * 
-	 * @param CommuVO             commuVo
-	 * @param Model               model
-	 * @param HttpServletResponse response
-	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.30 / 정윤지 / 최초 적용
-	 */
-	@RequestMapping(value = "/list/detail/{commuNo}", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
-	public String replyList(@RequestParam("commuNo") int commuNo) {
-		
-		int bno = (commuNo == 0) ? 1 : commuNo;
-		
-		
-
-		return null;
-	}
-
-	
-
 	// 댓글수정
-	@RequestMapping(value = "/list/{commuNo}/commentModify", method = RequestMethod.POST)
-	public String commentModify(@ModelAttribute CommuVO commuVo, HttpSession session) {
+	@RequestMapping(value = "/list/commentModify/{replyNo}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String commentModify(@PathVariable("replyNo") int replyNo, @ModelAttribute CommuVO commuVo, HttpSession session) {
 
 		Map<String, Object> commentModifyMap = commuSerivce.commentModify(commuVo);
 
 		String reString = commentModifyMap.get("commentModifyCode").toString();
 		if (reString.equals("13")) {
 			System.out.println("댓글수정 성공");
-			return "redirect:/community/list/{commuNo}";
+			return null;
 		} else if (reString.equals("01")) {
-			System.out.println("필수값 오류");
-			return "redirect:/community/list/{commuNo}";
+			System.out.println("댓글수정 필수값 오류");
+			return null;
 		} else {
 			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list/{commuNo}";
+			return null;
 		}
 	}
 
