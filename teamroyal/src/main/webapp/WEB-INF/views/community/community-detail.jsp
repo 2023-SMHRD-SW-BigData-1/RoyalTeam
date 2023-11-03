@@ -250,12 +250,12 @@
 															<c:forEach items="${replyMap }" var="replyMap" varStatus="replyBegin">
 																<div class="d-flex justify-content-between">
 																	<div class="d-flex justify-content-between ml-2 ">
-																		<span class="fw-medium">${replyMap.getReplyCreateNm()}</span>
+																		<span class="fw-medium" >${replyMap.getReplyCreateNm()}</span>
 																		<small <c:if test="${replyMap.getReplyCreateNm() != user.userEmail }"> colspan ="2"</c:if>
 																		 class="text-muted ml-2">${replyMap.getReplyCreateAt()}</small>
 																	</div>
 																	<c:if test="${replyMap.getReplyCreateNm() == user.userEmail }">
-																		<div class="dropdown">
+																		<div class="dropdown mt-3">
 																		<button class="btn p-0" type="button"
 																			id="supportTrackerMenu" data-bs-toggle="dropdown"
 																			aria-haspopup="true" aria-expanded="false">
@@ -263,8 +263,8 @@
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-end"
 																			aria-labelledby="supportTrackerMenu">
-																			<a class="dropdown-item" href="javascript:void(0);">수정
-																			</a> <a class="dropdown-item" href="javascript:void(0);">삭제</a>
+																			<button type="button" onclick='modifyView("modify${replyBegin.count}")' id="modify${i.count }" class="dropdown-item">수정</button>
+																			<button class="dropdown-item" onclick='replyDelete("${replyMap.getReplyNo() }")'>삭제</button>
 																		</div>
 																	</div>
 																	</c:if>
