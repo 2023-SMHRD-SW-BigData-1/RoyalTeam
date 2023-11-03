@@ -38,12 +38,13 @@ public interface CommuDAO {
 	List<CommuVO> replyList(CommuVO commuVo);
 	
 	// 게시판 댓글등록
-	int commentWrite(CommuVO commuVo);
+	int communityReplyInsert(CommuVO commuVo);
 		
 	// 게시판 댓글수정
 	int commentModify(CommuVO commuVo);
 		
 	// 게시판 댓글삭제
 	int commentDelete(CommuVO commuVo);
+
 
 }

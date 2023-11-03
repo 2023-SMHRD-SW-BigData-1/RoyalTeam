@@ -40,12 +40,14 @@ public interface CommuService {
 	List<CommuVO> replyList(CommuVO commuVo);
 	
 	// 게시판 댓글쓰기
-	int commentWrite(CommuVO commuVo);
+	Map<String, Object> communityReplyInsert(CommuVO commuVo);
 		
 	// 게시판 댓글수정
 	Map<String, Object> commentModify(CommuVO commuVo);
 		
 	// 게시판 댓글삭제
 	Map<String, Object> commentDelete(CommuVO commuVo);
+
+	
 
 }

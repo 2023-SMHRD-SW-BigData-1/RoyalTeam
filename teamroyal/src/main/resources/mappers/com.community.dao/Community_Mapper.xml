@@ -166,11 +166,19 @@
 
 	<!-- 댓글 조회 -->
 	<select id="replyList" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
-		SELECT *
+		SELECT REPLY_NO as replyNo
+		, USER_NICK as userEmail
+		, REPLY_TEXT as replyText
+		, COMMU_NO as commuNo
+		, REPLY_ISDELETED as replyIsDeleted
+		, REPLY_CREATE_NAME as replyCreateNm
+		, REPLY_CREATE_AT as replyCreateAt
+		, REPLY_MODIFY_AT as replyModifyAt
+		, REPLY_MODIFY_NAME as replyModifyNm
 		FROM ROYAL.TB_REPLY
 		WHERE
-		<if test="replyNo != null and replyNo  != ''">
-			REPLY_NO = #{replyNo}
+		<if test="commuNo != null and commuNo  != ''">
+			COMMU_NO = #{commuNo}
 		</if>
 		ORDER BY REPLY_NO DESC
 	</select>
@@ -181,7 +189,6 @@
 		USER_NICK
 		, REPLY_TEXT
 		, COMMU_NO
-		, REPLY_CREATE_NAME
 		, REPLY_CREATE_AT
 		) VALUES (
 		#{loginUser}
@@ -189,9 +196,8 @@
 			,#{replyText}
 		</if>
 		, #{commuNo}
-		, #{loginUser}
 		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
-		);
+		)
 	</insert>
 
 	<!-- 댓글 수정 -->
@@ -212,5 +218,22 @@
 		WHERE REPLY_NO=#{replyNo}
 	</delete>
 
+
+	<!-- 댓글 작성 -->
+	<insert id="communityReplyInsert" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_REPLY(
+		USER_NICK
+		, REPLY_TEXT
+		, COMMU_NO
+		, REPLY_CREATE_AT
+		) VALUES (
+		#{loginUser}
+		<if test="replyText != null and replyText != ''">
+			,#{replyText}
+		</if>
+		, #{commuNo}
+		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		)
+	</insert>
 
 </mapper>

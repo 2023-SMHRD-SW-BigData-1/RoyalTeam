@@ -13,18 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.community.converter.ImageConverter;
 import com.community.converter.ImageToBase64;
 import com.community.service.CommuService;
 import com.community.vo.CommuVO;
+import com.user.vo.LoginInfoVO;
+import com.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/community")
@@ -32,6 +39,9 @@ public class CommuController {
 
 	@Autowired
 	private CommuService commuSerivce;
+
+//	@Autowired
+//	private Authentication authentication;
 
 	/**
 	 * 게시판 입장
@@ -70,9 +80,9 @@ public class CommuController {
 	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.27 / 정윤지 / 최초 적용
 	 */
 	@RequestMapping(value = "/list/post/write", method = RequestMethod.POST)
-	public String postWrite(@ModelAttribute CommuVO commuVo, Principal principal, HttpServletRequest request, HttpServletResponse response) {
+	public String postWrite(@ModelAttribute CommuVO commuVo,@ModelAttribute LoginInfoVO loginInfoVo, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 		
-		commuVo.setLoginUser(principal.getName().toString());
+		commuVo.setLoginUser(loginInfoVo.getUserEmail().toString());
 
 		Map<String, Object> writeMap = commuSerivce.commuWrite(commuVo);
 		
@@ -119,6 +129,12 @@ public class CommuController {
 		System.out.println(detailMap);
 
 		model.addAttribute("detailMap", detailMap);
+		
+		List<CommuVO> replyMap = commuSerivce.replyList(commuVo);
+		
+		System.out.println(replyMap);
+
+		model.addAttribute("replyMap", replyMap);
 		
 //		File file = new File("C:\\royal\\commuImg\\"+commuVo.getCommuImgNm());
 //		
@@ -280,5 +296,6 @@ public class CommuController {
 	public String emailPage() {
 		return "/community/community-mail";
 	}
+	
 	
 }

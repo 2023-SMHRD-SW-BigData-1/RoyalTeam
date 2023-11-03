@@ -205,23 +205,22 @@
 													<div class="d-flex flex-column w-100">
 
 
-														<table align="center" width="500" border="1">
-
-															<c:forEach items="${replyList }" var="replyList"
-																varStatus="i">
-																<tr>
-																	<td width="100">${replyList.replyCreateNm }</td>
-																	<td>${replyList.replyText }</td>
-																	<td>${replyList.replyCreateAt }</td>
-																	<td>
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
-																</tr>
-
+														<div id="comment-list">
+														<table>
+															<tr>
+																<th>작성자</th>
+																<th>내용</th>
+																<th>작성시간</th>
+															</tr>
+															<c:forEach items="${replyMap }" var="replyMap">
+															<tr>
+																<td>"${replyMap.getReplyCreateNm()}"</td>
+																<td>"${replyMap.getReplyText()}"</td>
+																<td>"${replyMap.getReplyCreateAt()}"</td>
+															</tr>
 															</c:forEach>
 														</table>
+													</div>
 													</div>
 												</div>
 											</div>
@@ -346,6 +345,48 @@
 			}
 		});
 	})
+	
+	<!-- 댓글 출력 -->
+		const comment-list = () => {
+	        const replyCreateNm = document.getElementById("replyCreateNm").value;
+	        const replyText = document.getElementById("replyText").value;
+	        console.log("작성자: ", replyCreateNm);
+	        console.log("내용: ", replyText);
+	        const commuNo = [[${detailMap.commuNo}]]; //게시글번호
+	          $.ajax({
+	           // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
+	           type: "get",
+	           url: "/community/list/detail/${detailMap.commuNo}",
+	           data: {
+	               "replyCreateNm": replyCreateNm,
+	               "replyText": replyText,
+	               "commuNo": commuNo
+	           },
+	           success: function (res) {
+	               console.log("요청성공", res);
+	               
+	           },
+	           error: function (err) {
+	               console.log("요청실패", err);
+	           }
+	        });
+
+	    }
+	    const listReq = () => {
+	        console.log("목록 요청");
+	        const page = [[${commuNo}]];
+	        location.href = "/community/list/detail/"+commuNo;
+	    }
+	    const updateReq = () => {
+	        console.log("수정 요청");
+	        const id = [[${rpelyMap.replyCreateNm}]];
+	        location.href = "/community/list/reply/modify" + id;
+	    }
+	    const deleteReq = () => {
+	        console.log("삭제 요청");
+	        const id = [[${rpelyMap.replyCreateNm}]];
+	        location.href = "/community/list/reply/delete" + id;
+	    }
 
 </script>
 </body>

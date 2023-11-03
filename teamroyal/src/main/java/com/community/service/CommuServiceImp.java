@@ -184,15 +184,34 @@ public class CommuServiceImp implements CommuService {
 	// 게시판 댓글조회
 	@Override
 	public List<CommuVO> replyList(CommuVO commuVo) {
-		List<CommuVO> replyList = commuDao.replyList(commuVo);
-		return replyList;
+		return commuDao.replyList(commuVo);
 	}
 
 	// 게시판 댓글쓰기
 	@Override
-	public int commentWrite(CommuVO commuVo) {
-		int result = commuDao.commentWrite(commuVo);
-		return result;
+	public Map<String, Object> communityReplyInsert(CommuVO commuVo) {
+		Map<String, Object> writeMap = new HashMap<String, Object>();
+		if (commuVo.getCommuNo() != 0 && commuVo.getReplyText() != null) {
+
+			System.out.println("============================");
+			System.out.println("getLoginUser:::: "+commuVo.getLoginUser());
+			System.out.println("getReplyText:::: "+commuVo.getReplyText());
+			System.out.println("getCommuNo:::: "+commuVo.getCommuNo());
+			System.out.println("============================");
+			int WriteDataCnt = commuDao.communityReplyInsert(commuVo);
+
+			if (WriteDataCnt == 1) {
+				writeMap.put("Msg", "글등록 완료");
+				writeMap.put("Code", "20");
+			} else {
+				writeMap.put("Msg", "글등록 실패");
+				writeMap.put("Code", "80");
+			}
+		} else {
+			writeMap.put("Msg", "필수값 오류");
+			writeMap.put("Code", "01");
+		}
+		return writeMap;
 	}
 
 	// 게시판 댓글수정
@@ -240,5 +259,7 @@ public class CommuServiceImp implements CommuService {
 		}
 		return commentDeleteMap;
 	}
+
+	
 
 }
