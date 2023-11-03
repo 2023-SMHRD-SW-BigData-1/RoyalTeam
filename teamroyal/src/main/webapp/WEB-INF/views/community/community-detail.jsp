@@ -255,10 +255,18 @@
 																		 class="text-muted ml-2">${replyMap.getReplyCreateAt()}</small>
 																	</div>
 																	<c:if test="${replyMap.getReplyCreateNm() == user.userEmail }">
-																		<div class="fw-medium">
-																			<button type="button" onclick='modifyView("modify${replyBegin.count}")' id="modify${i.count }" class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow" onclick='replyDelete("${replyMap.getReplyNo() }")'>삭제</button>
+																		<div class="dropdown">
+																		<button class="btn p-0" type="button"
+																			id="supportTrackerMenu" data-bs-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="ti ti-dots-vertical ti-sm text-muted"></i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-end"
+																			aria-labelledby="supportTrackerMenu">
+																			<a class="dropdown-item" href="javascript:void(0);">수정
+																			</a> <a class="dropdown-item" href="javascript:void(0);">삭제</a>
 																		</div>
+																	</div>
 																	</c:if>
 																</div>
 																<div class="sh-comm-comment w-100">
@@ -297,7 +305,7 @@
 														placeholder="내용을 입력해주세요"></textarea>
 
 
-													<div class="w-100">
+													<div class="w-100 bdr">
 														<div class="ml-auto w-10">
 															<button id="rSubmit" type="button" name="rSubmit"
 																class="w-100 p-2 bg-transparent border-none"
