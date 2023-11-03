@@ -245,13 +245,12 @@
 
 
 													<div class="w-100">
-														<div class="ml-auto w-10">
-															<button id="btn_reply_regist" type="submit"
-																name="rSubmit"
-																class="w-100 p-2 btn btn-primary bg-transparent border-none btn-no-boxshadow"
-																style="color: gray;">댓글등록</button>
-														</div>
+													<div class="ml-auto w-10">
+														<button id="rSubmit" type="button" name="rSubmit"
+															class="w-100 p-2 bg-transparent border-none"
+															style="color: gray;">댓글등록</button>
 													</div>
+												</div>
 												</form>
 											</div>
 
@@ -325,128 +324,28 @@
 
 	<script type="text/javascript">
 		
-		<!-- 댓글 조회 -->
-		var $tableBody = $('#rtb tbody'); 
-		for ( var i in result) {
-										var $tr = $("<tr>");
-										var $rWriter = $("<td width='100'>").text(
-												result[i].replyWirter);
-										var $rContent = $("<td>").text(
-												result[i].replyContents);
-										var $rCreatDate = $("<td width='100'>").text(
-												result[i].rCreateDate);
-										var $btnArea = $("<td width='80'>").append(
-												"<a href='modifyreply(${board.boardNo})'>수정</a>").append(
-												"<a href='#'>삭제</a>");
+	<!-- 댓글 등록 -->
+	$('#rSubmit').on("click", function() {
+		var replyText = $("#replyText").val();
+		var commuNo = "${detailMap.commuNo}"
+		$.ajax({
+			url : "/community/list/post/reply",
+			data : {
+				"replyText" : replyText,
+				"commuNo" : commuNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("등록 성공")
+				$('#replyContents').val('')
+				getReplyList();
+			},
+			error : function() {
+				alert("등록 실패")
 
-										$tr.append($rWriter);
-										$tr.append($rContent);
-										$tr.append($rCreatDate);
-										$tr.append($btnArea);
-										$tableBody.append($tr);
-
-									}
-		
-		
-			function replyList(){
-				var commuNo = "${detialMap.commuNo}";
-				
-				$.ajax({
-					url : "/community/list/detail/{commuNo}",
-					type : "GET",
-					data : {"commuNo" : commuNo},
-					dataType : "json",
-					success : function(data){
-						console.log(data);
-						/*
-						var $rArea = $("#replyListArea");
-						
-						if(replyList == ""){
-							$rArea.html("<li>등록된 댓글이 없습니다.</li>");
-						}else{
-							$rArea.html("");
-							
-							$.each(replyList : function(i){
-								var $li = $("<li>");
-								var $rWriter = $("<span>").addClass("rWriter").html(replyList[i]).replyCreateNm);
-								var $rDate = $("<span>").addClass("wDate").html(replyList[i].replyCreateAt);
-								var $rContent = $("<p>").addClass("replyContent").html(replyList[i].replyText)
-								var $hr = $("<hr>");
-								
-								$li.append($rWriter).append($rDate).append("$rContent");
-								$rArea.append($li).append($hr);
-							});
-						}
-						*/
-						
-						var $tableBody = $('#rtb tbody');
-						$tableBody.html('');
-						$('#rCount').text("댓글 ("+result.length+")")
-						if (result != null) {
-							console.log(result);
-							for ( var i in result) {
-								var $tr = $("<tr>");
-								var $rWriter = $("<td width='100'>").text(
-										result[i].replyWirter);
-								var $rContent = $("<td>").text(
-										result[i].replyContents);
-								var $rCreatDate = $("<td width='100'>").text(
-										result[i].rCreateDate);
-								var $btnArea = $("<td width='80'>").append(
-										"<a href='modifyreply(${detailMap.commuNo})'>수정</a>").append(
-										"<a href='#'>삭제</a>");
-
-								$tr.append($replyCreateNm);
-								$tr.append($replyText);
-								$tr.append($replyCreateAt);
-								$tr.append($btnArea);
-								$tableBody.append($tr);
-					},
-					error : function(){
-						consol.log("댓글 목록 조회 실패");
-					}
-				})
 			}
-			
-		<!-- 댓글 등록 -->
-		$("#addReply#").on("click", finction(){
-			var userNick;
-			var commuNo = "${detailMap.commuNo}";
-			var replyText = $("#replyText").val();
-			
-			$.ajax({
-				url : "/community/list/detail/{commuNo}",
-				type : "post",
-				data : {"replyText" : replyText,
-					"commuNo" : commuNo,
-					"userNick" : userNick},
-				success : function(result){
-					var msg;
-					
-					switch(result){
-					
-					alert("등록성공")
-					$("#replyText").val('')
-					getReplyList()
-					
-					case 1 :
-						msg = "댓글 등록 성공";
-						$("#replyText").val("");
-						replyList();
-						break;
-						
-					case 0 : 
-						msg = "댓글 등록 실패";
-						break;
-					case -1 :
-						msg = "댓글 등록 오류 발생";
-						break;
-					}
-				}
-				}
-			})
-			
-		}
+		});
+	})
 
 </script>
 </body>

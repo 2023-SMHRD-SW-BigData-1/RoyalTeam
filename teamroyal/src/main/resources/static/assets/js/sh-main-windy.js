@@ -1,5 +1,5 @@
 // windy api
-const options = {
+const windyOptions = {
     // Required: API key
     key: 'BYAVf6FAuDCtLxDkiuQYnDXSP4WNHuks', // REPLACE WITH YOUR KEY !!!
 
@@ -13,7 +13,7 @@ const options = {
 };
 
 // Initialize Windy API
-windyInit(options, windyAPI => {
+windyInit(windyOptions, windyAPI => {
     // windyAPI is ready, and contain 'map', 'store',
     // 'picker' and other usefull stuff
 
