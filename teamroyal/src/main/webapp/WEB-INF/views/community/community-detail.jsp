@@ -136,7 +136,7 @@
 
 
 
-									
+
 									<!-- user infof -->
 									<div
 										class="d-flex justify-content-between align-items-center user-name">
@@ -209,19 +209,28 @@
 													<div class="d-flex flex-column w-100">
 
 
-														<div id="comment-list" class="d-flex flex-column w-100 ">
+														<div id="comment-list" class="d-flex flex-column w-100">
 															<c:forEach items="${replyMap }" var="replyMap">
 																<div class="d-flex justify-content-between">
 																	<div class="d-flex justify-content-between ml-2 ">
 																		<span class="fw-medium">"${replyMap.getReplyCreateNm()}"</span>
 																		<small class="text-muted ml-2">"${replyMap.getReplyCreateAt()}"</small>
 																	</div>
-																	<div class="fw-medium">
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-																		<button
-																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
+																	<div class="dropdown">
+																		<button class="btn p-0" type="button"
+																			id="supportTrackerMenu" data-bs-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="ti ti-dots-vertical ti-sm text-muted"></i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-end"
+																			aria-labelledby="supportTrackerMenu">
+																			<a class="dropdown-item" href="javascript:void(0);">수정
+																			</a> <a class="dropdown-item" href="javascript:void(0);">삭제</a>
+																		</div>
 																	</div>
+
+
+
 																</div>
 																<div class="sh-comm-comment w-100">
 																	<p class="border-none ml-4 mt-n2">"${replyMap.getReplyText()}"</p>

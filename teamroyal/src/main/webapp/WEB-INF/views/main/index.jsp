@@ -136,10 +136,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-body">
+						<div class="card-body mt-3">
 							<div class="row">
 								<ul class="d-flex d-flex justify-content-between w-100">
-									<li class="d-flex gap-3 align-items-center  pb-1">
+									<li class="d-flex gap-1 align-items-center  pb-1">
 										<div class="badge rounded bg-label-primary p-1">
 											<i class="ti ti-ticket ti-sm"></i>
 										</div>
@@ -148,7 +148,7 @@
 											<small class="text-muted">14,232</small>
 										</div>
 									</li>
-									<li class="d-flex gap-3 align-items-center  pb-1">
+									<li class="d-flex gap-1 align-items-center  pb-1">
 										<div class="badge rounded bg-label-info p-1">
 											<i class="ti ti-circle-check ti-sm"></i>
 										</div>
@@ -157,7 +157,7 @@
 											<small class="text-muted">28,200</small>
 										</div>
 									</li>
-									<li class="d-flex gap-3 align-items-center  pb-1">
+									<li class="d-flex gap-1 align-items-center  pb-1">
 										<div class="badge rounded bg-label-warning p-1">
 											<i class="ti ti-clock ti-sm"></i>
 										</div>
