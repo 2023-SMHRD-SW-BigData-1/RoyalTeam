@@ -121,4 +121,9 @@
 		WHERE USER_EMAIL = #{userEmail} AND USER_PHONE = #{userPhone}
 	</select>
 	
+	<!-- 마커 가져오기 -->
+	  <select id="getAllMarkers" resultType="com.user.vo.MapMarker">
+        SELECT LAT  as latitude, LOG as longitude FROM SOLAR_POWER_ARIA
+    </select>
+	
 </mapper>    
