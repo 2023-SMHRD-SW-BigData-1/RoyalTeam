@@ -75,25 +75,35 @@
 			},
 			type : "POST",
 			success : function(result) {
-				alert("등록 성공")
+				alert("댓글 수정 성공")
 			},
 			error : function() {
-				alert("등록 실패")
-
+				alert("댓글 수정 실패")
 			}
 		});
-	    
-	    // Add your logic to modify the reply here.
 	}
-
+	
 	function modifyView(modiId) {
 		$("#"+modiId).css('display','');
 	}
 
-    $('#mSubmit').on("click", function() {
-		var replyText = $("#replyText").val();
-		var commuNo = "${detailMap.getCommuNo()}"
-	})
+	
+	function replyDelete(replyNo) {
+		$.ajax({
+			url : "/community/list/post/replyDelete",
+			data : {
+				"replyNo" : replyNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("댓글 삭제 성공")
+			},
+			error : function() {
+				alert("댓글 삭제 실패")
+			}
+		}); 
+	}
+
 	
 </script>
 </head>
@@ -247,7 +257,7 @@
 																	<c:if test="${replyMap.getReplyCreateNm() == user.userEmail }">
 																		<div class="fw-medium">
 																			<button type="button" onclick='modifyView("modify${replyBegin.count}")' id="modify${i.count }" class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow" onclick='replyDelete("${replyMap.getReplyNo() }")'>삭제</button>
 																		</div>
 																	</c:if>
 																</div>
@@ -407,9 +417,8 @@
 	        const replyText = document.getElementById("replyText").value;
 	        console.log("작성자: ", replyCreateNm);
 	        console.log("내용: ", replyText);
-	        const commuNo = [[${detailMap.commuNo}]]; //게시글번호
+	        const commuNo = [[${detailMap.commuNo}]];
 	          $.ajax({
-	           // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
 	           type: "get",
 	           url: "/community/list/detail/${detailMap.commuNo}",
 	           data: {
@@ -427,43 +436,6 @@
 	        });
 
 	    }
-	    const listReq = () => {
-	        console.log("목록 요청");
-	        const page = [[${detailMap.getCommuNo()}]];
-	        location.href = "/community/list/detail/${detailMap.getCommuNo()}";
-	    }
-	    const updateReq = () => {
-	        console.log("수정 요청");
-	        const id = [[${rpelyMap.getReplyCreateNm()}]];
-	        location.href = "/community/list/reply/modify/${rpelyMap.getReplyCreateNm()}";
-	    }
-	    const deleteReq = () => {
-	        console.log("삭제 요청");
-	        const id = [[${rpelyMap.getReplyCreateNm()}]];
-	        location.href = "/community/list/reply/delete/${rpelyMap.getReplyCreateNm()}";
-	    }
-	    
-	    $('#mSubmit').on("click", function() {
-			var replyText = $("#replyText").val();
-			var commuNo = "${detailMap.getCommuNo()}"
-			$.ajax({
-				url : "/community/list/post/reply",
-				data : {
-					"replyText" : replyText,
-					"commuNo" : commuNo
-				},
-				type : "POST",
-				success : function(result) {
-					alert("등록 성공")
-					$('#replyContents').val('')
-					getReplyList();
-				},
-				error : function() {
-					alert("등록 실패")
-
-				}
-			});
-		})
 		
 
 </script>
