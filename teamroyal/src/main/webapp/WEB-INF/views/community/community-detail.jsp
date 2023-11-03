@@ -137,7 +137,7 @@
 
 
 									
-									<!-- user info -->
+									<!-- user infof -->
 									<div
 										class="d-flex justify-content-between align-items-center user-name">
 										<div class="d-flex">
