@@ -82,9 +82,9 @@
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
-							<a class="nav-item nav-link" href="/community/email">MAIL</a>
-							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -118,8 +118,8 @@
 									<div
 										class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
 
-										<div class="me-1">
-											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
+										<div class="me-1 ">
+											<h3 class="mb-1">${detailMap.getCommuTitle() }</h3>
 										</div>
 										<div class="me-1 mr-5">
 											<a
@@ -136,7 +136,7 @@
 
 
 
-									<hr class="my-2" />
+									
 									<!-- user info -->
 									<div
 										class="d-flex justify-content-between align-items-center user-name">
@@ -153,18 +153,22 @@
 											</div>
 										</div>
 										<div class="d-flex align-items-center">
-											<a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
-												class="ti ti-message ti-sm"></i>채팅
-												
-											</a> <a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
-												class="ti ti-mail ti-sm"></i>메일
-												
-											</a> <a href="chat.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"> <i
-												class="ti ti-bookmarks ti-sm"></i>${detailMap.getCommuCreateNm() }님의게시글더보기>
-												
+											<a href="chat.html"
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">
+												<i class="ti ti-message ti-sm"></i>채팅
+
+											</a> <a href="chat.html"
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">
+												<i class="ti ti-mail ti-sm"></i>메일
+
+											</a> <a href="chat.html"
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">
+												<i class="ti ti-bookmarks ti-sm"></i>${detailMap.getCommuCreateNm() }님의게시글더보기>
+
 											</a>
 										</div>
 									</div>
+									<hr class="my-2 mb-4" />
 									<!-- user info -->
 									<!-- user content-->
 									<div class="card academy-content shadow-none border">
@@ -205,22 +209,30 @@
 													<div class="d-flex flex-column w-100">
 
 
-														<div id="comment-list">
-														<table>
-															<tr>
-																<th>작성자</th>
-																<th>내용</th>
-																<th>작성시간</th>
-															</tr>
+														<div id="comment-list" class="d-flex flex-column w-100 ">
 															<c:forEach items="${replyMap }" var="replyMap">
-															<tr>
-																<td>"${replyMap.getReplyCreateNm()}"</td>
-																<td>"${replyMap.getReplyText()}"</td>
-																<td>"${replyMap.getReplyCreateAt()}"</td>
-															</tr>
+																<div class="d-flex justify-content-between">
+																	<div class="d-flex justify-content-between ml-2 ">
+																		<span class="fw-medium">"${replyMap.getReplyCreateNm()}"</span>
+																		<small class="text-muted ml-2">"${replyMap.getReplyCreateAt()}"</small>
+																	</div>
+																	<div class="fw-medium">
+																		<button
+																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
+																		<button
+																			class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
+																	</div>
+																</div>
+																<div class="sh-comm-comment w-100">
+																	<p class="border-none ml-4 mt-n2">"${replyMap.getReplyText()}"</p>
+																</div>
+
 															</c:forEach>
-														</table>
-													</div>
+														</div>
+
+
+
+
 													</div>
 												</div>
 											</div>
@@ -244,12 +256,12 @@
 
 
 													<div class="w-100">
-													<div class="ml-auto w-10">
-														<button id="rSubmit" type="button" name="rSubmit"
-															class="w-100 p-2 bg-transparent border-none"
-															style="color: gray;">댓글등록</button>
+														<div class="ml-auto w-10">
+															<button id="rSubmit" type="button" name="rSubmit"
+																class="w-100 p-2 bg-transparent border-none"
+																style="color: gray;">댓글등록</button>
+														</div>
 													</div>
-												</div>
 												</form>
 											</div>
 
