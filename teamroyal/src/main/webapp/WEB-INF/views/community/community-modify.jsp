@@ -11,6 +11,34 @@
   data-theme="theme-default"
   data-assets-path="/assets/"
   data-template="horizontal-menu-template">
+  
+  <script type="text/javascript">
+  	function commuUpdate(commuNo){
+  		var commuTitle = $("#commuTitle").val();
+		var commuText = $("#commuText").val();
+		var commuNo = "${detailMap.getCommuNo()}";
+  		$.ajax({
+  			
+  			url : "/community/modify",
+  			data : {
+  				"commuTitle" : commuTitle,
+  				"commuText" : commuText,
+  				"commuNo" : commuNo
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("게시글 수정 성공")
+  				window.location.href = "/community/list";
+  			},
+  			error : function(){
+  				alert("게시글 수정 실패")
+  			}
+  		});
+  	}
+  	
+  	
+  </script>
+  
   <head>
     <meta charset="utf-8" />
     <meta
@@ -86,7 +114,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
-              <div class="navbar-nav me-auto">
+						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
@@ -126,10 +154,12 @@
                       <div id="collapseDeliveryAddress" class="accordion-collapse collapse show" data-bs-parent="#collapsibleSection">
                         <div class="accordion-body">
                           <div class="row g-3">
-                          <form action="/community/list/detail/${detailMap.getCommuNo() }/modify/success" method="post">
+                          <div style="display: none;">
+                          <input type="text" name="commuNo" value="${detailMap.getCommuNo() }"/>${detailMap.getCommuNo() }
+                            </div>
                             <div class="col-md-12">
                               <label class="form-label" for="collapsible-fullname">제목</label>
-                              <input name="modifyTitle" type="text" id="collapsible-fullname" class="form-control" placeholder="제목을 입력해주세요" value="${detailMap.getCommuTitle() }"/>
+                              <input id="commuTitle" name="commuTitle" type="text" id="collapsible-fullname" class="form-control" placeholder="제목을 입력해주세요" value="${detailMap.getCommuTitle() }"/>
                             </div>
                             
                             <div class="col-12">
@@ -147,16 +177,15 @@
                                   </span>
                                 </div>
                               </div>
-                              <textarea name="modifyText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요">${detailMap.getCommuText() }</textarea>
+                              <textarea id="commuText" name="commuText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요">${detailMap.getCommuText() }</textarea>
                             </div>
                             <div class="col-md-3">
                               <label class="form-label" for="collapsible-fullname">사진첨부</label>
                               <input name="commuImg" type="file" id="collapsible-fullname" class="form-control" />
                             </div>
                             <div class="col-12">
-                              <button type="submit" name="submitButton" class="btn btn-primary waves-effect waves-light">Submit</button>
+                              <button onclick='commuUpdate("${detailMap.getCommuNo() }")' class="btn btn-primary waves-effect waves-light">Submit</button>
                             </div>
-                            </form>
                           </div>
                         </div>
                       </div>

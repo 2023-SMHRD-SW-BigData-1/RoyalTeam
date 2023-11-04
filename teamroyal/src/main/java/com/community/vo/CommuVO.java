@@ -13,7 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommuVO {
 	
-	private int commuNo;
+	private Integer commuNo;
+	private String userNick;
 	private String commuTitle;
 	private String commuText;
 	private String commuIsDeleted;
@@ -32,7 +33,7 @@ public class CommuVO {
 	private String replyModifyAt;
 	private String replyModifyNm;
 	
-	private int commuImgNo;
+	private Integer commuImgNo;
 	private String commuImgPath;
 	private String commuImgNm;
 	private String commuImgU;
@@ -45,7 +46,7 @@ public class CommuVO {
 	
 	private String commuImgIsDeleted;
 	
-	private MultipartFile commuImg;
+	private MultipartFile mtFile;
 	
 	
 	

@@ -57,6 +57,38 @@
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
+    
+    <script type="text/javascript">
+    function userUpdate(userNick){
+  		var userNick = "${user.userNick}";
+		var userEmail = $("#userEmail").val();
+		var userPw = $("#userPw").val();
+		var userAdd = $("#userAdd").val();
+		var userPhone = $("#userPhone").val();
+		var userNm = $("#userNm").val();
+  		$.ajax({
+  			
+  			url : "/user/modify",
+  			data : {
+  				"userNick" : userNick,
+  				"userEmail" : userEmail,
+  				"userPw" : userPw,
+  				"userAdd" : userAdd,
+  				"userPhone" : userPhone,
+  				"userNm" : userNm
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("회원정보 수정 성공")
+  				window.location.href = "/login/userProfile/modify/${user.userNick}";
+  			},
+  			error : function(){
+  				alert("회원정보 수정 실패")
+  			}
+  		});
+  	}
+    </script>
+    
   </head>
 
   <body>
@@ -76,7 +108,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
-              <div class="navbar-nav me-auto">
+						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
@@ -164,32 +196,31 @@
             </div>
             <hr class="my-0" />
             <div class="card-body">
-              <form action="/user/login/userProfile/modify/${userMap.getUserNick() }/success" id="formAccountSettings" method="POST">
                 <div class="row">
                   <div class="mb-3 col-md-6">
                     <label for="firstName" class="form-label">별명</label>
-                    <input class="form-control" type="text" id="firstName" name="userNick" placeholder="별명"
+                    <input class="form-control" type="text" id="userNick" name="userNick" placeholder="별명"
                       autofocus value="${userMap.getUserNick() }" />
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="lastName" class="form-label">이름</label>
-                    <input class="form-control" type="text" name="userNm" id="lastName" placeholder="이름" 
+                    <input class="form-control" type="text" name="userNm" id="userNm" placeholder="이름" 
                     value="${userMap.getUserNm() }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="email" class="form-label">E-mail</label>
-                    <input class="form-control" type="text" id="email" name="userEmail" placeholder="Shine@example.com"
+                    <input class="form-control" type="text" id="userEmail" name="userEmail" placeholder="Shine@example.com"
                       placeholder="john.doe@example.com" value="${userMap.getUserEmail() }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="address" class="form-label">주소</label>
-                    <input type="text" class="form-control" id="address" name="userAdd" placeholder="주소" 
+                    <input type="text" class="form-control" id="userAdd" name="userAdd" placeholder="주소" 
                     value="${userMap.getUserAdd() }"/>
                   </div>
                   <div class="mb-3 col-md-6 form-password-toggle">
                     <label class="form-label" for="newPassword">New Password</label>
                     <div class="input-group input-group-merge">
-                      <input class="form-control" type="password" id="newPassword" name="userPw"
+                      <input class="form-control" type="password" id="userPw" name="userPw"
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                       <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                     </div>
@@ -198,7 +229,7 @@
                     <label class="form-label" for="phoneNumber" >핸드폰번호</label>
                     <div class="input-group input-group-merge">
                       <span class="input-group-text">KR (+82)</span>
-                      <input type="text" id="phoneNumber" name="userPhone" class="form-control"
+                      <input type="text" id="userPhone" name="userPhone" class="form-control"
                         placeholder="202 555 0111" value="${userMap.getUserPhone() }"/>
                     </div>
                   </div>
@@ -214,10 +245,9 @@
                    -->
                 </div>
                 <div class="mt-2">
-                  <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                  <button onclick='userUpdate("${user.userNick }")' type="submit" class="btn btn-primary me-2">Save changes</button>
                   <button type="reset" class="btn btn-label-secondary">Cancel</button>
                 </div>
-              </form>
             </div>
             <!-- /Account -->
             </div>

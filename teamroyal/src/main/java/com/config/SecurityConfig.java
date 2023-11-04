@@ -1,6 +1,7 @@
 package com.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
@@ -29,6 +31,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private LoginInterceptor loginInterceptor;
+	
+	@Value("${royal.props.filein-path}")
+	private String file_attach;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -100,7 +105,13 @@ public class SecurityConfig {
             LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
             registry.addInterceptor(localeChangeInterceptor);
           }
-    	  
+
+      	@Override
+      	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+      		registry.addResourceHandler("/fpics/**")
+  	    		.addResourceLocations("file:///" + file_attach)
+  		        .setCachePeriod(31536000);
+          }
       };
     }
     

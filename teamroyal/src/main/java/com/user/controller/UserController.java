@@ -8,15 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cmmn.vo.ResultVO;
+import com.cmmn.vo.resultResponse;
 import com.community.vo.CommuVO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.user.service.UserService;
 import com.user.vo.UserVO;
 
@@ -146,6 +151,15 @@ public class UserController {
 			return "redirect:/login/userProfile/modify/"+userNick+"/success";
 		}
 	}
+	
+	//회원정보 수정
+		@PostMapping("/modify")
+		public ResponseEntity<Object> commuModify(@ModelAttribute UserVO userVo, Principal principal) {
+			userVo.setUserNick(principal.getName().toString());
+			Gson gson = new GsonBuilder().create();
+			ResultVO resultVo =  userService.userUpdate(userVo);
+		    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
+		}
 
 	/**
 	 * 회원정보 삭제

@@ -53,8 +53,8 @@
 
   <!-- shine-CSS-->
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+  <link rel="stylesheet" href="/assets/vendor/css/shine/sh-highchart-pages-main.css">
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-pages-myprofile.css">
-  <link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
 
   <!-- Helpers -->
   <script src="/assets/vendor/js/helpers.js"></script>
@@ -69,16 +69,15 @@
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
     <div class="layout-container">
-      <!----------------------------------------- Navbar ----------------------------------------->
-			<nav class="navbar navbar-expand-lg bg-navbar-theme">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg bg-navbar-theme">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/user/Success">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-					<div class="collapse navbar-collapse" id="navbar-ex-5">
+          <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
@@ -87,24 +86,22 @@
 							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
-						<ul class="navbar-nav ms-lg-auto">
-							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile"><i
-									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> 
-									Profile</a>
-							</li>
-							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
-									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
-									Login</a></li> -->
-							<li class="nav-item"><a class="nav-link" href="/logout"><i
-									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
-									Logout</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- / Navbar -->
-			<!----------------------------------------- Navbar ----------------------------------------->
+            <ul class="navbar-nav ms-lg-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/login/userProfile"
+                    ><i class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"
+                    ><i class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i> Logout</a
+                  >
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- / Navbar -->
 
       <!-- Layout container -->
       <div class="layout-page">

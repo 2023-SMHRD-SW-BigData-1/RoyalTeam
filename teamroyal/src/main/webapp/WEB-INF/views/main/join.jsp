@@ -57,6 +57,38 @@
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
+    
+    <script type="text/javascript">
+    function join(userNick) {
+		var userNick = $("#userNick").val();
+		var userEmail = $("#userEmail").val();
+		var userPw = $("#userPw").val();
+		var userNm = $("#userNm").val();
+		var userAdd = $("#userAdd").val();
+		var userPhone = $("#userPhone").val();
+		$.ajax({
+			url : "/user/login/join",
+			data : {
+				"userNick" : userNick,
+				"userEmail" : userEmail,
+				"userPw" : userPw,
+				"userNm" : userNm,
+				"userAdd" : userAdd,
+				"userPhone" : userPhone
+			},
+			type : "POST",
+			success : function(result) {
+				alert("회원가입 성공")
+				window.location.href = "/";
+			},
+			error : function() {
+				alert("회원가입 실패")
+	
+			}
+		});
+	}
+
+    </script>
   </head>
 
   <body>
@@ -79,13 +111,12 @@
             <h3 class="mb-1">회원가입 🚀</h3>
             <p class="mb-4">SHINE에 멤버가 되시는걸 환영합니다!</p>
 
-            <form id="formAuthentication" class="mb-3" action="/user/login/join" method="POST">
               <div class="mb-3">
                 <label for="username" class="form-label">닉네임</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
+                  id="userNick"
                   name="userNick"
                   placeholder="닉네임를 입력하세요"
                   autofocus />
@@ -93,7 +124,7 @@
 
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="userEmail" placeholder="Enter your email" />
+                <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter your email" />
               </div>
 
 
@@ -102,7 +133,7 @@
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
-                    id="password"
+                    id="userPw"
                     class="form-control"
                     name="userPw"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -116,9 +147,9 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
+                  id="userNm"
                   name="userNm"
-                  placeholder="이름을 입력하세요e"
+                  placeholder="이름을 입력하세요"
                   autofocus />
               </div>
 
@@ -127,7 +158,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
+                  id="userAdd"
                   name="userAdd"
                   placeholder="주소를 입력하세요"
                   autofocus />
@@ -138,13 +169,12 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
+                  id="userPhone"
                   name="userPhone"
                   placeholder="핸드폰번호를 입력하세요"
                   autofocus />
               </div>
-              <button class="btn btn-primary d-grid w-100">회원가입</button>
-            </form>
+              <button onclick='join("${uer.userNick }")' class="btn btn-primary d-grid w-100">회원가입</button>
 
             <p class="text-center">
               <span>회원정보가 있으십니까?</span>
@@ -153,23 +183,6 @@
               </a>
             </p>
 
-            <div class="divider my-4">
-              <div class="divider-text">or</div>
-            </div>
-
-            <div class="d-flex justify-content-center">
-              <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-              </a>
-
-              <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-                <i class="tf-icons fa-brands fa-google fs-5"></i>
-              </a>
-
-              <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                <i class="tf-icons fa-brands fa-twitter fs-5"></i>
-              </a>
-            </div>
           </div>
         </div><!-- /Left side -->
         <!-- right side-->

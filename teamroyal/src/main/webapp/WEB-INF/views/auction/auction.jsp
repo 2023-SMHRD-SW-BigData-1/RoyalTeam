@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-compact"
@@ -58,8 +59,8 @@
 <script src="/assets/js/config.js"></script>
 </head>
 
-  <body>
-    <!-- Layout wrapper -->
+<body>
+	<!-- Layout wrapper -->
 	<div
 		class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
 		<div class="layout-container">
@@ -99,7 +100,7 @@
 			<!-- / Navbar -->
 			<!----------------------------------------- Navbar ----------------------------------------->
 
-        <!-- Layout container -->
+			<!-- Layout container -->
 			<div class="layout-page">
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
@@ -109,8 +110,7 @@
 							<div class="col-12">
 								<div class="card mb-4">
 									<div class="col-lg-10 mx-auto">
-										<a href="/html/auction/auction-form.html"
-											class="btn btn-primary">물건등록</a>
+										<a href="/auction/write" class="btn btn-primary">물건등록</a>
 										<ul class="row list-unstyled">
 											<style>
 .sh-test {
@@ -129,306 +129,24 @@
 	transform: scale(1.02)
 }
 </style>
+										<c:forEach items="${auctionMap }" var="auctionMap">
 											<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test"><a
-												href="auction-detail.html">
+												href="/auction/post/${auctionMap.getMarketNo() }">
 													<div class="card border shadow-none">
 														<div class="card-body text-start p-0">
 															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
+																<img src="${auctionMap.getMarketImgPath() }" class="w-100 "
 																	alt="">
 															</div>
 															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
+																<h5 class="my-2">${auctionMap.getMarketTitle() }</h5>
+																<p>${auctionMap.getMarketText() }</p>
 															</div>
 														</div>
 													</div>
 											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test2"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3"><a
-												href="auction-detail.html">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="/assets/img/avatars/1.png" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">태양광 팝니다</h5>
-																<p>3만원에 팝니다</p>
-															</div>
-														</div>
-													</div>
-											</a></li>
+										</c:forEach>
+
 										</ul>
 									</div>
 								</div>
@@ -437,7 +155,7 @@
 					</div>
 					<!--/ Content -->
 
-            <!-- Footer -->
+					<!-- Footer -->
 					<footer class="content-footer footer bg-footer-theme">
 						<div class="container-xxl">
 							<div
@@ -455,11 +173,15 @@
 					</footer>
 					<!-- / Footer -->
 					<div class="content-backdrop fade"></div>
-				</div><!--/ Content wrapper -->
-			</div><!--/ Layout container -->
-		</div><!-- Content wrapper -->
-	</div><!-- Layout container -->
-	
+				</div>
+				<!--/ Content wrapper -->
+			</div>
+			<!--/ Layout container -->
+		</div>
+		<!-- Content wrapper -->
+	</div>
+	<!-- Layout container -->
+
 
 	<!-- Overlay -->
 	<div class="layout-overlay layout-menu-toggle"></div>

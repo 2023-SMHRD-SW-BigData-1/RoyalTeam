@@ -3,6 +3,8 @@ package com.user.service;
 import java.util.List;
 import java.util.Map;
 
+import com.cmmn.vo.ResultVO;
+import com.community.vo.CommuVO;
 import com.user.vo.UserVO;
 
 public interface UserService {
@@ -21,6 +23,9 @@ public interface UserService {
 	
 	//사용자 수정
 	Map<String, Object> userInfoUpdate(UserVO userVo);
+	
+	//회원정보 수정
+	ResultVO userUpdate(UserVO userVo);
 	
 	//사용자 삭제
 	Map<String, Object> userInfoDelete(UserVO userVo);

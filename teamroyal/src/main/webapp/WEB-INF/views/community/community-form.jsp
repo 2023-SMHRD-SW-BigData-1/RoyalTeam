@@ -61,6 +61,34 @@
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
+    
+    <script type="text/javascript">
+    function commuInsert(userNick){
+    	var userNick = "${user.userNick}";
+  		var commuTitle = $("#commuTitle").val();
+		var commuText = $("#commuText").val();
+		var commuCreateNm = "${user.userNick}";
+  		$.ajax({
+  			
+  			url : "/community/list/post/write",
+  			data : {
+  				"userNick" : userNick,
+  				"commuTitle" : commuTitle,
+  				"commuText" : commuText,
+  				"commuCreateNm" : commuCreateNm
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("게시글 등록 성공")
+  				window.location.href = "/community/list";
+  			},
+  			error : function(){
+  				alert("게시글 등록 실패")
+  			}
+  		});
+  	}
+    </script>
+    
   </head>
 
   <body>
@@ -73,16 +101,19 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
-        <!----------------------------------------- Navbar ----------------------------------------->
-			<nav class="navbar navbar-expand-lg bg-navbar-theme">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-navbar-theme">
+          <div class="container-fluid">
+          <a class="navbar-brand" href="/user/Success">Navbar</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbar-ex-5">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-					<div class="collapse navbar-collapse" id="navbar-ex-5">
+            <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
@@ -91,24 +122,22 @@
 							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
-						<ul class="navbar-nav ms-lg-auto">
-							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile"><i
-									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> 
-									Profile</a>
-							</li>
-							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
-									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
-									Login</a></li> -->
-							<li class="nav-item"><a class="nav-link" href="/logout"><i
-									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
-									Logout</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- / Navbar -->
-			<!----------------------------------------- Navbar ----------------------------------------->
+              <ul class="navbar-nav ms-lg-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/login/userProfile"
+                    ><i class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"
+                    ><i class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i> Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- / Navbar -->
 
         <!-- Layout container -->
         <div class="layout-page">
@@ -125,10 +154,9 @@
                       <div id="collapseDeliveryAddress" class="accordion-collapse collapse show" data-bs-parent="#collapsibleSection">
                         <div class="accordion-body">
                           <div class="row g-3">
-                          <form action="/community/list/post/write" method="post" enctype="multipart/form-data">
                             <div class="col-md-12">
                               <label class="form-label" for="collapsible-fullname">제목</label>
-                              <input name="commuTitle" type="text" id="collapsible-fullname" class="form-control" placeholder="제목을 입력해주세요" />
+                              <input id="commuTitle" name="commuTitle" type="text" id="collapsible-fullname" class="form-control" placeholder="제목을 입력해주세요" />
                             </div>
                             
                             <div class="col-12">
@@ -146,16 +174,15 @@
                                   </span>
                                 </div>
                               </div>
-                              <textarea name="commuText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요"></textarea>
+                              <textarea id="commuText" name="commuText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요"></textarea>
                             </div>
                             <div class="col-md-3">
                               <label class="form-label" for="collapsible-fullname">사진첨부</label>
-                              <input name="commuImg" type="file" id="collapsible-fullname" class="form-control" />
+                              <input name="mtFile" type="file" id="collapsible-fullname" class="form-control" />
                             </div>
                             <div class="col-12">
-                              <button type="submit" name="submitButton" class="btn btn-primary waves-effect waves-light">Submit</button>
+                              <button onclick='commuInsert("${user.userNick }")' type="submit" name="submitButton" class="btn btn-primary waves-effect waves-light">Submit</button>
                             </div>
-                            </form>
                           </div>
                         </div>
                       </div>
@@ -180,12 +207,17 @@
                   </div>
                 </div>
               </div>
-            </footer><!-- / Footer -->
+            </footer>
+            <!-- / Footer -->
+
             <div class="content-backdrop fade"></div>
-          </div><!--/ Content wrapper -->
-        </div><!--/ Layout container -->
-      </div><!-- Content wrapper -->
-    </div><!-- Layout container -->
+          </div>
+          <!--/ Content wrapper -->
+        </div>
+
+        <!--/ Layout container -->
+      </div>
+    </div>
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>

@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cmmn.vo.FileVO;
+import com.cmmn.vo.ParamVO;
+import com.cmmn.vo.ResultVO;
+import com.cmmn.service.CmmnService;
 import com.community.dao.CommuDAO;
 import com.community.vo.CommuVO;
 
@@ -21,6 +24,115 @@ public class CommuServiceImp implements CommuService {
 
 	@Autowired
 	private CommuDAO commuDao;
+
+	@Value("${royal.props.filein-path}")
+	private String attachRoot;
+
+	@Autowired
+	private CmmnService cmmnService;
+
+	// 커뮤니티 조회
+	@Override
+	public List<CommuVO> commuSelectList(ParamVO paramVo) {
+		return commuDao.commuSelectList(paramVo);
+	}
+
+	// 커뮤니티 등록
+	@Override
+	public ResultVO commuInsert(CommuVO commuVo) {
+		try {
+			if (commuVo.getUserNick() != null && commuVo.getCommuTitle() != null && commuVo.getCommuText() != null
+					&& commuVo.getMtFile() != null) {
+				// 커뮤니티 등록
+				commuDao.commuInsert(commuVo);
+				if (commuVo.getCommuNo() != null) {
+					FileVO fileVo = new FileVO();
+					MultipartFile mtFile = commuVo.getMtFile();
+
+					String path = attachRoot;
+					String uId = cmmnService.getUuid();
+					String orgfNm = mtFile.getOriginalFilename();
+					String[] fileNm = orgfNm.split("\\.");
+
+					fileVo.setIntId(commuVo.getCommuNo());
+					fileVo.setFileName(orgfNm);
+					fileVo.setFileExt("." + fileNm[1]);
+					fileVo.setFileUuName(uId);
+					fileVo.setFilePath(path + uId);
+					fileVo.setSize(mtFile.getSize());
+					fileVo.setLoginUser(commuVo.getUserNick());
+					System.out.println("::::::::::::::::이미지 등록 시작::::::::::::::::");
+					// 커뮤니티 이미지 등록
+					commuDao.commuFileInsert(fileVo);
+					commuVo.setCommuImgNo(fileVo.getFileNo());
+					// 커뮤니티 이미지 매핑 등록
+					commuDao.commuFileMapInsert(fileVo);
+
+					mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
+
+				} else {
+					return new ResultVO("01");
+				}
+			} else {
+				return new ResultVO("02");
+			}
+			return new ResultVO("00");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResultVO("99");
+		}
+	}
+
+	// 커뮤니티 수정
+	@Override
+	public ResultVO commuUpdate(CommuVO commuVo) {
+		
+		System.out.println("=====> 게시글 수정 진입");
+		try {
+			System.out.println("::::::: "+commuVo.getLoginUser());
+			System.out.println("::::::: "+commuVo.getCommuTitle());
+			System.out.println("::::::: "+commuVo.getCommuText());
+			if (commuVo.getLoginUser() != null && commuVo.getCommuTitle() != null
+					&& commuVo.getCommuText() != null) {
+				commuDao.commuUpdate(commuVo);
+				if (commuVo.getMtFile() != null && commuVo.getMtFile().isEmpty()) {
+
+					// 매핑 테이블 삭제
+					commuDao.commuFileMapDelete(commuVo);
+
+					FileVO fileVo = new FileVO();
+					MultipartFile mtFile = commuVo.getMtFile();
+
+					String path = attachRoot;
+					String uId = cmmnService.getUuid();
+					String orgfNm = mtFile.getOriginalFilename();
+					String[] fileNm = orgfNm.split("\\.");
+
+					fileVo.setIntId(commuVo.getCommuNo());
+					fileVo.setFileName(orgfNm);
+					fileVo.setFileExt("." + fileNm[1]);
+					fileVo.setFileUuName(uId);
+					fileVo.setFilePath(path + uId);
+					fileVo.setSize(mtFile.getSize());
+					fileVo.setLoginUser(commuVo.getUserNick());
+
+					// 커뮤니티 이미지 등록
+					commuDao.commuFileInsert(fileVo);
+					// 커뮤니티 이미지 매핑 등록
+					commuDao.commuFileMapInsert(fileVo);
+
+					mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
+
+				}
+			} else {
+				return new ResultVO("02");
+			}
+			return new ResultVO("00");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResultVO("99");
+		}
+	}
 
 	// 게시판 조회
 	@Override
@@ -35,6 +147,39 @@ public class CommuServiceImp implements CommuService {
 		if (commuVo.getCommuTitle() != null) {
 
 			int WriteDataCnt = commuDao.commuWrite(commuVo);
+
+			try {
+
+				FileVO fileVo = new FileVO();
+				MultipartFile mtFile = commuVo.getMtFile();
+
+				String path = attachRoot;
+				String uId = cmmnService.getUuid();
+				String orgfNm = mtFile.getOriginalFilename();
+				String[] fileNm = orgfNm.split("\\.");
+
+				fileVo.setIntId(commuVo.getCommuNo());
+				fileVo.setFileName(orgfNm);
+				fileVo.setFileExt("." + fileNm[1]);
+				fileVo.setFileUuName(uId);
+				fileVo.setFilePath(path + uId);
+				fileVo.setSize(mtFile.getSize());
+				fileVo.setLoginUser(commuVo.getLoginUser());
+				System.out.println("::::::::::::::::이미지 등록 시작::::::::::::::::");
+				// 커뮤니티 이미지 등록
+				System.out.println(fileVo.getLoginUser());
+				commuDao.commuFileInsert(fileVo);
+				commuVo.setCommuImgNo(fileVo.getFileNo());
+
+				System.out.println("::::::::::::::::::::::" + commuVo.getCommuNo());
+				System.out.println("::::::::::::::::::::::" + commuVo.getCommuImgNo());
+				// 커뮤니티 이미지 매핑 등록
+				commuDao.commuFileMapInsert(fileVo);
+
+				mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			if (WriteDataCnt == 1) {
 				writeMap.put("writeMsg", "글등록 완료");
@@ -55,39 +200,42 @@ public class CommuServiceImp implements CommuService {
 	public Map<String, Object> commuWriteImg(CommuVO commuVo) {
 		Map<String, Object> imgMap = new HashMap<String, Object>();
 
-		if (commuVo.getCommuImg() != null) {
-
-			MultipartFile file = commuVo.getCommuImg();
-			String of = file.getOriginalFilename();
-
-			String id = UUID.randomUUID().toString();
-
-			String imgFileName = id + of;
-
-			System.out.println("=== 이미지 등록 ===");
-
-			commuVo.setCommuImgNm(imgFileName);
-			commuVo.setCommuImgPath("C:\\royal\\commuImg");
-			commuVo.setCommuImgU(id);
-			commuVo.setCommuImgSize(file.getSize());
-			commuVo.setCommuImgEx(imgFileName.substring(imgFileName.lastIndexOf(".") + 1));
-
-			int imgDataCnt = commuDao.commuWriteImg(commuVo);
+		if (commuVo.getMtFile() != null) {
 
 			try {
-				file.transferTo(new File(imgFileName));
+				FileVO fileVo = new FileVO();
+				MultipartFile file = commuVo.getMtFile();
+
+				String path = attachRoot;
+				String uId = UUID.randomUUID().toString();
+				String orgfNm = file.getOriginalFilename();
+				String[] fileNm = orgfNm.split("\\.");
+
+				fileVo.setFileName(orgfNm);
+				fileVo.setFileExt("." + fileNm[1]);
+				fileVo.setFileUuName(uId);
+				fileVo.setFilePath(path + uId);
+				fileVo.setSize(file.getSize());
+				fileVo.setLoginUser(commuVo.getLoginUser());
+
+				int imgDataCnt = commuDao.commuWriteImg(fileVo);
+				commuVo.setCommuImgNo(fileVo.getIntId());
+				commuDao.commuFileMapInsert(fileVo);
+
+				file.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
+
+				if (imgDataCnt == 1) {
+					imgMap.put("imgMsg", "이미지등록 완료");
+					imgMap.put("imgCode", "21");
+				} else {
+					imgMap.put("imgMsg", "이미지등록 실패");
+					imgMap.put("imgCode", "81");
+				}
+
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-
-			if (imgDataCnt == 1) {
-				imgMap.put("imgMsg", "이미지등록 완료");
-				imgMap.put("imgCode", "21");
-			} else {
-				imgMap.put("imgMsg", "이미지등록 실패");
-				imgMap.put("imgCode", "81");
 			}
 		} else {
 			imgMap.put("imgMsg", "필수값 오류");
@@ -122,9 +270,10 @@ public class CommuServiceImp implements CommuService {
 	// 게시판 글상세 조회
 	@Override
 	public CommuVO commuListPostDetail(int commuNo) {
-
-		System.out.println("글상세 test");
-		return commuDao.commuListPostDetail(commuNo);
+		CommuVO commuVo = commuDao.commuListPostDetail(commuNo);
+		String filePath = commuDao.commuImgPathSelect(commuVo.getCommuNo());
+		commuVo.setCommuImgPath(filePath);
+		return commuVo;
 	}
 
 	// 게시판 이미지 조회
@@ -157,29 +306,23 @@ public class CommuServiceImp implements CommuService {
 		return modifyMap;
 	}
 
-	// 게시판 글삭제
-	@Override
-	public Map<String, Object> commuDelete(CommuVO commuVo) {
-
-		Map<String, Object> deleteMap = new HashMap<String, Object>();
-
-		if (commuVo.getLoginUser() != null && commuVo.getCommuTitle() != null) {
-			System.out.println(commuVo.getCommuTitle() + "글 수정");
-
-			int deleteDataCnt = commuDao.commuWrite(commuVo);
-			if (deleteDataCnt == 1) {
-				deleteMap.put("deleteMsg", "글삭제 완료");
-				deleteMap.put("deleteCode", "40");
-			} else {
-				deleteMap.put("deleteMsg", "글삭제 실패");
-				deleteMap.put("deleteCode", "60");
-			}
-		} else {
-			deleteMap.put("deleteMsg", "필수값 오류");
-			deleteMap.put("deleteCode", "01");
+	//커뮤니티 삭제
+		@Override
+		public ResultVO commuDelete(CommuVO commuVo) {
+		    try {
+		    	if(commuVo.getCommuNo() != null) {
+		    		commuDao.commuDelete(commuVo);
+	    			//매핑 테이블 삭제
+	    			commuDao.commuFileMapDelete(commuVo);
+		    	}else{
+		    		return new ResultVO("02");
+		    	}
+		        return new ResultVO("00");
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		        return new ResultVO("99");
+		    }
 		}
-		return deleteMap;
-	}
 
 	// 게시판 댓글조회
 	@Override
@@ -194,9 +337,9 @@ public class CommuServiceImp implements CommuService {
 		if (commuVo.getCommuNo() != 0 && commuVo.getReplyText() != null) {
 
 			System.out.println("============================");
-			System.out.println("getLoginUser:::: "+commuVo.getLoginUser());
-			System.out.println("getReplyText:::: "+commuVo.getReplyText());
-			System.out.println("getCommuNo:::: "+commuVo.getCommuNo());
+			System.out.println("getLoginUser:::: " + commuVo.getReplyCreateNm());
+			System.out.println("getReplyText:::: " + commuVo.getReplyText());
+			System.out.println("getCommuNo:::: " + commuVo.getCommuNo());
 			System.out.println("============================");
 			int WriteDataCnt = commuDao.communityReplyInsert(commuVo);
 
@@ -241,11 +384,12 @@ public class CommuServiceImp implements CommuService {
 	public Map<String, Object> commentDelete(CommuVO commuVo) {
 
 		Map<String, Object> commentDeleteMap = new HashMap<String, Object>();
+		System.out.println("========>>" + commuVo.getReplyNo());
 
-		if (commuVo.getLoginUser() != null && commuVo.getReplyText() != null) {
-			System.out.println(commuVo.getReplyText() + "댓글 수정");
+		if (commuVo.getLoginUser() != null && commuVo.getReplyNo() != 0) {
+			System.out.println("댓글 삭제");
 
-			int commentDeleteDataCnt = commuDao.commuWrite(commuVo);
+			int commentDeleteDataCnt = commuDao.commentDelete(commuVo);
 			if (commentDeleteDataCnt == 1) {
 				commentDeleteMap.put("commentDeleteMsg", "댓글삭제 완료");
 				commentDeleteMap.put("commentDeleteCode", "14");
@@ -259,7 +403,5 @@ public class CommuServiceImp implements CommuService {
 		}
 		return commentDeleteMap;
 	}
-
-	
 
 }

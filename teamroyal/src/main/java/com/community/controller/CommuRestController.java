@@ -65,6 +65,7 @@ public class CommuRestController {
 		
 		Map<String, Object> dbReMaap = commuService.communityReplyInsert(commuVo);
 		
+		
 		dbReMaap.put("commuNo", commuVo.getCommuNo());
 		return dbReMaap;
 	}
@@ -79,7 +80,6 @@ public class CommuRestController {
 	@RequestMapping(value = "/list/post/replyModify", method = RequestMethod.POST)
 	public Map<String, Object> commentModify(@ModelAttribute CommuVO commuVo, HttpSession session, Principal principal) {
 
-		System.out.println("===> 댓글수정진입");
 		commuVo.setLoginUser(principal.getName().toString());
 		commuVo.setReplyModifyNm(principal.getName().toString());
 		
@@ -88,4 +88,18 @@ public class CommuRestController {
 		dbReMaap.put("commuNo", commuVo.getCommuNo());
 		return dbReMaap;
 	}
+	
+	// 댓글삭제
+	@RequestMapping(value = "/list/post/replyDelete", method = RequestMethod.POST)
+	public Map<String, Object> commentDelete(@ModelAttribute CommuVO commuVo, HttpSession session, Principal principal) {
+
+		commuVo.setLoginUser(principal.getName().toString());
+		commuVo.setReplyModifyNm(principal.getName().toString());
+		
+		Map<String, Object> dbReMaap = commuService.commentDelete(commuVo);
+		
+		dbReMaap.put("commuNo", commuVo.getCommuNo());
+		return dbReMaap;
+	}
+	
 }

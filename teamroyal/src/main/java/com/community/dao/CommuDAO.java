@@ -1,10 +1,11 @@
 package com.community.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cmmn.vo.FileVO;
+import com.cmmn.vo.ParamVO;
 import com.community.vo.CommuVO;
 
 @Mapper
@@ -17,7 +18,25 @@ public interface CommuDAO {
 	int commuWrite(CommuVO commuVo);
 	
 	// 게시판 이미지등록
-	int commuWriteImg(CommuVO commuVo);
+	int commuWriteImg(FileVO fileVo);
+	
+	//커뮤니티 조회
+	List<CommuVO> commuSelectList(ParamVO paramVo);
+
+	//커뮤니티 등록
+	void commuInsert(CommuVO commuVo);
+		
+	//커뮤니티 이미지 등록
+	void commuFileInsert(FileVO fileVo);
+		
+	//커뮤니티 이미지 매핑 등록
+	void commuFileMapInsert(FileVO fileVo);
+	
+	//커뮤니티 수정
+	void commuUpdate(CommuVO commuVo);
+	
+	//커뮤니티 이미지 매핑 삭제
+	void commuFileMapDelete(CommuVO commuVo);
 	
 	// 게시판 매핑테이블
 	int commuWriteMap(CommuVO commuVo);
@@ -26,7 +45,7 @@ public interface CommuDAO {
 	int commuModify(CommuVO commuVo);
 	
 	// 게시판 글삭제
-	int commuDelete(CommuVO commuVo);
+	void commuDelete(CommuVO commuVo);
 	
 	// 게시판 상세조회
 	CommuVO commuListPostDetail(int commuNo);
@@ -45,6 +64,9 @@ public interface CommuDAO {
 		
 	// 게시판 댓글삭제
 	int commentDelete(CommuVO commuVo);
+
+	// 이미지 파일 가져오기
+	String commuImgPathSelect(Integer commuNo);
 
 
 }

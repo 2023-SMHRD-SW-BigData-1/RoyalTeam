@@ -194,7 +194,6 @@
 
           $('#example tbody').on('click', 'td:first-child', function() {
               var cellData = table.cell(this).data();
-              location.href = "community-detail.html";
           });
       });
     </script>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.community.vo.CommuVO;
 import com.user.vo.UserVO;
 
 @Mapper
@@ -23,6 +24,9 @@ public interface UserDAO {
 
 	// 사용자 수정
 	int userInfoUpdate(UserVO userVo);
+	
+	//회원정보 수정
+	void userUpdate(UserVO userVo);
 	
 	// 사용자 삭제
 	int userInfoDelete(UserVO userVo);

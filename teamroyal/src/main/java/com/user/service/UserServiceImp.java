@@ -1,5 +1,6 @@
 package com.user.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cmmn.vo.FileVO;
+import com.cmmn.vo.ResultVO;
+import com.community.vo.CommuVO;
 import com.user.dao.UserDAO;
 import com.user.vo.UserVO;
 
@@ -109,6 +114,26 @@ public class UserServiceImp implements UserService {
 		}
 		return updateMap;
 	}
+	
+	// 커뮤니티 수정
+		@Override
+		public ResultVO userUpdate(UserVO userVo) {
+			
+			System.out.println("=====> 회원정보 수정 진입");
+			try {
+				if (userVo.getUserNick() != null && userVo.getUserEmail() != null
+						&& userVo.getUserPw() != null) {
+					userVo.setUserPw(passencoder.encode(userVo.getUserPw().toString()));
+					userDao.userUpdate(userVo);
+				} else {
+					return new ResultVO("02");
+				}
+				return new ResultVO("00");
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResultVO("99");
+			}
+		}
 	
 	// 사용자 삭제
 	@Override

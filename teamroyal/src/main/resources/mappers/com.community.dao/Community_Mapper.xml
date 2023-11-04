@@ -3,6 +3,101 @@
 
 <mapper namespace="com.community.dao.CommuDAO">
 
+	<select id="commuSelectList" parameterType="com.cmmn.vo.ParamVO" resultType="com.community.vo.CommuVO">
+		SELECT 
+			COMMU_NO AS commuNo
+			,USER_NICK AS userNick
+			,COMMU_TITLE AS commuTitle
+			,COMMU_TEXT AS commuText
+			,COMMU_ISDELETED AS commuIsDeleted
+			,COMMU_CRETATE_AT AS commuCreateAt
+			,COMMU_CRETATE_NAME AS commuCreateNm
+			,COMMU_MODIFY_AT AS commuModifyAt
+			,COMMU_MODIFY_NAME AS commuModifyNm
+		FROM ROYAL.TB_COMMU
+		WHERE COMMU_ISDELETED != 'Y'
+		<if test="searchOne != null and searchOne != ''">
+			AND COMMU_NO = #{searchOne}
+		</if>
+		<if test="searchTwo != null and searchTwo != ''">
+			AND USER_NICK = #{searchTwo}
+		</if>
+	</select>
+	
+	<insert id="commuInsert" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_COMMU(
+			USER_NICK
+			, COMMU_TITLE
+			, COMMU_TEXT
+			, COMMU_ISDELETED
+			, COMMU_CRETATE_AT
+			,COMMU_CRETATE_NAME
+		)VALUES(
+			#{userNick}
+			,#{commuTitle}
+			,#{commuText}
+			,'N'
+			,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			,#{loginUser}
+		)
+		<selectKey keyColumn="COMMU_NO" keyProperty="commuNo" order="AFTER" resultType="com.community.vo.CommuVO">
+			SELECT MAX(COMMU_NO) AS commuNo FROM ROYAL.TB_COMMU
+		</selectKey>
+	</insert>
+	
+	<insert id="commuFileInsert" parameterType="com.cmmn.vo.FileVO">
+		INSERT INTO ROYAL.IMG_MASTER(
+			IMG_PATH
+			, IMG_NAME
+			, IMG_UUID
+			, IMG_EXTENSION
+			, IMG_SIZE
+			, IMG_CREATE_AT
+			, IMG_CREATE_NAME
+		)VALUES(
+			#{filePath}
+			,#{fileName}
+			,#{fileUuName}
+			,#{fileExt}
+			,${size}
+			,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			,#{loginUser}
+		)
+		<selectKey keyColumn="IMG_NO" keyProperty="fileNo" order="AFTER" resultType="com.cmmn.vo.FileVO">
+			SELECT MAX(IMG_NO) AS fileNo FROM ROYAL.IMG_MASTER
+		</selectKey>
+	</insert>
+	
+	<insert id="commuFileMapInsert" parameterType="com.community.vo.CommuVO">
+		INSERT INTO ROYAL.TB_COMMU_MAPPING(COMMU_NO, IMG_NO)VALUES(${commuNo}, ${commuImgNo})
+	</insert>
+	
+	<update id="commuUpdate" parameterType="com.community.vo.CommuVO">
+		UPDATE ROYAL.TB_COMMU SET
+			COMMU_MODIFY_NAME = #{loginUser}
+			, COMMU_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			<if test="commuTitle != null and commuTitle != ''">
+				,COMMU_TITLE = #{commuTitle}
+			</if>
+			<if test="commuText != null and commuText != ''">
+				,COMMU_TEXT = #{commuText}
+			</if>
+			<if test="commuIsDeleted != null and commuIsDeleted != ''">
+				,COMMU_ISDELETED = 'N'
+			</if>
+		WHERE COMMU_NO = ${commuNo}
+	</update>
+	
+	<delete id="commuFileMapDelete" parameterType="com.community.vo.CommuVO">
+		DELETE FROM ROYAL.TB_COMMU_MAPPING WHERE COMMU_NO = ${commuNo}
+	</delete>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="commuDelete" parameterType="com.community.vo.CommuVO">
+		DELETE FROM ROYAL.TB_COMMU
+		WHERE COMMU_NO=#{commuNo}
+	</delete>
+
 	<!-- 게시글 조회 -->
 	<select id="commuListPost" resultType="com.community.vo.CommuVO" parameterType="com.community.vo.CommuVO">
 		SELECT
@@ -54,47 +149,26 @@
 	</insert>
 	
 	<!-- 게시글 이미지 저장 -->
-	<insert id="commuWriteImg" parameterType="com.community.vo.CommuVO">
+	<insert id="commuWriteImg" parameterType="com.cmmn.vo.FileVO">
 		INSERT INTO ROYAL.IMG_MASTER(
-		<if test="commuImgPath != null and commuImgPath != ''">
-			IMG_PATH,
-		</if>
-		<if test="commuImgNm != null and commuImgNm != ''">
-			IMG_NAME,
-		</if>
-		<if test="commuImgU != null and commuImgU != ''">
-			IMG_UUID,
-		</if>
-		<if test="commuImgEx != null and commuImgEx != ''">
-			IMG_EXTENSION,
-		</if>
-		<if test="commuImgSize != null and commuImgSize != ''">
-			IMG_SIZE,
-		</if>
-		IMG_CREATE_AT
-		, IMG_CREATE_NAME
+			IMG_PATH
+			,IMG_NAME
+			,IMG_UUID
+			,IMG_EXTENSION
+			,IMG_SIZE
+			,IMG_CREATE_AT
+			,IMG_CREATE_NAME
 		)VALUES(
-		<if test="commuImgPath != null and commuImgPath != ''">
-			#{commuImgPath},
-		</if>
-		<if test="commuImgNm != null and commuImgNm != ''">
-			#{commuImgNm},
-		</if>
-		<if test="commuImgU != null and commuImgU != ''">
-			#{commuImgU},
-		</if>
-		<if test="commuImgEx != null and commuImgEx != ''">
-			#{commuImgEx},
-		</if>
-		<if test="commuImgSize != null and commuImgSize != ''">
-			#{commuImgSize},
-		</if>
-		TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),
-		#{loginUser}
+			#{filePath}
+			,#{fileName}
+			,#{fileUuName}
+			,#{fileExt}
+			,#{size}
+			,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			,#{loginUser}
 		)
-		<selectKey keyColumn="IMG_NO" keyProperty="commuImgNo" resultType="com.community.vo.CommuVO" order="AFTER">
-			SELECT MAX(IMG_NO) AS commuImgNo 
-			FROM ROYAL.IMG_MASTER
+		<selectKey keyColumn="IMG_NO" keyProperty="fileNo" resultType="com.cmmn.vo.FileVO" order="AFTER">
+			SELECT MAX(IMG_NO) AS fileNo FROM ROYAL.IMG_MASTER
 		</selectKey>
 	</insert>
 	
@@ -129,6 +203,10 @@
 		ORDER BY COMMU_NO DESC
 	</select>
 	
+	<select id="commuImgPathSelect" parameterType="Integer" resultType="String">
+		SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS commuImgPath FROM ROYAL.IMG_MASTER A WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_COMMU_MAPPING B WHERE B.COMMU_NO = ${commuNo})
+	</select>
+	
 	<!-- 이미지 조회 -->
 	<select id="commuListPostImg" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
 		SELECT IMG_NO as commuImgNo
@@ -158,16 +236,10 @@
 		WHERE COMMU_NO=#{commuNo};
 	</update>
 
-	<!-- 게시글 삭제 -->
-	<delete id="commuDelete" parameterType="com.community.vo.CommuVO">
-		DELETE FROM ROYAL.TB_COMMU
-		WHERE COMMU_NO=#{commuNo};
-	</delete>
-
 	<!-- 댓글 조회 -->
 	<select id="replyList" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">
 		SELECT REPLY_NO as replyNo
-		, USER_NICK as userEmail
+		, USER_NICK as userNick
 		, REPLY_TEXT as replyText
 		, COMMU_NO as commuNo
 		, REPLY_ISDELETED as replyIsDeleted
@@ -184,19 +256,21 @@
 	</select>
 
 	<!-- 댓글 작성 -->
-	<insert id="commentWrite" parameterType="com.community.vo.CommuVO">
+	<insert id="communityReply" parameterType="com.community.vo.CommuVO">
 		INSERT INTO ROYAL.TB_REPLY(
 		USER_NICK
-		, REPLY_TEXT
 		, COMMU_NO
+		, REPLY_CREATE_NAME
 		, REPLY_CREATE_AT
+		, REPLY_TEXT
 		) VALUES (
 		#{loginUser}
+		, #{commuNo}
+		, #{replyCreateNm}
+		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 		<if test="replyText != null and replyText != ''">
 			,#{replyText}
 		</if>
-		, #{commuNo}
-		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 		)
 	</insert>
 
@@ -204,18 +278,17 @@
 	<update id="commentModify" parameterType="com.community.vo.CommuVO">
 		UPDATE ROYAL.TB_REPLY
 		SET
+		REPLY_MODIFY_AT=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, REPLY_MODIFY_NAME=#{loginUser}
 		<if test="replyText != null and replyText != ''">
-			REPLY_TEXT = #{replyText}
+			, REPLY_TEXT = #{replyText}
 		</if>
-		, REPLY_MODIFY_AT=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
-		, REPLY_MODIFY_NAME='USER'
 		WHERE REPLY_NO=#{replyNo}
 	</update>
 
 	<!-- 댓글 삭제 -->
 	<delete id="commentDelete" parameterType="com.community.vo.CommuVO">
-		DELETE FROM ROYAL.TB_REPLY
-		WHERE REPLY_NO=#{replyNo}
+		DELETE FROM ROYAL.TB_REPLY WHERE REPLY_NO=#{replyNo}
 	</delete>
 
 
@@ -226,6 +299,7 @@
 		, REPLY_TEXT
 		, COMMU_NO
 		, REPLY_CREATE_AT
+		, REPLY_CREATE_NAME
 		) VALUES (
 		#{loginUser}
 		<if test="replyText != null and replyText != ''">
@@ -233,6 +307,7 @@
 		</if>
 		, #{commuNo}
 		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, #{replyCreateNm}
 		)
 	</insert>
 

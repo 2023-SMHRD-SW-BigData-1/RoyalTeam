@@ -86,7 +86,7 @@
 	</select>
 	
 	<!-- 회원정보 수정 -->
-	<update id="userInfoUpdate" parameterType="com.user.vo.UserVO">
+	<update id="userUpdate" parameterType="com.user.vo.UserVO">
 		UPDATE ROYAL.TB_USER SET 
 			USER_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 			, USER_MODIFY_NAME = 'USER'
@@ -120,10 +120,5 @@
 		FROM ROYAL.TB_USER
 		WHERE USER_EMAIL = #{userEmail} AND USER_PHONE = #{userPhone}
 	</select>
-	
-	<!-- 마커 가져오기 -->
-	  <select id="getAllMarkers" resultType="com.user.vo.MapMarker">
-        SELECT LAT  as latitude, LOG as longitude FROM SOLAR_POWER_ARIA
-    </select>
 	
 </mapper>    

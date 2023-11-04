@@ -1,48 +1,39 @@
 package com.community.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.community.converter.ImageConverter;
-import com.community.converter.ImageToBase64;
+import com.cmmn.vo.ParamVO;
+import com.cmmn.vo.ResultVO;
+import com.cmmn.vo.resultResponse;
 import com.community.service.CommuService;
 import com.community.vo.CommuVO;
-import com.user.vo.LoginInfoVO;
-import com.user.vo.UserVO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 @RequestMapping("/community")
 public class CommuController {
 
 	@Autowired
-	private CommuService commuSerivce;
-
-//	@Autowired
-//	private Authentication authentication;
-
+	private CommuService commuService;
+	
 	/**
 	 * 게시판 입장
 	 * 
@@ -52,9 +43,9 @@ public class CommuController {
 	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.27 / 정윤지 / 최초 적용
 	 */
 	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
-	public String commuEnter(@ModelAttribute CommuVO commuVo, Model model) {
+	public String commuEnter(@ModelAttribute CommuVO commuVo, @ModelAttribute ParamVO paramVo, Model model) {
 
-		List<CommuVO> listMap = commuSerivce.commuListPost(commuVo);
+		List<CommuVO> listMap = commuService.commuListPost(commuVo);
 
 		model.addAttribute("listMap", listMap);
 
@@ -80,38 +71,53 @@ public class CommuController {
 	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.27 / 정윤지 / 최초 적용
 	 */
 	@RequestMapping(value = "/list/post/write", method = RequestMethod.POST)
-	public String postWrite(@ModelAttribute CommuVO commuVo, Principal principal, HttpServletRequest request, HttpServletResponse response) {
+	public String postWrite(@ModelAttribute CommuVO commuVo, Principal principal) {
 		
 		commuVo.setLoginUser(principal.getName().toString());
 		
-		Map<String, Object> writeMap = commuSerivce.commuWrite(commuVo);
+		System.out.println("::::::::::::::::::::::::::::");
+		System.out.println(commuVo.getCommuTitle());
+		System.out.println("::::::::::::::::::::::::::::");
+		System.out.println(commuVo.getCommuText());
+		System.out.println("::::::::::::::::::::::::::::");
+		System.out.println(commuVo.getMtFile());
+		System.out.println("::::::::::::::::::::::::::::");
 		
-		Map<String, Object> imgMap = commuSerivce.commuWriteImg(commuVo);
+		Map<String, Object> writeMap = commuService.commuWrite(commuVo);
 		
-		Map<String, Object> mappingMap = commuSerivce.commuWriteMap(commuVo);
-
+		//Map<String, Object> imgMap = commuSerivce.commuWriteImg(commuVo);
+		
 		String reString = writeMap.get("writeCode").toString();
 		
-		String imgString = imgMap.get("imgCode").toString();
+		//String imgString = imgMap.get("imgCode").toString();
 		
-		String mapString = mappingMap.get("mappingCode").toString();
-		
-		if (reString.equals("20") && imgString.equals("21") && mapString.equals("22")) {
+		if (reString.equals("20")) {
 			System.out.println("글쓰기 성공");
-			request.setAttribute("message", "success");
 			return "redirect:/community/list";
-		} else if (reString.equals("01") && imgString.equals("01")) {
+		} else if (reString.equals("01")) {
 			System.out.println("필수값 오류");
-			request.setAttribute("message", "error");
 			return "redirect:/community/list";
 		} else {
 			System.out.println("관리자 확인이 필요합니다.");
-			request.setAttribute("message", "info");
 			return "redirect:/community/list";
 		}
 	}
-	
-	
+
+	//커뮤니티 리스트
+	@PostMapping("/search")
+	public ResponseEntity<Object> commuSearch(@ModelAttribute ParamVO paramVo) {
+		Gson gson = new GsonBuilder().create();
+		List<CommuVO> commuList =  commuService.commuSelectList(paramVo);
+	    return ResponseEntity.ok(new resultResponse(gson.toJson(commuList)));
+	}
+		
+		//커뮤니티 등록
+	@PostMapping("/registration")
+	public ResponseEntity<Object> commuRegistration(@ModelAttribute CommuVO commuVo) {
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo =  commuService.commuInsert(commuVo);
+	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
+	}	
 
 	/**
 	 * 게시판 글상세 페이지
@@ -124,35 +130,20 @@ public class CommuController {
 	@RequestMapping(value = "/list/detail/{commuNo}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String commuListDetail(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, Model model) {
 
-		CommuVO detailMap = commuSerivce.commuListPostDetail(commuNo);
-
-		System.out.println(detailMap);
+		CommuVO detailMap = commuService.commuListPostDetail(commuNo);
+		
+		System.out.println(":::::::::::::" + detailMap.getCommuImgPath());
+		
+		System.out.println(":::::::::::::" + detailMap.getCommuNo());
 
 		model.addAttribute("detailMap", detailMap);
 		
-		List<CommuVO> replyMap = commuSerivce.replyList(commuVo);
+		List<CommuVO> replyMap = commuService.replyList(commuVo);
 		
 		System.out.println(replyMap);
 
 		model.addAttribute("replyMap", replyMap);
 		
-//		File file = new File("C:\\royal\\commuImg\\"+commuVo.getCommuImgNm());
-//		
-//		ImageConverter<File, String> converter = new ImageToBase64();
-//		
-//		String fileStringValue = null;
-//		try {
-//		fileStringValue = converter.convert(file);
-//		System.out.println(fileStringValue);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		commuVo.setCommuImgNm(fileStringValue);
-//		
-//		CommuVO imgMap = commuSerivce.commuListPostImg(commuVo);
-//		
-//		model.addAttribute("imgMap", imgMap);
 
 		return "/community/community-detail";
 	}
@@ -161,110 +152,32 @@ public class CommuController {
 	@RequestMapping(value = "/list/detail/{commuNo}/modify", method = { RequestMethod.GET, RequestMethod.POST })
 	public String detailModify(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, Model model) {
 
-		CommuVO detailMap = commuSerivce.commuListPostDetail(commuNo);
+		CommuVO detailMap = commuService.commuListPostDetail(commuNo);
 
 		System.out.println(detailMap);
 
 		model.addAttribute("detailMap", detailMap);
 		return "/community/community-modify";
 	}
-
-	/**
-	 * 게시판 글수정
-	 * 
-	 * @param CommuVO     commuVo
-	 * @param HttpSession session
-	 * @param Map<String, Object>
-	 * @return Map<String, Object> ------------ 이력 ------------ 2023.10.26 / 정윤지 /
-	 *         최초 적용
-	 */
-	@RequestMapping(value = "/list/detail/{commuNo}/modify/success", method = RequestMethod.POST)
-	public String postModify(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, Model model) {
-
-		CommuVO detailMap = commuSerivce.commuListPostDetail(commuNo);
+	
+	//커뮤니티 수정
+	@PostMapping("/modify")
+	public ResponseEntity<Object> commuModify(@ModelAttribute CommuVO commuVo, Principal principal) {
+		commuVo.setLoginUser(principal.getName().toString());
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo =  commuService.commuUpdate(commuVo);
+	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
+	}
 		
-		model.addAttribute("detailMap", detailMap);
-		
-		Map<String, Object> modifyMap = commuSerivce.commuModify(commuVo);
-
-		String reString = modifyMap.get("modifyCode").toString();
-		if (reString.equals("30")) {
-			System.out.println("글수정 성공");
-			return "redirect:/community/list";
-		} else if (reString.equals("01")) {
-			System.out.println("필수값 오류");
-			return "redirect:/community/list";
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list";
-		}
-	}
-
-	/**
-	 * 게시판 글삭제
-	 * 
-	 * @param CommuVO     commuVo
-	 * @param HttpSession session
-	 * @param Map<String, Object>
-	 * @return Map<String, Object> ------------ 이력 ------------ 2023.10.26 / 정윤지 /
-	 *         최초 적용
-	 */
-	@RequestMapping(value = "/list/detail/{commuNo}/delete", method = RequestMethod.POST)
-	public String postDelete(@PathVariable("commuNo") int commuNo, @ModelAttribute CommuVO commuVo, HttpSession session) {
-
-		Map<String, Object> deleteMap = commuSerivce.commuDelete(commuVo);
-
-		String reString = deleteMap.get("deleteCode").toString();
-		if (reString.equals("40")) {
-			System.out.println("글삭제 성공");
-			return "redirect:/community/list";
-		} else if (reString.equals("01")) {
-			System.out.println("글수정 필수값 오류");
-			return "redirect:/community/list";
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list";
-		}
-	}
-
-	// 댓글수정
-	@RequestMapping(value = "/list/commentModify/{replyNo}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String commentModify(@PathVariable("replyNo") int replyNo, @ModelAttribute CommuVO commuVo, HttpSession session) {
-
-		Map<String, Object> commentModifyMap = commuSerivce.commentModify(commuVo);
-
-		String reString = commentModifyMap.get("commentModifyCode").toString();
-		if (reString.equals("13")) {
-			System.out.println("댓글수정 성공");
-			return null;
-		} else if (reString.equals("01")) {
-			System.out.println("댓글수정 필수값 오류");
-			return null;
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return null;
-		}
-	}
-
-	// 댓글삭제
-	@RequestMapping(value = "/list/{commuNo}/commentDelete/{replyNo}", method = RequestMethod.POST)
-	public String commentDelete(@ModelAttribute CommuVO commuVo, HttpSession session) {
-
-		Map<String, Object> commentDeleteMap = commuSerivce.commentDelete(commuVo);
-
-		String reString = commentDeleteMap.get("commentDeleteCode").toString();
-		if (reString.equals("14")) {
-			System.out.println("댓글삭제 성공");
-			return "redirect:/community/list/{commuNo}";
-		} else if (reString.equals("01")) {
-			System.out.println("필수값 오류");
-			return "redirect:/community/list/{commuNo}";
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list/{commuNo}";
-		}
+		//커뮤니티 삭제
+	@PostMapping("/delete")
+	public ResponseEntity<Object> commuDelete(@ModelAttribute CommuVO commuVo) {
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo =  commuService.commuDelete(commuVo);
+	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
 	}
 	
+
 	// 채팅페이지로 이동
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
 	public String chatPage() {

@@ -64,8 +64,31 @@
 <script src="/assets/js/config.js"></script>
 
 <script type="text/javascript">
+	
+	<!-- 댓글 등록 -->
+	function replyWrite(commuNo) {
+		var replyText = $("#replyText").val();
+		var commuNo = "${detailMap.getCommuNo()}"
+		$.ajax({
+			url : "/community/list/post/reply",
+			data : {
+				"replyText" : replyText,
+				"commuNo" : commuNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("등록 성공")
+				$('#replyContents').val('')
+				location.reload();
+			},
+			error : function() {
+				alert("등록 실패")
+	
+			}
+		});
+	}
 
-
+	<!-- 댓글 수정 -->
 	function replyModify(replyNo) {
 		$.ajax({
 			url : "/community/list/post/replyModify",
@@ -76,6 +99,7 @@
 			type : "POST",
 			success : function(result) {
 				alert("댓글 수정 성공")
+				location.reload();
 			},
 			error : function() {
 				alert("댓글 수정 실패")
@@ -86,8 +110,12 @@
 	function modifyView(modiId) {
 		$("#"+modiId).css('display','');
 	}
-
 	
+	function btnView(btnId) {
+		$("#"+btnId).css('display','');
+	}
+
+	<!-- 댓글 삭제 -->
 	function replyDelete(replyNo) {
 		$.ajax({
 			url : "/community/list/post/replyDelete",
@@ -97,12 +125,33 @@
 			type : "POST",
 			success : function(result) {
 				alert("댓글 삭제 성공")
+				location.reload();
 			},
 			error : function() {
 				alert("댓글 삭제 실패")
 			}
 		}); 
 	}
+	
+	<!-- 게시글 삭제 -->
+	function commuDelete(commuNo){
+		var commuNo = "${detailMap.getCommuNo()}";
+  		$.ajax({
+  			
+  			url : "/community/delete",
+  			data : {
+  				"commuNo" : commuNo
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("게시글 삭제 성공")
+  				window.location.href = "/community/list";
+  			},
+  			error : function(){
+  				alert("게시글 삭제 실패")
+  			}
+  		});
+  	}
 
 	
 </script>
@@ -126,9 +175,9 @@
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link" href="/community/email">MAIL</a>
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -165,14 +214,17 @@
 										<div class="me-1">
 											<h5 class="mb-1">${detailMap.getCommuTitle() }</h5>
 										</div>
-										<div class="me-1 mr-5">
+										<c:if test="${detailMap.getCommuCreateNm() == user.userNick }">
+											<div class="me-1 mr-5">
 											<a
 												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
 												href="/community/list/detail/${detailMap.getCommuNo() }/modify">수정</a>
-											<a
+											<button
 												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
-												href="/community/list/detail/${detailMap.getCommuNo() }/delete">삭제</a>
-										</div>
+												onclick='commuDelete("${detailMap.getCommuNo() }")'>삭제</button>
+											</div>
+										</c:if>
+										
 									</div>
 									<!-- title -->
 
@@ -227,8 +279,10 @@
 														type="video/mp4" />
 												</video>
 												
-												 <img alt="" src="data:image/png;base64,${imgMap.getCommuImgNm() }">
+												 
 												 -->
+												 
+												 <img alt="" src="${detailMap.getCommuImgPath()}">
 											</div>
 										</div>
 										<div class="card-body">
@@ -251,10 +305,10 @@
 																<div class="d-flex justify-content-between">
 																	<div class="d-flex justify-content-between ml-2 ">
 																		<span class="fw-medium" >${replyMap.getReplyCreateNm()}</span>
-																		<small <c:if test="${replyMap.getReplyCreateNm() != user.userEmail }"> colspan ="2"</c:if>
+																		<small <c:if test="${replyMap.getReplyCreateNm() != user.userNick }"> colspan ="2"</c:if>
 																		 class="text-muted ml-2">${replyMap.getReplyCreateAt()}</small>
 																	</div>
-																	<c:if test="${replyMap.getReplyCreateNm() == user.userEmail }">
+																	<c:if test="${replyMap.getReplyCreateNm() == user.userNick }">
 																		<div class="dropdown mt-3">
 																		<button class="btn p-0" type="button"
 																			id="supportTrackerMenu" data-bs-toggle="dropdown"
@@ -305,9 +359,9 @@
 														placeholder="내용을 입력해주세요"></textarea>
 
 
-													<div class="w-100 bdr">
+													<div class="w-100">
 														<div class="ml-auto w-10">
-															<button id="rSubmit" type="button" name="rSubmit"
+															<button onclick='replyWrite("${detailMap.getCommuNo() }")' id="rSubmit" type="button" name="rSubmit"
 																class="w-100 p-2 bg-transparent border-none"
 																style="color: gray;">댓글등록</button>
 														</div>
@@ -396,36 +450,15 @@
 		modifiId.parentElement.parentElement.nextElementSibling.style.display = 'none';
 	}
 		
-	<!-- 댓글 등록 -->
-	$('#rSubmit').on("click", function() {
-		var replyText = $("#replyText").val();
-		var commuNo = "${detailMap.commuNo}"
-		$.ajax({
-			url : "/community/list/post/reply",
-			data : {
-				"replyText" : replyText,
-				"commuNo" : commuNo
-			},
-			type : "POST",
-			success : function(result) {
-				alert("등록 성공")
-				$('#replyContents').val('')
-				getReplyList();
-			},
-			error : function() {
-				alert("등록 실패")
-
-			}
-		});
-	})
+	
 	
 	<!-- 댓글 출력 -->
-		const comment-list = () => {
+		const commentList = () => {
 	        const replyCreateNm = document.getElementById("replyCreateNm").value;
 	        const replyText = document.getElementById("replyText").value;
 	        console.log("작성자: ", replyCreateNm);
 	        console.log("내용: ", replyText);
-	        const commuNo = [[${detailMap.commuNo}]];
+	        const commuNo = [detailMap.getCommuNo()];
 	          $.ajax({
 	           type: "get",
 	           url: "/community/list/detail/${detailMap.commuNo}",
