@@ -12553,6 +12553,10 @@ html:not([dir=rtl]) .card .card-separator {
   margin-left: 3rem !important;
 }
 
+.ml-6 {
+  margin-left: 5rem !important;
+}
+
 .mr-1 {
   margin-right: 0.25rem !important;
 }
@@ -24296,4 +24300,16 @@ a.bg-vimeo:hover, a.bg-vimeo:focus {
 }
 .bd {
   border: 1px solid black;
+}
+
+.t-a-l {
+	text-align : left;
+}
+
+.t-a-c {
+	text-align : center;
+}
+
+.t-a-r {
+	text-align : right;
 }

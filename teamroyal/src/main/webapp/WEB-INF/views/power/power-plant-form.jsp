@@ -74,6 +74,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
+            <a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>

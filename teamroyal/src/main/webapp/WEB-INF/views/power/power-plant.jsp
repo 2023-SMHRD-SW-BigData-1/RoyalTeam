@@ -46,6 +46,7 @@
 
     <!--Shine CSS-->
     <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+    
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
@@ -73,7 +74,10 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
-						<div class="navbar-nav me-auto">
+            <a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+						<div class="navbar-nav me-auto ml-6">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 

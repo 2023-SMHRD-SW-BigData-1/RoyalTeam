@@ -68,11 +68,15 @@
 					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+						
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
-						<div class="navbar-nav me-auto">
+					<a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+						<div class="navbar-nav me-auto ml-6">
 							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
@@ -106,12 +110,13 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Invoice List Table -->
-                <div class="card w-100">
-                    <div class="card-datatable table-responsives">
+                <div class="card w-100 vh-100">
+                    <div class="card-datatable table-responsives p-3">
                         <table id="example" class="display w-100 sh-comm-table" >
+                        <a href="/community/list/post" class="btn btn-primary mb-3 waves-effect waves-light sh-comm-wright">글쓰기</a>
                     <thead>
-                        <tr>
-                            <th>num</th>
+                        <tr >
+                            <th class="t-a-c" style="width:20px;">num</th>
                             <th>제목</th>
                             <th>글쓴이</th>
                             <th>날짜</th>
@@ -119,16 +124,16 @@
                     </thead>
                     <tbody>
                     	<c:forEach items="${listMap }" var="listMap">
-							<tr>
-								<td>${listMap.getCommuNo() }</td>
-								<td><a href="/community/list/detail/${listMap.getCommuNo() }">${listMap.getCommuTitle() }</a></td>
-								<td>${listMap.getCommuCreateNm() }</td>
-								<td>${listMap.getCommuCreateAt() }</td>							
+							<tr class="bdr">
+								<td class="t-a-c" style="height: 50px;">${listMap.getCommuNo() }</td>
+								<td style="height: 50px;"><a style="color:#444;" href="/community/list/detail/${listMap.getCommuNo() }">${listMap.getCommuTitle() }</a></td>
+								<td style="height: 50px;">${listMap.getCommuCreateNm() }</td>
+								<td style="height: 50px;">${listMap.getCommuCreateAt() }</td>							
 							</tr>			
 						</c:forEach>
                     </tbody>
                 </table>
-                <a href="/community/list/post" class="btn btn-primary waves-effect waves-light sh-comm-wright">글쓰기</a>
+                
             </div>
         </div>
     </div>
