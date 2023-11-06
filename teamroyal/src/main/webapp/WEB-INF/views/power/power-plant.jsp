@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
   <link rel="stylesheet" href="/assets/vendor/libs/typeahead-js/typeahead.css" />
 
+<<<<<<< HEAD
   <!-- Sh Main CSS-->
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
   <link rel="stylesheet" href="/assets/vendor/css/shine/sh-drilldown.css">
@@ -53,9 +54,15 @@
       display: none;
     }
   </style>
+=======
+    <!--Shine CSS-->
+    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+    
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
 
 
 
+<<<<<<< HEAD
   <!-- Helpers -->
   <script src="/assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -103,6 +110,14 @@
           <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
+=======
+            <div class="collapse navbar-collapse" id="navbar-ex-5">
+            <a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+						<div class="navbar-nav me-auto ml-6">
+							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>

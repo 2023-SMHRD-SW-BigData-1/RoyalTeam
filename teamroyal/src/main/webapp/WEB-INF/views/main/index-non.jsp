@@ -72,10 +72,34 @@
               <span class="navbar-toggler-icon"></span>
             </button>
 
+<<<<<<< HEAD
             <div class="collapse navbar-collapse" id="navbar-ex-5">
               <div class="navbar-nav me-auto">
                 <a class="nav-item nav-link" href="/">MAIN</a>
                 <!-- <a class="nav-item nav-link" href="/html/community/community.html">COMMUNITY</a>
+=======
+<body>
+	<!-- Layout wrapper -->
+	<div
+		class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+		<div class="layout-container">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg bg-navbar-theme">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
+					<button class="navbar-toggler" type="button"
+						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbar-ex-5">
+					<a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+						<div class="navbar-nav me-auto ml-6">
+							<a class="nav-item nav-link" href="/">MAIN</a>
+							<!-- <a class="nav-item nav-link" href="/html/community/community.html">COMMUNITY</a>
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
                 <a class="nav-item nav-link" href="/html/community/chat.html">CHAT</a>
                 <a class="nav-item nav-link" href="/html/community/community-mail.html">MAIL</a>
                 <a class="nav-item nav-link" href="/html/power/power-plant.html">POWER PLANT</a> -->

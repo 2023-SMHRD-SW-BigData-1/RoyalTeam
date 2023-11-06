@@ -75,6 +75,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
+<<<<<<< HEAD
               <div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
@@ -83,6 +84,19 @@
 							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
+=======
+            <a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+              <div class="navbar-nav me-auto ml-6">
+                <a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+                <a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
+                <a class="nav-item nav-link" href="/community/chat">CHAT</a>
+                <a class="nav-item nav-link" href="/community/email">MAIL</a>
+                <a class="nav-item nav-link active" href="/auction">AUCTION</a>
+                <a class="nav-item nav-link" href="/power">POWER PLANT</a>
+              </div>
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
               <ul class="navbar-nav ms-lg-auto">
                 <li class="nav-item">
                   <a class="nav-link" href="/user/login/userProfile"

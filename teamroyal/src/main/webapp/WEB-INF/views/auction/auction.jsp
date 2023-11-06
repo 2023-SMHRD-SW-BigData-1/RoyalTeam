@@ -50,6 +50,8 @@
 
 <!-- Page CSS -->
 
+<!-- Sh Main CSS-->
+<link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 <!-- Helpers -->
 <script src="/assets/vendor/js/helpers.js"></script>
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -89,6 +91,7 @@ $.ajax({
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
+<<<<<<< HEAD
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
@@ -96,6 +99,18 @@ $.ajax({
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>
 							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
+=======
+					<a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
+						</a>
+						<div class="navbar-nav me-auto ml-6">
+							<a class="nav-item nav-link " href="/user/Success">MAIN</a> <a
+								class="nav-item nav-link" href="/community/list">COMMUNITY</a> <a
+								class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link active" href="/auction/auction">AUCTION</a>
+							<a class="nav-item nav-link" href="/power">POWER PLANT</a>
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
