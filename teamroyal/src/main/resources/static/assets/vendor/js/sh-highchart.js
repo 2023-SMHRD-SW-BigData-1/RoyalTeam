@@ -16,12 +16,11 @@ Highcharts.chart('sh-drilldown', {
         }
     },
     xAxis: {
-        type: 'category',
-        
+        type: 'category'
     },
     yAxis: {
         title: {
-            text: '한국 태양광 발전 현황'
+            text: 'Total percent market share'
         }
 
     },
