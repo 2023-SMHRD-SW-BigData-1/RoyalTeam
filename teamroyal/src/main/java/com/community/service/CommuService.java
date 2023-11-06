@@ -54,6 +54,8 @@ public interface CommuService {
 	// 게시판 댓글삭제
 	Map<String, Object> commentDelete(CommuVO commuVo);
 
+	List<CommuVO> commuPostPart(String commuCreateNm);
+
 	
 
 }

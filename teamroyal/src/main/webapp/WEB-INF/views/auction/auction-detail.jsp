@@ -1,4 +1,4 @@
-auction<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -52,6 +52,127 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
   <script src="/assets/vendor/js/template-customizer.js"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="/assets/js/config.js"></script>
+  <script type="text/javascript">
+	
+  <!-- 댓글 출력 -->
+	const mrList = () => {
+      const mrCreateNm = document.getElementById("mrCreateNm").value;
+      const mrText = document.getElementById("mrText").value;
+      console.log("작성자: ", mrCreateNm);
+      console.log("내용: ", mrText);
+      const marketNo = [adMap.getMarketNo()];
+        $.ajax({
+         type: "get",
+         url: "auction/list/${adMap.getMarketNo() }",
+         data: {
+             "mrCreateNm": mrCreateNm,
+             "mrText": mrText,
+             "marketNo": marketNo
+         },
+         success: function (res) {
+             console.log("요청성공", res);
+             
+         },
+         error: function (err) {
+             console.log("요청실패", err);
+         }
+      });
+
+  }
+	
+	<!-- 댓글 등록 -->
+	function mrWrite(marketNo) {
+		var mrText = $("#mrText").val();
+		var marketNo = "${adMap.getMarketNo()}"
+		$.ajax({
+			url : "/auction/list/reply",
+			data : {
+				"mrText" : mrText,
+				"marketNo" : marketNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("등록 성공")
+				$('#mrContents').val('')
+				location.reload();
+			},
+			error : function() {
+				alert("등록 실패")
+	
+			}
+		});
+	}
+
+	<!-- 댓글 수정 -->
+	function mrModify(mrNo) {
+		$.ajax({
+			url : "/auction/list/replyModify",
+			data : {
+				"mrText" : $("#mr"+mrNo).val(),
+				"mrNo" : mrNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("댓글 수정 성공")
+				location.reload();
+			},
+			error : function() {
+				alert("댓글 수정 성공")
+				location.reload();
+			}
+		});
+	}
+	
+	function modifyView(modiId) {
+		$("#"+modiId).css('display','');
+	}
+	
+	function btnView(btnId) {
+		$("#"+btnId).css('display','');
+	}
+
+	<!-- 댓글 삭제 -->
+	function mrDelete(mrNo) {
+		$.ajax({
+			url : "/auction/list/mrDelete",
+			data : {
+				"mrNo" : mrNo
+			},
+			type : "POST",
+			success : function(result) {
+				alert("댓글 삭제 성공")
+				location.reload();
+			},
+			error : function() {
+				alert("댓글 삭제 성공")
+				location.reload();
+			}
+		}); 
+	}
+
+	<!-- 게시글 삭제 -->
+	function auctionDelete(marketNo){
+		var marketNo = "${adMap.getMarketNo()}";
+  		$.ajax({
+  			
+  			url : "/auction/delete",
+  			data : {
+  				"marketNo" : marketNo
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("게시글 삭제 성공")
+  				window.location.href = "/auction/main";
+  			},
+  			error : function(){
+  				alert("게시글 삭제 실패")
+  			}
+  		});
+  	}
+	
+
+</script>
+  
 </head>
 
 <body>
@@ -68,7 +189,7 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 
           <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>
@@ -102,12 +223,16 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
                   <!-- title -->
                   <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
                     <div class="me-1">
-                      <h5 class="mb-1">Title Here</h5>
+                      <h5 class="mb-1">${adMap.getMarketTitle() }</h5>
                     </div>
-                    <div class="me-1 mr-5">
-                      <a href="community-form.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">수정</a>
-                      <a href="community-form.html" class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">삭제</a>
-                    </div>
+                    
+                    <c:if test="${adMap.getMarketCreateNm() == user.userNick }">
+											<div class="me-1 mr-5">
+											<button
+												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow"
+												onclick='auctionDelete("${adMap.getMarketNo() }")'>삭제</button>
+											</div>
+										</c:if>
                   </div><!-- title -->
                   <hr class="my-2" />
                   <!-- user info -->
@@ -119,8 +244,8 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
                         </div>
                       </div>
                       <div class="d-flex flex-column">
-                        <span class="fw-medium">Devonne Wallbridge</span>
-                        <small class="text-muted">2023.10.17<span class="mx-2">17:50</span></small>
+                        <span class="fw-medium">${adMap.getMarketCreateNm() }</span>
+                        <small class="text-muted">${adMap.getMarketCreateAt() }</small>
                       </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -131,8 +256,8 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
                       <a href="chat.html" class="d-flex mx-2 btn btn-primary bg-transparent border-none btn-no-boxshadow">
                         <i class="ti ti-mail ti-sm"></i>메일
                       </a>
-                      <a href="chat.html" class="d-flex mx-2 btn btn-primary bg-transparent border-none btn-no-boxshadow">
-                        <i class="ti ti-bookmarks ti-sm"></i>${user}님의 게시글더보기 >
+                      <a href="/auction/list/part/${adMap.getMarketCreateNm()}" class="d-flex mx-2 btn btn-primary bg-transparent border-none btn-no-boxshadow">
+                        <i class="ti ti-bookmarks ti-sm"></i>${adMap.getMarketCreateNm()}님의 게시글더보기 >
                       </a>
                     </div>
                   </div><!-- user info -->
@@ -140,31 +265,12 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
                   <div class="card academy-content shadow-none border">
                     <div class="p-2">
                       <div class="cursor-pointer">
-                        <video class="w-100"
-                          poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                          id="plyr-video-player" playsinline controls>
-                          <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-                            type="video/mp4" />
-                        </video>
+                        <img alt="" src="${adMap.getMarketImgPath()}">
                       </div>
                     </div>
                     <div class="card-body">
                       <h5>내용</h5>
-                      <p class="mb-4">
-                        The material of this course is also covered in my other course about web design and
-                        development with HTML5 & CSS3. Scroll to the bottom of this page to check out that course,
-                        too! If you're already taking my other course, you already have all it takes to start
-                        designing beautiful websites today!
-                      </p>
-                      <p class="mb-4">
-                        "Best web design course: If you're interested in web design, but want more than just a "how to
-                        use WordPress" course,I highly recommend this one." — Florian Giusti
-                      </p>
-                      <p>
-                        "Very helpful to us left-brained people: I am familiar with HTML, CSS, JQuery, and Twitter
-                        Bootstrap, but I needed instruction in web design. This course gave me practical, impactful
-                        techniques for making websites more beautiful and engaging." — Susan Darlene Cain
-                      </p>
+                      <p class="mb-4">${adMap.getMarketText() }</p>
 
 
                       <hr class="mb-4 mt-2" />
@@ -173,48 +279,87 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 
                       <!-- user info -->
-                  <div class="d-flex justify-content-between align-items-center user-name">
-                    <div class="d-flex w-100">
-                      <div class="avatar-wrapper">
-                        <div class="avatar me-2">
-                          <img src="/assets/img/avatars/11.png" alt="Avatar" class="rounded-circle" />
-                        </div>
-                      </div>
-                      <div class="d-flex flex-column w-100">
-                        <div class="d-flex justify-content-between">
-                          <span class="fw-medium">${user}박충희</span>
-                          <span class="fw-medium">
-                            <button class="btn btn-primary border-none bg-transparent btn-no-boxshadow">수정</button>
-                            <button class="btn btn-primary border-none bg-transparent btn-no-boxshadow">삭제</button>
-                          </span>
-                        </div>
-                        <div class="sh-comm-comment w-100">
-                          <p class="border-none"> 코드에서 왼쪽 class="border"지우고 "댓글은 이 곳" </p>
-                        </div>
-                        <small class="text-muted">2023.10.17<span class="mx-2">18:00</span></small>
-                        <div class="sh-comm-comment w-100">
-                          <p class="border"> 가격란 </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div><!-- user info -->
-                      <div class="border mt-5">
-                        <div class="d-flex flex-column pl-3">
-                          <span class="fw-medium fw-bolder">박충희</span>
-                        </div>
-                        <textarea name="collapsible-address" class="form-control border-none" id="collapsible-address" rows="2"
-                          placeholder="내용을 입력해주세요"></textarea>
-                        <div class="w-100">
-                          <div class="ml-auto w-10">
-                            <button class="w-100 p-2 btn btn-primary bg-transparent border-none btn-no-boxshadow" style="color: gray;">댓글등록</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  <div
+												class="d-flex justify-content-between align-items-center user-name">
+												<div class="d-flex w-100">
+
+													<div class="d-flex flex-column w-100">
+
+														<div id="comment-list" class="d-flex flex-column w-100 ">
+															<c:forEach items="${arMap }" var="arMap" varStatus="replyBegin">
+																<div class="d-flex justify-content-between">
+																	<div class="d-flex justify-content-between ml-2 ">
+																		<span class="fw-medium" >${arMap.getMrCreateNm()}</span>
+																		<small <c:if test="${arMap.getMrCreateNm() != user.userNick }"> colspan ="2"</c:if>
+																		 class="text-muted ml-2">${arMap.getMrCreateAt()}</small>
+																	</div>
+																	<c:if test="${arMap.getMrCreateNm() == user.userNick }">
+																		<div class="dropdown mt-3">
+																		<button class="btn p-0" type="button"
+																			id="supportTrackerMenu" data-bs-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="ti ti-dots-vertical ti-sm text-muted"></i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-end"
+																			aria-labelledby="supportTrackerMenu">
+																			<button type="button" onclick='modifyView("modify${replyBegin.count}")' id="modify${i.count }" class="dropdown-item">수정</button>
+																			<button type="button" class="dropdown-item" onclick='mrDelete("${arMap.getMrNo() }")'>삭제</button>
+																		</div>
+																	</div>
+																	</c:if>
+																</div>
+																<div class="sh-comm-comment w-100">
+																	<p class="border-none ml-4 mt-n2">${arMap.getMrText()}</p>
+																</div>
+																
+																<div id="modify${replyBegin.count}" class="border" style="display: none; width : 800px; border:2px solid gray !important; border-radius:10px;">
+																	<input type="hidden" name="mrNo" value="${arMap.getMrNo() }"> 
+																	<input type="hidden" name="marketNo" value="${adMap.getMarketNo() }"> 
+																	<input type="hidden" name="mrCreateNm" value="${arMap.getMrCreateNm() }">
+																	<textarea class="form-control border-none" placeholder="내용을 작성하세요" name="mrText" required="required" id="mr${arMap.getMrNo() }">${arMap.getMrText() }</textarea>
+																		<div class="fw-medium" style="display:flex; justify-content:end;">
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow" onclick='mrModify("${arMap.getMrNo() }")'>수정</button>
+																			<button class="btn btn-primary border-none bg-transparent btn-no-boxshadow" onclick="mrModifyCancel">취소</button>
+																		</div>
+																</div>
+																<br>
+															</c:forEach>
+														</div>
+
+													</div>
+												</div>
+											</div>
+											<!-- user info -->
+
+											<div class="border mt-5">
+												<form action="/auction/list/reply" method="post">
+													<input type="hidden" name="marketNo"
+														value="${adMap.getMarketNo() }">
+													<div class="d-flex flex-column pl-3">
+														<span class="fw-medium fw-bolder">${user.userNick }</span>
+													</div>
+
+													<textarea name="mrContents"
+														class="form-control border-none" id="mrText" rows="2"
+														placeholder="내용을 입력해주세요"></textarea>
+
+
+													<div class="w-100">
+														<div class="ml-auto w-10">
+															<button onclick='mrWrite("${adMap.getMarketNo() }")' id="rSubmit" type="button" name="rSubmit"
+																class="w-100 p-2 bg-transparent border-none"
+																style="color: gray;">댓글등록</button>
+														</div>
+													</div>
+												</form>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
             <!--/ Content -->
 
             <!-- Footer -->

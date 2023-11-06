@@ -24,7 +24,6 @@ public class UserServiceImp implements UserService {
 
 	@Autowired
 	private UserDAO userDao;
-	
 
 	// 사용자 조회
 	@Override
@@ -57,16 +56,15 @@ public class UserServiceImp implements UserService {
 	// 사용자 로그인
 	@Override
 	public Map<String, Object> userLogin(UserVO userVo) {
-		
+
 		Map<String, Object> loginMap = new HashMap<String, Object>();
 		if (userVo.getUserNick() != null && userVo.getUserPw() != null) {
-			
+
 			System.out.println(userVo.getUserNick());
 			System.out.println(userVo.getUserPw());
 			UserVO loginData = userDao.userLogin(userVo);
 			System.out.println(loginData);
-			
-			
+
 			if (loginData != null) {
 				loginMap.put("loginEmail", userVo.getUserNick());
 				loginMap.put("loginMsg", "로그인 완료");
@@ -81,22 +79,22 @@ public class UserServiceImp implements UserService {
 		}
 		return loginMap;
 	}
-	
+
 	// 사용자 수정 조회
 	@Override
 	public UserVO userModifyList(String userNick) {
-		
+
 		return userDao.userModifyList(userNick);
 	}
 
 	// 사용자 수정
 	@Override
 	public Map<String, Object> userInfoUpdate(UserVO userVo) {
-		
+
 		System.out.println("===========>> 수정 진입");
-		
+
 		Map<String, Object> updateMap = new HashMap<String, Object>();
-		
+
 		if (userVo.getUserNick() != null && userVo.getUserPw() != null) {
 			userVo.setUserPw(passencoder.encode(userVo.getUserPw().toString()));
 			System.out.println(userVo.getUserNick() + "회원정보수정");
@@ -114,27 +112,26 @@ public class UserServiceImp implements UserService {
 		}
 		return updateMap;
 	}
-	
+
 	// 커뮤니티 수정
-		@Override
-		public ResultVO userUpdate(UserVO userVo) {
-			
-			System.out.println("=====> 회원정보 수정 진입");
-			try {
-				if (userVo.getUserNick() != null && userVo.getUserEmail() != null
-						&& userVo.getUserPw() != null) {
-					userVo.setUserPw(passencoder.encode(userVo.getUserPw().toString()));
-					userDao.userUpdate(userVo);
-				} else {
-					return new ResultVO("02");
-				}
-				return new ResultVO("00");
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResultVO("99");
+	@Override
+	public ResultVO userUpdate(UserVO userVo) {
+
+		System.out.println("=====> 회원정보 수정 진입");
+		try {
+			if (userVo.getUserNick() != null && userVo.getUserEmail() != null && userVo.getUserPw() != null) {
+				userVo.setUserPw(passencoder.encode(userVo.getUserPw().toString()));
+				userDao.userUpdate(userVo);
+			} else {
+				return new ResultVO("02");
 			}
+			return new ResultVO("00");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResultVO("99");
 		}
-	
+	}
+
 	// 사용자 삭제
 	@Override
 	public Map<String, Object> userInfoDelete(UserVO userVo) {
@@ -158,34 +155,31 @@ public class UserServiceImp implements UserService {
 
 	// 사용자 비밀번호 초기화
 	@Override
-	public Map<String, Object> userFindPw(UserVO userVo) {
-		Map<String, Object> findMap = new HashMap<String, Object>();
-		if(userVo.getUserNick() != null) {
-			
-			String pwSt = "";
-			
-			char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-	                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	public ResultVO userFindPw(UserVO userVo) {
+		try {
+			if (userVo.getUserNick() != null) {
 
-	        int idx = 0;
-	        for (int i = 0; i < 6; i++) {
-	            idx = (int) (charSet.length * Math.random());
-	            pwSt += charSet[idx];
-	        }
-	        
-			userVo.setUserPw(passencoder.encode(pwSt));
-			int findDataCnt = userDao.userInfoUpdate(userVo);
-			if(findDataCnt == 1) {
-				findMap.put("findReMsg", "비밀번호 조회 완료");
-				findMap.put("findReCode", "44");
-			}else {
-				findMap.put("findReMsg", "비밀번호 조회 실패");
-				findMap.put("findReCode", "55");
+				String pwSt = "";
+
+				char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+						'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+						'Y', 'Z' };
+
+				int idx = 0;
+				for (int i = 0; i < 6; i++) {
+					idx = (int) (charSet.length * Math.random());
+					pwSt += charSet[idx];
+				}
+
+				userVo.setUserPw(passencoder.encode(pwSt));
+				
+			} else {
+				return new ResultVO("02");
 			}
-		}else {
-			findMap.put("findReMsg", "필수값 오류");
-			findMap.put("findReCode", "01");
+			return new ResultVO("00");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResultVO("99");
 		}
-		return findMap;
 	}
 }

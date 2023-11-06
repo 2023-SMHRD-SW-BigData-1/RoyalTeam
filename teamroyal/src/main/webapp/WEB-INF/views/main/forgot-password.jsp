@@ -52,6 +52,27 @@
   <script src="/assets/vendor/js/template-customizer.js"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="/assets/js/config.js"></script>
+  
+  <script type="text/javascript">
+  function findPw() {
+		var userEmail = $("#userEmail").val();
+		$.ajax({
+			url : "/user/login/findPw",
+			data : {
+				"userEmail" : userEmail
+			},
+			type : "POST",
+			success : function(result) {
+				alert("이메일 발송 성공")
+				window.location.href = "/";
+			},
+			error : function() {
+				alert("이메일 발송 실패")
+	
+			}
+		});
+	}
+  </script>
 </head>
 
 <body>
@@ -75,14 +96,12 @@
             <!-- /Logo -->
             <h4 class="mb-1 pt-2">비밀번호를 잊으셨습니까? 🔒</h4>
             <p class="mb-4">이메일을 입력하세요</p>
-            <form id="formAuthentication" class="mb-3" action="/user/findPw" method="POST">
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="userEmail" placeholder="이메일을 입력하세요"
+                <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일을 입력하세요"
                   autofocus />
               </div>
-              <button class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
-            </form>
+              <button onclick="findPw" class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
             <div class="text-center">
               <a href="/user/login/main" class="d-flex align-items-center justify-content-center">
                 <i class="ti ti-chevron-left scaleX-n1-rtl"></i>

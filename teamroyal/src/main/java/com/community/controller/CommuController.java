@@ -4,15 +4,10 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +47,19 @@ public class CommuController {
 		System.out.println(listMap.size());
 
 		return "/community/community";
+	}
+	
+	// 특정 게시글 조회
+	@RequestMapping(value = "/list/part/{commuCreateNm}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String commuPart(@PathVariable("commuCreateNm") String commuCreateNm, @ModelAttribute CommuVO commuVo, @ModelAttribute ParamVO paramVo, Model model) {
+
+		List<CommuVO> partMap = commuService.commuPostPart(commuCreateNm);
+
+		model.addAttribute("partMap", partMap);
+
+		System.out.println(partMap.size());
+
+		return "/community/community-part";
 	}
 
 	// 게시판 글쓰기 페이지로 이동
@@ -113,7 +121,8 @@ public class CommuController {
 		
 		//커뮤니티 등록
 	@PostMapping("/registration")
-	public ResponseEntity<Object> commuRegistration(@ModelAttribute CommuVO commuVo) {
+	public ResponseEntity<Object> commuRegistration(@ModelAttribute CommuVO commuVo, Principal principal) {
+		commuVo.setLoginUser(principal.getName().toString());
 		Gson gson = new GsonBuilder().create();
 		ResultVO resultVo =  commuService.commuInsert(commuVo);
 	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
@@ -171,7 +180,7 @@ public class CommuController {
 		
 		//커뮤니티 삭제
 	@PostMapping("/delete")
-	public ResponseEntity<Object> commuDelete(@ModelAttribute CommuVO commuVo) {
+	public ResponseEntity<Object> commuDelete(@ModelAttribute CommuVO commuVo, Principal principal) {
 		Gson gson = new GsonBuilder().create();
 		ResultVO resultVo =  commuService.commuDelete(commuVo);
 	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));

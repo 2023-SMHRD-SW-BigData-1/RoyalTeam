@@ -64,29 +64,28 @@
     
     <script type="text/javascript">
     function commuInsert(userNick){
-    	var userNick = "${user.userNick}";
-  		var commuTitle = $("#commuTitle").val();
-		var commuText = $("#commuText").val();
-		var commuCreateNm = "${user.userNick}";
-  		$.ajax({
-  			
-  			url : "/community/list/post/write",
-  			data : {
-  				"userNick" : userNick,
-  				"commuTitle" : commuTitle,
-  				"commuText" : commuText,
-  				"commuCreateNm" : commuCreateNm
-  			},
-  			type : "POST",
-  			success : function(result) {
-  				alert("게시글 등록 성공")
-  				window.location.href = "/community/list";
-  			},
-  			error : function(){
-  				alert("게시글 등록 실패")
-  			}
-  		});
-  	}
+        var formData = new FormData();
+        formData.append("userNick", userNick); // 이미 서버로부터 받은 데이터이므로 JSP EL을 사용할 필요가 없습니다.
+        formData.append("commuTitle", $("#commuTitle").val());
+        formData.append("commuText", $("#commuText").val());
+        formData.append("commuCreateNm", userNick); // 위와 동일
+        formData.append("mtFile", $("#mtFile")[0].files[0]); // 파일 객체 직접 추가
+
+        $.ajax({
+            url : "/community/registration",
+            type : "POST",
+            data : formData,
+            processData: false,  // FormData를 사용할 경우 필수
+            contentType: false,  // FormData를 사용할 경우 필수
+            success : function(result) {
+                alert("게시글 등록 성공")
+                window.location.href = "/community/list";
+            },
+            error : function(xhr, status, error){
+                alert("게시글 등록 실패: " + xhr.responseText);
+            }
+        });
+    }
     </script>
     
   </head>
@@ -115,7 +114,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>
@@ -177,8 +176,10 @@
                               <textarea id="commuText" name="commuText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요"></textarea>
                             </div>
                             <div class="col-md-3">
+                            <form enctype="multipart/form-data">
                               <label class="form-label" for="collapsible-fullname">사진첨부</label>
-                              <input name="mtFile" type="file" id="collapsible-fullname" class="form-control" />
+                              <input id="mtFile" name="mtFile" type="file" class="form-control" />
+                              </form>
                             </div>
                             <div class="col-12">
                               <button onclick='commuInsert("${user.userNick }")' type="submit" name="submitButton" class="btn btn-primary waves-effect waves-light">Submit</button>

@@ -118,12 +118,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach items="${listMap }" var="listMap">
+                    	<c:forEach items="${partMap }" var="partMap">
 							<tr>
-								<td>${listMap.getCommuNo() }</td>
-								<td><a href="/community/list/detail/${listMap.getCommuNo() }">${listMap.getCommuTitle() }</a></td>
-								<td>${listMap.getCommuCreateNm() }</td>
-								<td>${listMap.getCommuCreateAt() }</td>							
+								<td>${partMap.getCommuNo() }</td>
+								<td><a href="/community/list/detail/${partMap.getCommuNo() }">${partMap.getCommuTitle() }</a></td>
+								<td>${partMap.getCommuCreateNm() }</td>
+								<td>${partMap.getCommuCreateAt() }</td>							
 							</tr>			
 						</c:forEach>
                     </tbody>

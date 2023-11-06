@@ -115,14 +115,10 @@
 	</delete>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="userFindPw" parameterType="com.user.vo.UserVO">
-		SELECT *
-		FROM ROYAL.TB_USER
-		WHERE USER_EMAIL = #{userEmail} AND USER_PHONE = #{userPhone}
-	</select>
+	<update id="userFindPw" parameterType="com.user.vo.UserVO">
+		UPDATE ROYAL.TB_USER SET 
+		USER_PW = #{userPw}
+		WHERE USER_EMAIL = #{userEmail}
+	</update>
 	
-		<!-- 마커 가져오기 -->
-	  <select id="getAllMarkers" resultType="com.user.vo.MapMarker">
-        SELECT LAT  as latitude, LOG as longitude FROM SOLAR_POWER_ARIA
-    </select>
 </mapper>    

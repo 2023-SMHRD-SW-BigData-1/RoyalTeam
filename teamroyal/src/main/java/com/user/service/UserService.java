@@ -31,7 +31,7 @@ public interface UserService {
 	Map<String, Object> userInfoDelete(UserVO userVo);
 	
 	//사용자 비밀번호 초기화
-	Map<String, Object> userFindPw(UserVO userVo);
+	ResultVO userFindPw(UserVO userVo);
 	
 	
 }

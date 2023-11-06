@@ -134,10 +134,12 @@
                     <a class="nav-link" href="./pages-profile-projects.html"><i
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
+                  <c:if test="${user.userNick == 'admin' }">
                   <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/manager"><i
                         class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
                   </li>
+                  </c:if>
                 </ul>
               </div>
             </div><!--/ Navbar pills -->
@@ -156,16 +158,7 @@
                         class="w-50 d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start flex-md-row flex-column">
                         <div class="user-profile-info mx-4">
                           <h4><sec:authentication property="principal.userNick"/></h4>
-                          <ul
-                            class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                            <li class="list-inline-item d-flex gap-1">
-                              <i class="ti ti-color-swatch"></i> UX Designer
-                            </li>
-                            <li class="list-inline-item d-flex gap-1"><i class="ti ti-map-pin"></i> Vatican City</li>
-                            <li class="list-inline-item d-flex gap-1">
-                              <i class="ti ti-calendar"></i> Joined April 2021
-                            </li>
-                          </ul>
+                          
                         </div>
                       </div>
                       <div
@@ -181,7 +174,7 @@
 
 
                               <!-- Button trigger modal -->
-                              <a href="/user/login/userProfile/modify/${userMap.getUserNick() }">
+                              <a href="/user/login/userProfile/modify/${user.userNick }">
                               <button type="button" class="btn btn-primary">
                                 <i class="ti ti-link me-1"></i>회원정보수정
                               </button>
@@ -197,32 +190,6 @@
                                     <div class="container-xxl">
                                       <div class="authentication-wrapper authentication-basic container-p-y">
                                         <div class="authentication-inner py-4">
-                                        <!-- 
-                                          <div class="card">
-                                            <div class="card-body">
-                                              <div class="app-brand justify-content-center mb-4 mt-2">
-                                                <a href="index.html" class="app-brand-link gap-2">
-                                                  <span class="app-brand-logo demo" style="width: 60px; height: 60px;">
-                                                    <img src="/assets/img/branding/shinelogosm.png" class="w-100" alt="">
-                                                  </span>
-                                                  <span class="app-brand-text demo text-body fw-bold">SHINE</span>
-                                                </a>
-                                              </div>
-                                              <h4 class="mb-1 pt-2">🔒회원정보수정</h4>
-                                              <p class="mb-4">이메일을 입력하세요
-                                              </p>
-                                              <form id="formAuthentication" class="mb-3"
-                                                action="/user/login/userProfile/modify" method="GET">
-                                                <div class="mb-3">
-                                                  <label for="email" class="form-label">Email</label>
-                                                  <input type="text" class="form-control" id="email" name="userEmail"
-                                                    placeholder="이메일을 입력하세요" autofocus />
-                                                </div>
-                                                <button class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
-                                              </form>
-                                            </div>
-                                          </div>
-                                           -->
                                         </div>
                                       </div>
                                     </div>
@@ -231,7 +198,7 @@
                               </div>
                             </li>
                             <li class="list-inline-item d-flex gap-1">
-                              <a href="/html/power/power-plant.html" class="btn btn-primary">
+                              <a href="/power/main" class="btn btn-primary">
                                 <i class="ti ti-check me-1"></i>발전소 등록
                               </a>
                             </li>
@@ -255,23 +222,23 @@
                       <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">별명:</span>
-                          <span>${userMap.getUserNick() }</span>
+                          <span>${user.userNick }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-check text-heading"></i><span class="fw-medium mx-2 text-heading">이름:</span>
-                          <span>${userMap.getUserNm() }</span>
+                          <span>${user.userNm }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">Email:</span>
-                          <span>${userMap.getUserEmail() }</span>
+                          <span>${user.userEmail }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-flag text-heading"></i><span class="fw-medium mx-2 text-heading">주소:</span>
-                          <span>${userMap.getUserAdd() }</span>
+                          <span>${user.userAdd }</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">연락처:</span>
-                          <span>${userMap.getUserPhone() }</span>
+                          <span>${user.userPhone }</span>
                         </li>
                       </ul>
                     </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 
 <html
@@ -9,6 +11,34 @@
   data-theme="theme-default"
   data-assets-path="/assets/"
   data-template="horizontal-menu-template">
+  
+  <script type="text/javascript">
+  	function marketUpdate(marketNo){
+  		var marketTitle = $("#marketTitle").val();
+		var marketText = $("#marketText").val();
+		var marketNo = "${adMap.getMarketNo()}";
+  		$.ajax({
+  			
+  			url : "/auction/modify",
+  			data : {
+  				"marketTitle" : marketTitle,
+  				"marketText" : marketText,
+  				"marketNo" : marketNo
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("게시글 수정 성공")
+  				window.location.href = "/auction/main";
+  			},
+  			error : function(){
+  				alert("게시글 수정 실패")
+  			}
+  		});
+  	}
+  	
+  	
+  </script>
+  
   <head>
     <meta charset="utf-8" />
     <meta
@@ -59,49 +89,31 @@
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
-    
-    <script type="text/javascript">
-    function auctionInsert(userNick){
-        var formData = new FormData();
-        formData.append("userNick", userNick); // 이미 서버로부터 받은 데이터이므로 JSP EL을 사용할 필요가 없습니다.
-        formData.append("marketTitle", $("#marketTitle").val());
-        formData.append("marketText", $("#marketText").val());
-        formData.append("marketCreateNm", userNick);
-        formData.append("marketPrice", $("#marketPrice").val());
-        formData.append("mtFile", $("#mtFile")[0].files[0]); // 파일 객체 직접 추가
-
-        $.ajax({
-            url : "/auction/registration",
-            type : "POST",
-            data : formData,
-            processData: false,  // FormData를 사용할 경우 필수
-            contentType: false,  // FormData를 사용할 경우 필수
-            success : function(result) {
-                alert("게시글 등록 성공")
-                window.location.href = "/auction/main";
-            },
-            error : function(xhr, status, error){
-                alert("게시글 등록 실패: " + xhr.responseText);
-            }
-        });
-    }
-    </script>
   </head>
 
   <body>
+  
+  <% 
+  	String massage = (String) request.getAttribute("massage");
+  	System.out.println(massage);
+  %>
+  
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
-        <!----------------------------------------- Navbar ----------------------------------------->
-			<nav class="navbar navbar-expand-lg bg-navbar-theme">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-navbar-theme">
+          <div class="container-fluid">
+          <a class="navbar-brand" href="/user/Success">Navbar</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbar-ex-5">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-					<div class="collapse navbar-collapse" id="navbar-ex-5">
+            <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
 							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
@@ -110,30 +122,30 @@
 							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
-						<ul class="navbar-nav ms-lg-auto">
-							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile"><i
-									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> 
-									Profile</a>
-							</li>
-							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
-									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
-									Login</a></li> -->
-							<li class="nav-item"><a class="nav-link" href="/logout"><i
-									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
-									Logout</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			<!-- / Navbar -->
-			<!----------------------------------------- Navbar ----------------------------------------->
+              <ul class="navbar-nav ms-lg-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/login/userProfile"
+                    ><i class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"
+                    ><i class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i> Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- / Navbar -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
+
             <!-- Content -->
+
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row my-4">
                 <div class="col">
@@ -142,26 +154,37 @@
                       <div id="collapseDeliveryAddress" class="accordion-collapse collapse show" data-bs-parent="#collapsibleSection">
                         <div class="accordion-body">
                           <div class="row g-3">
+                          <div style="display: none;">
+                          <input type="text" name="marketNo" value="${adMap.getMarketNo() }"/>${adMap.getMarketNo() }
+                            </div>
                             <div class="col-md-12">
                               <label class="form-label" for="collapsible-fullname">제목</label>
-                              <input type="text" id="marketTitle" class="form-control" placeholder="제목을 입력해주세요" />
+                              <input id="marketTitle" name="marketTitle" type="text" id="collapsible-fullname" class="form-control" placeholder="제목을 입력해주세요" value="${adMap.getMarketTitle() }"/>
                             </div>
+                            
                             <div class="col-12">
-                              <label class="form-label" for="collapsible-address">매매 가격</label>
-                              <input type="text" id="marketPrice" class="form-control" placeholder="매매 가격을 입력해주세요" />
+                              <label class="form-label" for="collapsible-address">내용</label>
                               <div class="d-flex justify-content-end">
-                                
+                                <div class="email-editor-toolbar border-0 w-100 border-top ql-toolbar ql-snow">
+                                  <span class="ql-formats me-0">
+                                    <button class="ql-bold" type="button"><svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M5,4H9.5A2.5,2.5,0,0,1,12,6.5v0A2.5,2.5,0,0,1,9.5,9H5A0,0,0,0,1,5,9V4A0,0,0,0,1,5,4Z"></path> <path class="ql-stroke" d="M5,9h5.5A2.5,2.5,0,0,1,13,11.5v0A2.5,2.5,0,0,1,10.5,14H5a0,0,0,0,1,0,0V9A0,0,0,0,1,5,9Z"></path> </svg></button>
+                                    <button class="ql-italic" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="7" x2="13" y1="4" y2="4"></line> <line class="ql-stroke" x1="5" x2="11" y1="14" y2="14"></line> <line class="ql-stroke" x1="8" x2="10" y1="14" y2="4"></line> </svg></button>
+                                    <button class="ql-underline" type="button"><svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M5,3V9a4.012,4.012,0,0,0,4,4H9a4.012,4.012,0,0,0,4-4V3"></path> <rect class="ql-fill" height="1" rx="0.5" ry="0.5" width="12" x="3" y="15"></rect> </svg></button>
+                                    <button class="ql-list" value="ordered" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="7" x2="15" y1="4" y2="4"></line> <line class="ql-stroke" x1="7" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="7" x2="15" y1="14" y2="14"></line> <line class="ql-stroke ql-thin" x1="2.5" x2="4.5" y1="5.5" y2="5.5"></line> <path class="ql-fill" d="M3.5,6A0.5,0.5,0,0,1,3,5.5V3.085l-0.276.138A0.5,0.5,0,0,1,2.053,3c-0.124-.247-0.023-0.324.224-0.447l1-.5A0.5,0.5,0,0,1,4,2.5v3A0.5,0.5,0,0,1,3.5,6Z"></path> <path class="ql-stroke ql-thin" d="M4.5,10.5h-2c0-.234,1.85-1.076,1.85-2.234A0.959,0.959,0,0,0,2.5,8.156"></path> <path class="ql-stroke ql-thin" d="M2.5,14.846a0.959,0.959,0,0,0,1.85-.109A0.7,0.7,0,0,0,3.75,14a0.688,0.688,0,0,0,.6-0.736,0.959,0.959,0,0,0-1.85-.109"></path> </svg></button>
+                                    <button class="ql-list" value="bullet" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="6" x2="15" y1="4" y2="4"></line> <line class="ql-stroke" x1="6" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="6" x2="15" y1="14" y2="14"></line> <line class="ql-stroke" x1="3" x2="3" y1="4" y2="4"></line> <line class="ql-stroke" x1="3" x2="3" y1="9" y2="9"></line> <line class="ql-stroke" x1="3" x2="3" y1="14" y2="14"></line> </svg></button>
+                                    <button class="ql-link" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="7" x2="11" y1="7" y2="11"></line> <path class="ql-even ql-stroke" d="M8.9,4.577a3.476,3.476,0,0,1,.36,4.679A3.476,3.476,0,0,1,4.577,8.9C3.185,7.5,2.035,6.4,4.217,4.217S7.5,3.185,8.9,4.577Z"></path> <path class="ql-even ql-stroke" d="M13.423,9.1a3.476,3.476,0,0,0-4.679-.36,3.476,3.476,0,0,0,.36,4.679c1.392,1.392,2.5,2.542,4.679.36S14.815,10.5,13.423,9.1Z"></path> </svg></button>
+                                    <button class="ql-image" type="button"><svg viewBox="0 0 18 18"> <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect> <circle class="ql-fill" cx="6" cy="7" r="1"></circle> <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline> </svg></button>
+                                  </span>
+                                </div>
                               </div>
-                              <br>
-                              <p>내용</p>
-                              <textarea name="collapsible-address" class="form-control" id="marketText" rows="20" placeholder="내용을 입력해주세요"></textarea>
+                              <textarea id="marketText" name="marketText" class="form-control" id="collapsible-address" rows="20" placeholder="내용을 입력해주세요">${adMap.getMarketText() }</textarea>
                             </div>
                             <div class="col-md-3">
                               <label class="form-label" for="collapsible-fullname">사진첨부</label>
-                              <input type="file" id="mtFile" name="mtFile" class="form-control" />
+                              <input name="marketImg" type="file" id="collapsible-fullname" class="form-control" />
                             </div>
                             <div class="col-12">
-                              <button onclick='auctionInsert("${user.userNick }")' type="submit" name="submitButton" class="btn btn-primary waves-effect waves-light">Submit</button>
+                              <button onclick='marketUpdate("${adMap.getMarketNo() }")' class="btn btn-primary waves-effect waves-light">Submit</button>
                             </div>
                           </div>
                         </div>
@@ -170,7 +193,9 @@
                   </div>
                 </div>
               </div>
-            </div><!--/ Content -->
+            </div>
+            <!--/ Content -->
+
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl">
@@ -185,12 +210,17 @@
                   </div>
                 </div>
               </div>
-            </footer><!-- / Footer -->
+            </footer>
+            <!-- / Footer -->
+
             <div class="content-backdrop fade"></div>
-          </div><!--/ Content wrapper -->
-        </div><!--/ Layout container -->
-      </div><!-- Content wrapper -->
-    </div><!-- Layout container -->
+          </div>
+          <!--/ Content wrapper -->
+        </div>
+
+        <!--/ Layout container -->
+      </div>
+    </div>
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
@@ -226,6 +256,7 @@
 
     <!-- Page JS-->
     <script src="/assets/js/app-email.js"></script>
+    
 
   </body>
 </html>

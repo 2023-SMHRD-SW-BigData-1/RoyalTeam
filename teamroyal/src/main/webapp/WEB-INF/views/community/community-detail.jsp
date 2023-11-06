@@ -173,7 +173,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>
@@ -257,7 +257,7 @@
 												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">
 												<i class="ti ti-mail ti-sm"></i>메일
 
-											</a> <a href="chat.html"
+											</a> <a href="/community/list/part/${detailMap.getCommuCreateNm() }"
 												class="mx-1 btn btn-primary bg-transparent border-none btn-no-boxshadow">
 												<i class="ti ti-bookmarks ti-sm"></i>${detailMap.getCommuCreateNm() }님의게시글더보기>
 

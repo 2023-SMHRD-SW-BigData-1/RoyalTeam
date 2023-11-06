@@ -38,5 +38,14 @@ public class AuctionVO {
 	private String AuctionImgIsDeleted;
 	
 	private MultipartFile mtFile;
+	
+	private int mrNo;
+	private String mrText;
+	private String mrIsDeleted;
+	private String mrCreateNm;
+	private String mrCreateAt;
+	private String mrModifyNm;
+	private String mrNodifyAt;
+	
 
 }

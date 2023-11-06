@@ -59,18 +59,7 @@
 <script src="/assets/js/config.js"></script>
 
 <script type="text/javascript">
-var marketNo = ${adlMap.getMarketNo()}; // 이 값은 애플리케이션 로직에 따라 동적으로 설정되어야 합니다.
 
-$.ajax({
-    url: "/main/" + marketNo,
-    type: "GET",
-    success: function(response) {
-        // 성공 처리
-    },
-    error: function(xhr, status, error) {
-        // 오류 처리
-    }
-});
 </script>
 </head>
 
@@ -144,18 +133,18 @@ $.ajax({
 	transform: scale(1.02)
 }
 </style>
-										<c:forEach items="${auctionMap }" var="auctionMap" >
+										<c:forEach items="${aPartMap }" var="aPartMap" >
 											<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test"><a
-												href="/auction/list/${auctionMap.getMarketNo() }">
+												href="/auction/list/${aPartMap.getMarketNo() }">
 													<div class="card border shadow-none">
 														<div class="card-body text-start p-0">
 															<div class="w-100">
 															
-																<img src="${auctionMap.getMarketImgPath() }" class="w-100 " alt="">
+																<img src="${aPartMap.getMarketImgPath() }" class="w-100 " alt="">
 															</div>
 															<div class="mx-2">
-																<h5 class="my-2">${auctionMap.getMarketTitle() }</h5>
-																<p>${auctionMap.getMarketText() }</p>
+																<h5 class="my-2">${aPartMap.getMarketTitle() }</h5>
+																<p>${aPartMap.getMarketText() }</p>
 															</div>
 														</div>
 													</div>

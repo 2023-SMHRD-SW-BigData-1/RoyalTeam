@@ -115,7 +115,7 @@
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
                   <label class="form-label" for="password">비밀번호</label>
-                  <a href="/login/forgotPw">
+                  <a href="/user/login/forgotPw">
                     <small>Forgot Password?</small>
                   </a>
                 </div>

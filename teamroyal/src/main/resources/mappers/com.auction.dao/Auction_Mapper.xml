@@ -43,7 +43,7 @@
 		ORDER BY MARKET_NO DESC
 	</select>
 	
-	<insert id="auctionWrite" parameterType="com.auction.vo.AuctionVO">
+	<insert id="auctionInsert" parameterType="com.auction.vo.AuctionVO">
 		INSERT INTO ROYAL.TB_MARKET(
 		USER_NICK
 		, MARKET_TITLE
@@ -66,7 +66,7 @@
 		</selectKey>
 	</insert>
 	
-	<insert id="marketFileInsert" parameterType="com.cmmn.vo.FileVO">
+	<insert id="auctionFileInsert" parameterType="com.cmmn.vo.FileVO">
 		INSERT INTO ROYAL.IMG_MASTER(
 			IMG_PATH
 			, IMG_NAME
@@ -89,8 +89,129 @@
 		</selectKey>
 	</insert>
 	
-	<insert id="marketFileMapInsert" parameterType="com.auction.vo.AuctionVO">
-		INSERT INTO ROYAL.TB_MARKET_MAPPING(MARKET_NO, IMG_NO)VALUES(${marketNo}, ${marketImgNo})
+	<insert id="auctionFileMapInsert" parameterType="com.auction.vo.AuctionVO">
+		INSERT INTO ROYAL.TB_MAKET_MAPPING(MARKET_NO, IMG_NO)VALUES(${marketNo}, ${marketImgNo})
 	</insert>
+	
+	<!-- 매매 조회 -->
+	<select id="auctionPostDetail" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+		SELECT 
+			MARKET_NO AS marketNo
+			,USER_NICK AS userNick
+			,MARKET_TITLE AS marketTitle
+			,MARKET_TEXT AS marketText
+			,MARKET_ISDELETED AS marketIsDeleted
+			,MARKET_CREATE_AT AS marketCreateAt
+			,MARKET_CREATE_NAME AS marketCreateNm
+			,MARKET_PRICE AS marketPrice
+		FROM ROYAL.TB_MARKET
+		WHERE 1=1
+		<if test="marketNo != null and marketNo != ''">
+			AND MARKET_NO = ${marketNo}
+		</if>
+	</select>
+	
+	<select id="auctionImgPathSelect" parameterType="Integer" resultType="String">
+		SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS marketImgPath FROM ROYAL.IMG_MASTER A WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_MAKET_MAPPING B WHERE B.MARKET_NO = ${marketNo})
+	</select>
+	
+	<!-- 이미지 조회 -->
+	<select id="auctionListPostImg" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+		SELECT IMG_NO as marketImgNo
+		, IMG_PATH as marketImgPath
+		, IMG_NAME as marketImgNm
+		, IMG_UUID as marketImgU
+		, IMG_EXTENSION as marketImgEx
+		, IMG_SIZE as marketImgSize
+		, IMG_CREATE_AT as marketImgCreateAt
+		, IMG_CREATE_NAME as marketImgCreateNm
+		FROM ROYAL.IMG_MASTER
+		WHERE IMG_NAME =#{marketImgNm}
+	</select>
+	
+	<!-- 특정 매매글 조회 -->
+	<select id="auctionPostPart" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+		SELECT 
+			MARKET_NO AS marketNo
+			,USER_NICK AS userNick
+			,MARKET_TITLE AS marketTitle
+			,MARKET_TEXT AS marketText
+			,MARKET_ISDELETED AS marketIsDeleted
+			,MARKET_CREATE_AT AS marketCreateAt
+			,MARKET_CREATE_NAME AS marketCreateNm
+			,MARKET_PRICE AS marketPrice
+		FROM ROYAL.TB_MARKET
+		WHERE 1=1
+		<if test="marketNo != null and marketNo != ''">
+			AND MARKET_CREATE_NAME = #{marketCreateNm}
+		</if>
+		
+		ORDER BY MARKET_NO DESC
+	</select>
+
+	<delete id="auctionFileMapDelete" parameterType="com.auction.vo.AuctionVO">
+		DELETE FROM ROYAL.TB_MAKET_MAPPING 
+		WHERE MARKET_NO = ${marketNo}
+	</delete>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="auctionDelete" parameterType="com.auction.vo.AuctionVO">
+		DELETE FROM ROYAL.TB_MARKET
+		WHERE MARKET_NO = ${marketNo}
+	</delete>
+	
+	<!-- 댓글 조회 -->
+	<select id="replyList" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+		SELECT M_REPLY_NO as mrNo
+		, USER_NICK as userNick
+		, M_REPLY_TEXT as mrText
+		, MARKET_NO as marketNo
+		, M_REPLY_ISDELETED as mrIsDeleted
+		, M_REPLY_CREATE_NAME as mrCreateNm
+		, M_REPLY_CREATE_AT as mrCreateAt
+		, M_REPLY_MODIFY_AT as mrNodifyAt
+		, M_REPLY_MODIFY_NAME as mrModifyNm
+		FROM ROYAL.TB_M_REPLY
+		WHERE 1=1
+		<if test="marketNo != null and marketNo != ''">
+			AND MARKET_NO = ${marketNo}
+		</if>
+	</select>
+	
+	<insert id="mrInsert" parameterType="com.auction.vo.AuctionVO">
+		INSERT INTO ROYAL.TB_M_REPLY(
+		USER_NICK
+		, MARKET_NO
+		, M_REPLY_ISDELETED
+		, M_REPLY_CREATE_NAME
+		, M_REPLY_CREATE_AT
+		, M_REPLY_TEXT
+		)VALUES(
+		#{loginUser}
+		, #{marketNo}
+		, 'N'
+		, #{loginUser}
+		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		<if test="mrText != null and mrText != ''">
+			,#{mrText}
+		</if>
+		)
+	</insert>
+	
+	<update id="mrModify" parameterType="com.auction.vo.AuctionVO">
+		UPDATE ROYAL.TB_M_REPLY SET 
+		M_REPLY_ISDELETED = 'N'
+		, M_REPLY_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, M_REPLY_MODIFY_NAME = #{loginUser}
+		<if test="mrText != null and mrText != ''">
+			, M_REPLY_TEXT = #{mrText}
+		</if>
+		WHERE M_REPLY_NO = #{mrNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="mrDelete" parameterType="com.auction.vo.AuctionVO">
+		DELETE FROM ROYAL.TB_M_REPLY WHERE M_REPLY_NO = #{mrNo}
+	</delete>
 	
 </mapper>

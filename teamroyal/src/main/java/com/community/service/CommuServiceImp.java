@@ -66,9 +66,11 @@ public class CommuServiceImp implements CommuService {
 					commuDao.commuFileInsert(fileVo);
 					commuVo.setCommuImgNo(fileVo.getFileNo());
 					// 커뮤니티 이미지 매핑 등록
-					commuDao.commuFileMapInsert(fileVo);
+					commuDao.commuFileMapInsert(commuVo);
 
 					mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
+					
+					System.out.println(fileVo.getFilePath());
 
 				} else {
 					return new ResultVO("01");
@@ -119,7 +121,7 @@ public class CommuServiceImp implements CommuService {
 					// 커뮤니티 이미지 등록
 					commuDao.commuFileInsert(fileVo);
 					// 커뮤니티 이미지 매핑 등록
-					commuDao.commuFileMapInsert(fileVo);
+					commuDao.commuFileMapInsert(commuVo);
 
 					mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
 
@@ -152,6 +154,8 @@ public class CommuServiceImp implements CommuService {
 
 				FileVO fileVo = new FileVO();
 				MultipartFile mtFile = commuVo.getMtFile();
+				
+				System.out.println("========>"+mtFile);
 
 				String path = attachRoot;
 				String uId = cmmnService.getUuid();
@@ -174,7 +178,7 @@ public class CommuServiceImp implements CommuService {
 				System.out.println("::::::::::::::::::::::" + commuVo.getCommuNo());
 				System.out.println("::::::::::::::::::::::" + commuVo.getCommuImgNo());
 				// 커뮤니티 이미지 매핑 등록
-				commuDao.commuFileMapInsert(fileVo);
+				commuDao.commuFileMapInsert(commuVo);
 
 				mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
 			} catch (Exception e) {
@@ -220,7 +224,7 @@ public class CommuServiceImp implements CommuService {
 
 				int imgDataCnt = commuDao.commuWriteImg(fileVo);
 				commuVo.setCommuImgNo(fileVo.getIntId());
-				commuDao.commuFileMapInsert(fileVo);
+				commuDao.commuFileMapInsert(commuVo);
 
 				file.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
 
@@ -272,6 +276,7 @@ public class CommuServiceImp implements CommuService {
 	public CommuVO commuListPostDetail(int commuNo) {
 		CommuVO commuVo = commuDao.commuListPostDetail(commuNo);
 		String filePath = commuDao.commuImgPathSelect(commuVo.getCommuNo());
+		
 		commuVo.setCommuImgPath(filePath);
 		return commuVo;
 	}
@@ -282,6 +287,12 @@ public class CommuServiceImp implements CommuService {
 
 		System.out.println("글상세 test");
 		return commuDao.commuListPostImg(commuVo);
+	}
+	
+	// 특정 게시글 조회
+	@Override
+	public List<CommuVO> commuPostPart(String commuCreateNm) {
+		return commuDao.commuPostPart(commuCreateNm);
 	}
 
 	// 게시판 글수정

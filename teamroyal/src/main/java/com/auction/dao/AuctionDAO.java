@@ -11,14 +11,36 @@ import com.cmmn.vo.FileVO;
 @Mapper
 public interface AuctionDAO {
 
-	int auctionWrite(AuctionVO auctionVo);
+	void auctionInsert(AuctionVO auctionVo);
 
-	void marketFileMapInsert(FileVO fileVo);
+	void auctionFileMapInsert(AuctionVO auctionVo);
 
-	void marketFileInsert(FileVO fileVo);
+	void auctionFileInsert(FileVO fileVo);
 
 	List<AuctionVO> auctionListPost(AuctionVO auctionVo);
 
 	List<AuctionVO> auctionSelectList(ParamVO paramVo);
+
+	AuctionVO auctionListPostImg(AuctionVO auctionVo);
+
+	AuctionVO auctionPostDetail(int marketNo);
+
+	String auctionImgPathSelect(Integer marketNo);
+
+	List<AuctionVO> replyList(AuctionVO auctionVo);
+
+	int mrInsert(AuctionVO auctionVo);
+
+	int mrModify(AuctionVO auctionVo);
+
+	int mrDelete(AuctionVO auctionVo);
+
+	void auctionUpdate(AuctionVO auctionVo);
+
+	void auctionFileMapDelete(AuctionVO auctionVo);
+
+	void auctionDelete(AuctionVO auctionVo);
+
+	List<AuctionVO> auctionPostPart(String marketCreateNm);
 
 }

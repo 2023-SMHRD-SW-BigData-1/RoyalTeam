@@ -31,7 +31,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	// 로그인 화면으로 이동
 	@RequestMapping(value = "/login/main", method = RequestMethod.GET)
 	public String loginMain() {
@@ -41,17 +41,14 @@ public class UserController {
 	// 로그인 화면 조회
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session, HttpServletResponse response) {
-		System.out.println("teste11");
 		return "/main/index-non";
 	}
-		
+
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginSuccess(Model model, HttpSession session, HttpServletResponse response) {
-		System.out.println("teste22");
-			
 		return "/main/index";
 	}
-	
+
 	// 회원가입 페이지로 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String joinMain() {
@@ -64,9 +61,8 @@ public class UserController {
 	 * @param UserVO      userVo
 	 * @param HttpSession session
 	 * @param Map<String, Object>
-	 * @return Login-Join/Login-Join.jsp
-	 * ------------이력------------ 
-	 * 2023.10.24 / 정윤지 / 최초 적용
+	 * @return Login-Join/Login-Join.jsp ------------이력------------ 2023.10.24 / 정윤지
+	 *         / 최초 적용
 	 */
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public String join(@ModelAttribute UserVO userVo, HttpSession session) {
@@ -88,7 +84,7 @@ public class UserController {
 			return "redirect:/";
 		}
 	}
-	
+
 	// 로그아웃
 	@RequestMapping("/login/logout")
 	public String logout(HttpSession session) {
@@ -97,24 +93,19 @@ public class UserController {
 	}
 
 	// 회원정보 페이지로 이동
-	@RequestMapping(value = "/login/userProfile/{userNick}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String userProfile(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
-		
-		UserVO userMap = userService.userModifyList(userNick);
-		
-		model.addAttribute("userMap", userMap);
-		
+	@RequestMapping(value = "/login/userProfile", method = { RequestMethod.GET, RequestMethod.POST })
+	public String userProfile(@ModelAttribute UserVO userVo, Model model) {
+
 		return "/mypage/pages-profile-userprofile";
 	}
 
 	// 회원정보 수정 페이지로 이동
 	@RequestMapping(value = "/login/userProfile/modify/{userNick}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String userProfileModify(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
-		
-		UserVO userMap = userService.userModifyList(userNick);
-		
-		model.addAttribute("userMap", userMap);
-		
+	public String userProfileModify(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo,
+			Model model) {
+
+		userService.userModifyList(userNick);
+
 		return "/mypage/pages-profile-account";
 	}
 
@@ -124,54 +115,54 @@ public class UserController {
 	 * @param UserVO      userVo
 	 * @param HttpSession session
 	 * @param Map<String, Object>
-	 * @return Map<String, Object> 
-	 * ------------이력------------ 
-	 * 2023.10.24 / 정윤지 / 최초 적용
+	 * @return Map<String, Object> ------------이력------------ 2023.10.24 / 정윤지 / 최초
+	 *         적용
 	 */
-	@RequestMapping(value = "/login/userProfile/modify/{userNick}/success", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/login/userProfile/modify/{userNick}/success", method = { RequestMethod.GET,
+			RequestMethod.POST })
 	public String modify(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo, Model model) {
-		
+
 		System.out.println("회원수정진입");
-		
+
 		UserVO userMap = userService.userModifyList(userNick);
-		
+
 		model.addAttribute("userMap", userMap);
-		
+
 		Map<String, Object> updateReMap = userService.userInfoUpdate(userVo);
-		
+
 		String reString = updateReMap.get("updateReCode").toString();
 		if (reString.equals("22")) {
 			System.out.println("회원수정 성공");
-			return "redirect:/login/userProfile/"+userNick;
+			return "redirect:/login/userProfile/" + userNick;
 		} else if (reString.equals("01")) {
 			System.out.println("회원수정 필수값 오류");
-			return "redirect:/login/userProfile/modify/"+userNick+"/success";
+			return "redirect:/login/userProfile/modify/" + userNick + "/success";
 		} else {
 			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/login/userProfile/modify/"+userNick+"/success";
+			return "redirect:/login/userProfile/modify/" + userNick + "/success";
 		}
 	}
-	
-	//회원정보 수정
-		@PostMapping("/modify")
-		public ResponseEntity<Object> commuModify(@ModelAttribute UserVO userVo, Principal principal) {
-			userVo.setUserNick(principal.getName().toString());
-			Gson gson = new GsonBuilder().create();
-			ResultVO resultVo =  userService.userUpdate(userVo);
-		    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
-		}
+
+	// 회원정보 수정
+	@PostMapping("/modify")
+	public ResponseEntity<Object> userModify(@ModelAttribute UserVO userVo, Principal principal) {
+		userVo.setUserNick(principal.getName().toString());
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo = userService.userUpdate(userVo);
+		return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
+	}
 
 	/**
 	 * 회원정보 삭제
+	 * 
 	 * @param UserVO      userVo
 	 * @param Map<String, Object>
-	 * @return Map<String, Object> 
-	 * ------------이력------------ 
-	 * 2023.10.24 / 정윤지 / 최초 적용
+	 * @return Map<String, Object> ------------이력------------ 2023.10.24 / 정윤지 / 최초
+	 *         적용
 	 */
 	@RequestMapping(value = "/login/userDelete/{userNick}")
 	public Map<String, Object> delete(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo) {
-		
+
 		Map<String, Object> deleteMap = userService.userInfoDelete(userVo);
 
 		String reString = deleteMap.get("deleteReCode").toString();
@@ -196,24 +187,17 @@ public class UserController {
 	 * 
 	 * @param UserVO      userVo
 	 * @param Map<String, Object>
-	 * @return Map<String, Object> 
-	 * ------------이력------------ 
-	 * 2023.10.24 / 정윤지 / 최초 적용
+	 * @return Map<String, Object> ------------이력------------ 2023.10.24 / 정윤지 / 최초
+	 *         적용
 	 */
 	@RequestMapping(value = "/login/findPw", method = RequestMethod.POST)
-	public Map<String, Object> findPw(@ModelAttribute UserVO userVo) {
+	public ResponseEntity<Object> userFindPw(@ModelAttribute UserVO userVo) {
+		System.out.println("====> 비밀번호 찾기 진입");
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo = userService.userUpdate(userVo);
+		return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
 
-		Map<String, Object> findMap = userService.userFindPw(userVo);
-
-		String reString = findMap.get("findReCode").toString();
-		if (reString.equals("44")) {
-			System.out.println("비밀번호 찾기 성공");
-		} else if (reString.equals("01")) {
-			System.out.println("비밀번호 찾기 필수값 오류");
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-		}
-		return findMap;
+		
 	}
 
 	// 상세 notification 페이지 이동

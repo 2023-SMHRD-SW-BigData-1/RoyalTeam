@@ -32,6 +32,6 @@ public interface UserDAO {
 	int userInfoDelete(UserVO userVo);
 	
 	// 사용자 비밀번호 조회
-	List<UserVO> userFindPw(UserVO userVo);
+	void userFindPw(UserVO userVo);
 
 }

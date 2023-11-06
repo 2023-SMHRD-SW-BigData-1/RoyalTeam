@@ -30,7 +30,7 @@ public interface CommuDAO {
 	void commuFileInsert(FileVO fileVo);
 		
 	//커뮤니티 이미지 매핑 등록
-	void commuFileMapInsert(FileVO fileVo);
+	void commuFileMapInsert(CommuVO commuVo);
 	
 	//커뮤니티 수정
 	void commuUpdate(CommuVO commuVo);
@@ -67,6 +67,8 @@ public interface CommuDAO {
 
 	// 이미지 파일 가져오기
 	String commuImgPathSelect(Integer commuNo);
+
+	List<CommuVO> commuPostPart(String commuCreateNm);
 
 
 }

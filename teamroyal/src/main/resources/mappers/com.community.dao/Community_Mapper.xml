@@ -92,6 +92,26 @@
 		DELETE FROM ROYAL.TB_COMMU_MAPPING WHERE COMMU_NO = ${commuNo}
 	</delete>
 	
+	<!-- 특정 게시글 조회 -->
+	<select id="commuPostPart" parameterType="com.cmmn.vo.ParamVO" resultType="com.community.vo.CommuVO">
+		SELECT
+		COMMU_NO as commuNo
+		, USER_NICK as userNick
+		, COMMU_TITLE as commuTitle
+		, COMMU_TEXT as commuText
+		, COMMU_ISDELETED as commuIsDeleted
+		, COMMU_CRETATE_AT as commuCreateAt
+		, COMMU_CRETATE_NAME as commuCreateNm
+		, COMMU_MODIFY_AT as commuModifyAt
+		, COMMU_MODIFY_NAME as commuModifyNm
+		FROM ROYAL.TB_COMMU
+		WHERE
+		<if test="commuCreateNm != null and commuCreateNm != ''">
+			COMMU_CRETATE_NAME=#{commuCreateNm}
+		</if>
+		ORDER BY COMMU_NO DESC
+	</select>
+	
 	<!-- 게시글 삭제 -->
 	<delete id="commuDelete" parameterType="com.community.vo.CommuVO">
 		DELETE FROM ROYAL.TB_COMMU

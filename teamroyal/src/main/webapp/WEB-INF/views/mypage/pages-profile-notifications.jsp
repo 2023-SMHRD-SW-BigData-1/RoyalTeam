@@ -76,7 +76,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>

@@ -80,7 +80,7 @@
   			type : "POST",
   			success : function(result) {
   				alert("회원정보 수정 성공")
-  				window.location.href = "/login/userProfile/modify/${user.userNick}";
+  				window.location.href = "/user/login/userProfile";
   			},
   			error : function(){
   				alert("회원정보 수정 실패")
@@ -109,7 +109,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/Success">MAIN</a>
+							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
 							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
 							<a class="nav-item nav-link" href="/community/email">MAIL</a>
@@ -200,22 +200,22 @@
                   <div class="mb-3 col-md-6">
                     <label for="firstName" class="form-label">별명</label>
                     <input class="form-control" type="text" id="userNick" name="userNick" placeholder="별명"
-                      autofocus value="${userMap.getUserNick() }" />
+                      autofocus value="${user.userNick }" />
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="lastName" class="form-label">이름</label>
                     <input class="form-control" type="text" name="userNm" id="userNm" placeholder="이름" 
-                    value="${userMap.getUserNm() }"/>
+                    value="${user.userNm }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="email" class="form-label">E-mail</label>
                     <input class="form-control" type="text" id="userEmail" name="userEmail" placeholder="Shine@example.com"
-                      placeholder="john.doe@example.com" value="${userMap.getUserEmail() }"/>
+                      placeholder="john.doe@example.com" value="${user.userEmail }"/>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="address" class="form-label">주소</label>
                     <input type="text" class="form-control" id="userAdd" name="userAdd" placeholder="주소" 
-                    value="${userMap.getUserAdd() }"/>
+                    value="${user.userAdd }"/>
                   </div>
                   <div class="mb-3 col-md-6 form-password-toggle">
                     <label class="form-label" for="newPassword">New Password</label>
@@ -230,7 +230,7 @@
                     <div class="input-group input-group-merge">
                       <span class="input-group-text">KR (+82)</span>
                       <input type="text" id="userPhone" name="userPhone" class="form-control"
-                        placeholder="202 555 0111" value="${userMap.getUserPhone() }"/>
+                        placeholder="202 555 0111" value="${user.userPhone }"/>
                     </div>
                   </div>
                   <!-- 
