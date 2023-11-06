@@ -110,7 +110,7 @@
 							<div class="col-12">
 								<div class="card mb-4">
 									<div class="col-lg-10 mx-auto">
-										<a href="/auction/write" class="btn btn-primary">물건등록</a>
+										<a href="/auction/write" class="btn btn-primary mt-5">물건등록</a>
 										<ul class="row list-unstyled">
 											<style>
 .sh-test {
@@ -129,23 +129,23 @@
 	transform: scale(1.02)
 }
 </style>
-										<c:forEach items="${auctionMap }" var="auctionMap">
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test"><a
-												href="/auction/post/${auctionMap.getMarketNo() }">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-															<div class="w-100">
-																<img src="${auctionMap.getMarketImgPath() }" class="w-100 "
-																	alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">${auctionMap.getMarketTitle() }</h5>
-																<p>${auctionMap.getMarketText() }</p>
+											<c:forEach items="${auctionMap }" var="auctionMap">
+												<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test"><a
+													href="/auction/post/${auctionMap.getMarketNo() }">
+														<div class="card border shadow-none">
+															<div class="card-body text-start p-0">
+																<div class="w-100">
+																	<img src="${auctionMap.getMarketImgPath() }"
+																		class="w-100 " alt="">
+																</div>
+																<div class="mx-2">
+																	<h5 class="my-2">${auctionMap.getMarketTitle() }</h5>
+																	<p>${auctionMap.getMarketText() }</p>
+																</div>
 															</div>
 														</div>
-													</div>
-											</a></li>
-										</c:forEach>
+												</a></li>
+											</c:forEach>
 
 										</ul>
 									</div>
