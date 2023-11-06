@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.auction.dao.AuctionDAO">
+	
+	<select id="auctionSelectList" parameterType="com.cmmn.vo.ParamVO" resultType="com.auction.vo.AuctionVO">
+		SELECT 
+			MARKET_NO AS marketNo
+			,USER_NICK AS userNick
+			,MARKET_TITLE AS marketTitle
+			,MARKET_TEXT AS marketText
+			,MARKET_ISDELETED AS marketIsDeleted
+			,MARKET_CREATE_AT AS marketCreateAt
+			,MARKET_CREATE_NAME AS marketCreateNm
+			,MARKET_PRICE AS marketPrice
+		FROM ROYAL.TB_MARKET
+		WHERE MARKET_ISDELETED != 'Y'
+		<if test="searchOne != null and searchOne != ''">
+			AND MARKET_NO = #{searchOne}
+		</if>
+		<if test="searchTwo != null and searchTwo != ''">
+			AND USER_NICK = #{searchTwo}
+		</if>
+	</select>
+	
+	<!-- 매매 조회 -->
+	<select id="auctionListPost" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+		SELECT 
+			MARKET_NO AS marketNo
+			,USER_NICK AS userNick
+			,MARKET_TITLE AS marketTitle
+			,MARKET_TEXT AS marketText
+			,MARKET_ISDELETED AS marketIsDeleted
+			,MARKET_CREATE_AT AS marketCreateAt
+			,MARKET_CREATE_NAME AS marketCreateNm
+			,MARKET_PRICE AS marketPrice
+		FROM ROYAL.TB_MARKET
+		WHERE 1=1
+		<if test="marketNo != null and marketNo != ''">
+			AND MARKET_NO = ${marketNo}
+		</if>
+		
+		ORDER BY MARKET_NO DESC
+	</select>
+	
+	<insert id="auctionWrite" parameterType="com.auction.vo.AuctionVO">
+		INSERT INTO ROYAL.TB_MARKET(
+		USER_NICK
+		, MARKET_TITLE
+		, MARKET_TEXT
+		, MARKET_ISDELETED
+		, MARKET_CREATE_AT
+		, MARKET_CREATE_NAME
+		, MARKET_PRICE
+		)VALUES(
+		 #{loginUser}
+		, #{marketTitle}
+		, #{marketText}
+		, 'N'
+		, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, #{loginUser}
+		, #{marketPrice}
+		)
+		<selectKey keyColumn="MARKET_NO" keyProperty="marketNo" order="AFTER" resultType="com.auction.vo.AuctionVO">
+			SELECT MAX(MARKET_NO) AS marketNo FROM ROYAL.TB_MARKET
+		</selectKey>
+	</insert>
+	
+	<insert id="marketFileInsert" parameterType="com.cmmn.vo.FileVO">
+		INSERT INTO ROYAL.IMG_MASTER(
+			IMG_PATH
+			, IMG_NAME
+			, IMG_UUID
+			, IMG_EXTENSION
+			, IMG_SIZE
+			, IMG_CREATE_AT
+			, IMG_CREATE_NAME
+		)VALUES(
+			#{filePath}
+			,#{fileName}
+			,#{fileUuName}
+			,#{fileExt}
+			,${size}
+			,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			,#{loginUser}
+		)
+		<selectKey keyColumn="IMG_NO" keyProperty="fileNo" order="AFTER" resultType="com.cmmn.vo.FileVO">
+			SELECT MAX(IMG_NO) AS fileNo FROM ROYAL.IMG_MASTER
+		</selectKey>
+	</insert>
+	
+	<insert id="marketFileMapInsert" parameterType="com.auction.vo.AuctionVO">
+		INSERT INTO ROYAL.TB_MARKET_MAPPING(MARKET_NO, IMG_NO)VALUES(${marketNo}, ${marketImgNo})
+	</insert>
+	
+</mapper>

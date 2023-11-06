@@ -1,0 +1,39 @@
+server:
+  port: 8582
+
+spring:
+  main:
+    allow-circular-references: true
+  # JSP 경로 설정
+  mvc:
+    view:
+      prefix: /WEB-INF/views
+      suffix: .jsp
+  # DB 연결정보
+  datasource:
+    url: jdbc:oracle:thin:@project-db-campus.smhrd.com:1524:xe
+    username: royal
+    password: r1234
+    driver-class-name: oracle.jdbc.OracleDriver
+    
+  servlet:
+    multipart: 
+      location: C:\\royal\\commuImg
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+mybatis:
+  mapper-locations: mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    
+jwt:
+  secret: lLz0wjFXoLhdj4xfGX4gc192O29JBRkcSF9DmPkyYVOn6gCAUa
+  expiration: 86400000
+  authorities: roles
+
+royal:
+  props:
+    filein-path: C:/royal/Directory/upload/filein/
+    temp-path:  C:/royal/Directory/upload/temp/
+    

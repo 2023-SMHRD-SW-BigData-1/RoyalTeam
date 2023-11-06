@@ -106,22 +106,6 @@
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
-            <div id="windy" class="w-100 vh-95"></div>
-            <div class="container-xxl flex-grow-1 container-p-y">
-              
-
-            </div>
-            <!--/ Content -->
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!--/ Content wrapper -->
-        </div>
-
-        <!-- Layout container -->
-			<div class="layout-page">
-				<!-- Content wrapper -->
-				<div class="content-wrapper">
 					<!-- Content -->
 					<div id="windy" class="w-100 vh-95 windy"
 						style="position: relative;"></div>
@@ -209,7 +193,7 @@
 												</div>
 												<h6 class="mb-0">실시간 REC(원)</h6>
 											</div>
-											<h4 class="my-2 pt-1">34,474.19</h4>
+											<h4 class="my-2 pt-1">34,474.30</h4>
 											<div class="progress w-75" style="height: 4px">
 												<div class="progress-bar bg-danger" role="progressbar"
 													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
@@ -240,7 +224,7 @@
 						</div>
 					</div>
 					<div class="card w-25 windy-right-table"
-						style="position: absolute; top: 30%; left: 3%;">
+						style="position: absolute; top: 30%; left: 3%; display:none">
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
 								<h5 class="mb-0">2023년 10월 24일</h5>
@@ -341,5 +325,17 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
     <script src="/assets/js/sh-main-windy.js"></script>
+    
+    <!-- high chart -->
+	<script src="/assets/code/highcharts.js"></script>
+	<script src="/assets/code/modules/data.js"></script>
+	<script src="/assets/code/modules/exporting.js"></script>
+	<script src="/assets/code/modules/export-data.js"></script>
+	<script src="/assets/code/modules/accessibility.js"></script>
+	<script src="/assets/code/modules/drilldown.js"></script>
+	
+	<!-- shine chart js-->
+	<script src="/assets/vendor/js/sh-highchart.js"></script>
+	<script type="text/javascript"></script>
   </body>
 </html>

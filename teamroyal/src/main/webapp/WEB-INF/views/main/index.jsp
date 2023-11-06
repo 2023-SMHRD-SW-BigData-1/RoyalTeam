@@ -194,7 +194,7 @@
 												</div>
 												<h6 class="mb-0">실시간 REC(원)</h6>
 											</div>
-											<h4 class="my-2 pt-1">34,474.19</h4>
+											<h4 class="my-2 pt-1">34,474.30</h4>
 											<div class="progress w-75" style="height: 4px">
 												<div class="progress-bar bg-danger" role="progressbar"
 													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
