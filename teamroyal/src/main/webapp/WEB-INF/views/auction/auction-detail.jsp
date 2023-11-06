@@ -192,6 +192,9 @@ auction<%@ page language="java" contentType="text/html; charset=UTF-8"
                           <p class="border-none"> 코드에서 왼쪽 class="border"지우고 "댓글은 이 곳" </p>
                         </div>
                         <small class="text-muted">2023.10.17<span class="mx-2">18:00</span></small>
+                        <div class="sh-comm-comment w-100">
+                          <p class="border"> 가격란 </p>
+                        </div>
                       </div>
                     </div>
                   </div><!-- user info -->
