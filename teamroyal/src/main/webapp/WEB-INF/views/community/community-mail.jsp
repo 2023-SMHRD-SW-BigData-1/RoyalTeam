@@ -84,7 +84,7 @@
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile/${user.userNick}"><i
+								href="/user/login/userProfile"><i
 									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
