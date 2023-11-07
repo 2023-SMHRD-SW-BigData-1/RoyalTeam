@@ -69,7 +69,7 @@
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
     <div class="layout-container">
-     <!----------------------------------------- Navbar ----------------------------------------->
+      <!----------------------------------------- Navbar ----------------------------------------->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -80,7 +80,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -125,7 +125,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
-                      notification</a>
+                      Notification</a>
                     </li>
                     <!-- <li class="nav-item">
                       <a class="nav-link" href="./pages-profile-email.html"><i class="ti-xs ti ti-mail me-1"></i>
@@ -139,6 +139,14 @@
                     <a class="nav-link" href="./pages-profile-projects.html"><i
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Community</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Auction</a>
+                    </li>
                   <c:if test="${user.userNick == 'admin' }">
                   <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/manager"><i
@@ -155,7 +163,7 @@
                 <div class="card mb-4">
                   <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-end mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                      <img src="/assets/img/avatars/12.png" alt="user image"
+                      <img src="/assets/img/profil.png" alt="user image" style="width:100px; height:100px;"
                         class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
                     </div>
                     <div class="d-flex justify-content-between w-100 mt-sm-5">

@@ -112,7 +112,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>

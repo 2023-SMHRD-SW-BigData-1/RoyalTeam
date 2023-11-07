@@ -62,7 +62,7 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
-       <!----------------------------------------- Navbar ----------------------------------------->
+        <!----------------------------------------- Navbar ----------------------------------------->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -73,7 +73,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -118,7 +118,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
-                      notification</a>
+                      Notification</a>
                     </li>
                     <!-- <li class="nav-item">
                       <a class="nav-link" href="./pages-profile-email.html"><i class="ti-xs ti ti-mail me-1"></i>
@@ -133,9 +133,19 @@
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Community</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Auction</a>
+                    </li>
+                  <c:if test="${user.userNick == 'admin' }">
+                  <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/manager"><i
                         class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
                   </li>
+                  </c:if>
                 </ul>
               </div>
             </div>

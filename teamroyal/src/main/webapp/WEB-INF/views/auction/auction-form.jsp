@@ -92,7 +92,7 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
-       <!----------------------------------------- Navbar ----------------------------------------->
+        <!----------------------------------------- Navbar ----------------------------------------->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -103,7 +103,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -115,7 +115,7 @@
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile/${user.userNick}"><i
+								href="/user/login/userProfile"><i
 									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
@@ -130,7 +130,6 @@
 			</nav>
 			<!-- / Navbar -->
 			<!----------------------------------------- Navbar ----------------------------------------->
-
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Content wrapper -->

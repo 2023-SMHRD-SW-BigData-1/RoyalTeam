@@ -94,7 +94,7 @@
   <body>
     <!-- Content -->
 
-    <div class="authentication-wrapper authentication-cover authentication-bg">
+    <div class="authentication-wrapper authentication-cover authentication-bg" style="display : felx; padding-left:700px">
       <div class="authentication-inner row">
         <!-- Left Side -->
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
@@ -175,6 +175,7 @@
                   autofocus />
               </div>
               <button onclick='join("${uer.userNick }")' class="btn btn-primary d-grid w-100">회원가입</button>
+              <br>
 
             <p class="text-center">
               <span>회원정보가 있으십니까?</span>
@@ -185,7 +186,7 @@
 
           </div>
         </div><!-- /Left side -->
-        <!-- right side-->
+        <!-- right side
         <div class="d-none d-lg-flex col-lg-7 p-0">
           <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
             <img
@@ -202,7 +203,7 @@
               data-app-light-img="illustrations/bg-shape-image-light.png"
               data-app-dark-img="illustrations/bg-shape-image-dark.png" />
           </div>
-        </div><!-- right side-->
+        </div> right side-->
 
 
       </div>

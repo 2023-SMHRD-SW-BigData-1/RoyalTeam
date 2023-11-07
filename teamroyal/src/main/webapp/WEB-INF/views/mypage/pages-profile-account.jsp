@@ -106,7 +106,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -151,7 +151,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
-                      notification</a>
+                      Notification</a>
                     </li>
                     <!-- <li class="nav-item">
                       <a class="nav-link" href="./pages-profile-email.html"><i class="ti-xs ti ti-mail me-1"></i>
@@ -166,9 +166,19 @@
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Community</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                      Auction</a>
+                    </li>
+                  <c:if test="${user.userNick == 'admin' }">
+                  <li class="nav-item">
                     <a class="nav-link" href="/user/login/userProfile/manager"><i
                         class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
                   </li>
+                  </c:if>
                 </ul>
               </div>
             </div>
@@ -177,7 +187,7 @@
             <!-- Account -->
             <div class="card-body">
               <div class="d-flex align-items-start align-items-sm-center gap-4">
-                <img src="/assets/img/avatars/14.png" alt="user-avatar"
+                <img src="/assets/img/profil.png" alt="user-avatar" style="width:100px; height:100px;"
                   class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
                 <div class="button-wrapper">
                   <label for="upload" class="btn btn-primary me-2 mb-3" tabindex="0">

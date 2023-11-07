@@ -35,6 +35,10 @@ public class AuctionController {
 
 	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public String auctionEnter(@ModelAttribute AuctionVO auctionVo, @ModelAttribute ParamVO paramVo, Model model) {
+		
+		String defaultImg = "'/fpics/'||652803e80e5d4496ae78a971b52295d5||.png";
+		
+		model.addAttribute("defaultImg", defaultImg);
 
 		List<AuctionVO> auctionMap = auctionService.auctionListPost(auctionVo);
 

@@ -65,9 +65,9 @@
   <body>
     <!-- Content -->
 
-    <div class="authentication-wrapper authentication-cover authentication-bg">
+    <div class="authentication-wrapper authentication-cover authentication-bg" style="display : felx; padding-left:700px">
       <div class="authentication-inner row">
-        <!-- /Left Text -->
+        <!-- /Left Text
         <div class="d-none d-lg-flex col-lg-7 p-0">
           <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
             <img
@@ -85,7 +85,7 @@
               data-app-dark-img="illustrations/bg-shape-image-dark.png" />
           </div>
         </div>
-        <!-- /Left Text -->
+         /Left Text -->
 
         <!-- Login -->
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
@@ -140,23 +140,6 @@
               </a>
             </p>
 
-            <div class="divider my-4">
-              <div class="divider-text">or</div>
-            </div>
-
-            <div class="d-flex justify-content-center">
-              <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-              </a>
-
-              <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-                <i class="tf-icons fa-brands fa-google fs-5"></i>
-              </a>
-
-              <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                <i class="tf-icons fa-brands fa-twitter fs-5"></i>
-              </a>
-            </div>
           </div>
         </div>
         <!-- /Login -->

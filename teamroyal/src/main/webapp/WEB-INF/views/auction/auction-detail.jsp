@@ -190,7 +190,7 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -202,7 +202,7 @@
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile/${user.userNick}"><i
+								href="/user/login/userProfile"><i
 									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
@@ -230,7 +230,7 @@
                   <!-- title -->
                   <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
                     <div class="me-1">
-                      <h5 class="mb-1">${adMap.getMarketTitle() }</h5>
+                      <h5 class="mb-1" style="font-weight:bolder; font-size:2rem;">${adMap.getMarketTitle() }</h5>
                     </div>
                     
                     <c:if test="${adMap.getMarketCreateNm() == user.userNick }">
@@ -247,10 +247,10 @@
                     <div class="d-flex">
                       <div class="avatar-wrapper">
                         <div class="avatar me-2">
-                          <img src="/assets/img/avatars/11.png" alt="Avatar" class="rounded-circle" />
+                          <img src="/assets/img/profil.png" alt="Avatar" style="width:50px; height:50px;" class="rounded-circle" />
                         </div>
                       </div>
-                      <div class="d-flex flex-column">
+                      <div class="d-flex flex-column ml-3">
                         <span class="fw-medium">${adMap.getMarketCreateNm() }</span>
                         <small class="text-muted">${adMap.getMarketCreateAt() }</small>
                       </div>
@@ -267,7 +267,7 @@
                         <i class="ti ti-bookmarks ti-sm"></i>${adMap.getMarketCreateNm()}님의 게시글더보기 >
                       </a>
                     </div>
-                  </div><!-- user info -->
+                  </div><br><!-- user info -->
                   <!-- user content-->
                   <div class="card academy-content shadow-none border">
                     <div class="p-2">
@@ -276,7 +276,6 @@
                       </div>
                     </div>
                     <div class="card-body">
-                      <h5>내용</h5>
                       <p class="mb-4">${adMap.getMarketText() }</p>
 
 

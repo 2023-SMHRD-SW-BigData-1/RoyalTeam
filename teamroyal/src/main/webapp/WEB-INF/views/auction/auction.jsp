@@ -49,9 +49,9 @@
 	href="/assets/vendor/libs/typeahead-js/typeahead.css" />
 
 <!-- Page CSS -->
+<!-- shine-CSS-->
+    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 
-<!-- Sh Main CSS-->
-<link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 <!-- Helpers -->
 <script src="/assets/vendor/js/helpers.js"></script>
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -92,7 +92,7 @@ $.ajax({
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
 								style="text-decoration: none;"> <img alt=""
 								src="/assets/img/branding/logo.png" class="w-100">SHINE
 							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
@@ -104,7 +104,7 @@ $.ajax({
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile/${user.userNick}"><i
+								href="/user/login/userProfile"><i
 									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
@@ -154,8 +154,12 @@ $.ajax({
 												href="/auction/list/${auctionMap.getMarketNo() }">
 													<div class="card border shadow-none">
 														<div class="card-body text-start p-0">
+														<c:if test='${auctionMap.getMarketImgPath() == "null" }'>
 															<div class="w-100">
-															
+																<img src="${defaultImg }" class="w-100 " alt="">
+															</div>
+														</c:if>
+															<div class="w-100">
 																<img src="${auctionMap.getMarketImgPath() }" class="w-100 " alt="">
 															</div>
 															<div class="mx-2">

@@ -101,6 +101,7 @@
 			<!-- / Navbar -->
 			<!----------------------------------------- Navbar ----------------------------------------->
 
+
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Content wrapper -->
@@ -108,12 +109,13 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Invoice List Table -->
-                <div class="card w-100">
-                    <div class="card-datatable table-responsives">
+                <div class="card w-100 vh-100">
+                    <div class="card-datatable table-responsives p-3">
                         <table id="example" class="display w-100 sh-comm-table" >
+                        <a href="/community/list/post" class="btn btn-primary mb-3 waves-effect waves-light sh-comm-wright">글쓰기</a>
                     <thead>
-                        <tr>
-                            <th>num</th>
+                        <tr >
+                            <th class="t-a-c" style="width:20px;">num</th>
                             <th>제목</th>
                             <th>글쓴이</th>
                             <th>날짜</th>
@@ -122,15 +124,15 @@
                     <tbody>
                     	<c:forEach items="${partMap }" var="partMap">
 							<tr>
-								<td>${partMap.getCommuNo() }</td>
-								<td><a href="/community/list/detail/${partMap.getCommuNo() }">${partMap.getCommuTitle() }</a></td>
-								<td>${partMap.getCommuCreateNm() }</td>
-								<td>${partMap.getCommuCreateAt() }</td>							
+								<td class="t-a-c" style="height: 50px;">${partMap.getCommuNo() }</td>
+								<td style="height: 50px;"><a style="color:#444;" href="/community/list/detail/${partMap.getCommuNo() }">${partMap.getCommuTitle() }</a></td>
+								<td style="height: 50px;">${partMap.getCommuCreateNm() }</td>
+								<td style="height: 50px;">${partMap.getCommuCreateAt() }</td>							
 							</tr>			
 						</c:forEach>
                     </tbody>
                 </table>
-                <a href="/community/list/post" class="btn btn-primary waves-effect waves-light sh-comm-wright">글쓰기</a>
+                
             </div>
         </div>
     </div>
