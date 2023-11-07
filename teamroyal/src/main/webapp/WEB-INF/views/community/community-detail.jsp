@@ -284,8 +284,9 @@
 												
 												 
 												 -->
-												 
-												 <img alt="" src="${detailMap.getCommuImgPath()}">
+												 <div style="width:300px;">
+												 	<img class="w-100" alt="" src="${detailMap.getCommuImgPath()}">
+												 </div>
 											</div>
 										</div>
 										<div class="card-body">
