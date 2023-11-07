@@ -45,7 +45,7 @@
     <!-- Sh Main CSS-->
     <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
     <link rel="stylesheet" href="/assets/vendor/css/shine/sh-drilldown.css">
- <link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
+	<link rel="stylesheet" href="/assets/vendor/css/shine/sh-spline_symbols.css">
 
 
     <!-- Helpers -->
@@ -116,8 +116,8 @@
                <!-- Content -->
                <div id="windy" class="w-100 vh-95 windy"
                   style="position: relative;"></div>
-               <div class="card w-25  windy-right-table"
-                  style="position: absolute; top: 8.5%; right: 3%;">
+               <div class="card w-25 windy-right-table"
+                  style="position: absolute; top: 6.5%; right: 3%;">
                   <div class="card-header d-flex justify-content-between pb-0">
                      <div class="card-title mb-0">
                         <h5 class="mb-0">2023년 10월 24일</h5>
@@ -210,7 +210,7 @@
                            </div>
                         </div>
                         <div class="w-100 col-12 col-md-8 ">
-                           <div id="sh-livedata"></div>
+                           <div id="sh-symbols">f</div>
                            <div class="d-flex">
                               <div class="ld-row d-none">
                                  <label class="ld-label d-none"> Enable Polling </label> <input
@@ -334,13 +334,16 @@
     <script src="/assets/js/sh-main-windy.js"></script>
     
     <!-- high chart -->
-   <script src="/assets/code/highcharts.js"></script>
-   <script src="/assets/code/modules/data.js"></script>
-   <script src="/assets/code/modules/exporting.js"></script>
-   <script src="/assets/code/modules/export-data.js"></script>
-   <script src="/assets/code/modules/accessibility.js"></script>
-   <script src="/assets/code/modules/drilldown.js"></script>
-   
+	<script src="/assets/code/highcharts.js"></script>
+	<script src="/assets/code/modules/exporting.js"></script>
+	<script src="/assets/code/modules/export-data.js"></script>
+	<script src="/assets/code/modules/accessibility.js"></script>
+	<script src="/assets/code/modules/data.js"></script>
+	
+	<script src="/assets/code/modules/drilldown.js"></script>
+	<script src="/assets/code/modules/series-label.js"></script>
+	
+	   
    <!-- shine chart js-->
    <script src="/assets/vendor/js/sh-highchart.js"></script>
    <script type="text/javascript"></script>

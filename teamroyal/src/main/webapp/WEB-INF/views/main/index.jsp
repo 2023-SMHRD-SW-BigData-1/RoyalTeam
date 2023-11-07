@@ -55,7 +55,8 @@
 <!-- Sh Main CSS-->
 <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 <link rel="stylesheet" href="/assets/vendor/css/shine/sh-drilldown.css">
-<link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
+
+<link rel="stylesheet" href="/assets/vendor/css/shine/sh-spline_symbols.css">
 
 
 
@@ -220,7 +221,7 @@
 									</div>
 								</div>
 								<div class="w-100 col-12 col-md-8 ">
-									<div id="sh-livedata"></div>
+									<div id="sh-symbols"></div>
 									<div class="d-flex">
 										<div class="ld-row d-none">
 											<label class="ld-label d-none"> Enable Polling </label> <input
@@ -244,8 +245,7 @@
 						style="position: absolute; top: 30%; left: 3%; width:700px;">
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
-								<h5 class="mb-0">2023년 10월 24일</h5>
-								<small class="text-muted">광주발전소</small>
+								<h5 class="mb-0">광주발전소</h5>
 							</div>
 							<div class="dropdown">
 								<button class="btn p-0" type="button" id="supportTrackerMenu"
@@ -359,11 +359,13 @@
 
 	<!-- high chart -->
 	<script src="/assets/code/highcharts.js"></script>
-	<script src="/assets/code/modules/data.js"></script>
 	<script src="/assets/code/modules/exporting.js"></script>
 	<script src="/assets/code/modules/export-data.js"></script>
 	<script src="/assets/code/modules/accessibility.js"></script>
+	<script src="/assets/code/modules/data.js"></script>
+	
 	<script src="/assets/code/modules/drilldown.js"></script>
+	<script src="/assets/code/modules/series-label.js"></script>
 
 	<!-- shine chart js-->
 	<script src="/assets/vendor/js/sh-highchart.js"></script>
