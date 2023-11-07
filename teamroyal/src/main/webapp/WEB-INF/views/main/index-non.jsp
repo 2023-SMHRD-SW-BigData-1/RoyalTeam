@@ -44,7 +44,8 @@
 
     <!-- Sh Main CSS-->
     <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
-    
+    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-drilldown.css">
+ <link rel="stylesheet" href="/assets/vendor/css/shine/sh-livedata.css">
 
 
     <!-- Helpers -->
@@ -72,34 +73,16 @@
               <span class="navbar-toggler-icon"></span>
             </button>
 
-<<<<<<< HEAD
             <div class="collapse navbar-collapse" id="navbar-ex-5">
               <div class="navbar-nav me-auto">
-                <a class="nav-item nav-link" href="/">MAIN</a>
+              <a
+				href="#" class="d-flex align-items-center w-px-30"
+				style="text-decoration: none;"> 
+				<img alt=""
+				src="/assets/img/branding/logo.png" class="w-100">SHINE
+			</a>
+                <a class="nav-item nav-link ml-6" href="/">MAIN</a>
                 <!-- <a class="nav-item nav-link" href="/html/community/community.html">COMMUNITY</a>
-=======
-<body>
-	<!-- Layout wrapper -->
-	<div
-		class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
-		<div class="layout-container">
-			<!-- Navbar -->
-			<nav class="navbar navbar-expand-lg bg-navbar-theme">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbar-ex-5">
-					<a href="#" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
-							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE
-						</a>
-						<div class="navbar-nav me-auto ml-6">
-							<a class="nav-item nav-link" href="/">MAIN</a>
-							<!-- <a class="nav-item nav-link" href="/html/community/community.html">COMMUNITY</a>
->>>>>>> branch 'main' of https://github.com/2023-SMHRD-SW-BigData-1/RoyalTeam.git
                 <a class="nav-item nav-link" href="/html/community/chat.html">CHAT</a>
                 <a class="nav-item nav-link" href="/html/community/community-mail.html">MAIL</a>
                 <a class="nav-item nav-link" href="/html/power/power-plant.html">POWER PLANT</a> -->
@@ -130,213 +113,197 @@
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
-            <div id="windy" class="w-100 vh-95"></div>
-            <div class="container-xxl flex-grow-1 container-p-y">
-              
-
-            </div>
-            <!--/ Content -->
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!--/ Content wrapper -->
-        </div>
-
-        <!-- Layout container -->
-			<div class="layout-page">
-				<!-- Content wrapper -->
-				<div class="content-wrapper">
-					<!-- Content -->
-					<div id="windy" class="w-100 vh-95 windy"
-						style="position: relative;"></div>
-					<div class="card w-25  windy-right-table"
-						style="position: absolute; top: 8.5%; right: 3%;">
-						<div class="card-header d-flex justify-content-between pb-0">
-							<div class="card-title mb-0">
-								<h5 class="mb-0">2023년 10월 24일</h5>
-								<small class="text-muted">대한민국</small>
-							</div>
-							<div class="dropdown">
-								<button class="btn p-0" type="button" id="supportTrackerMenu"
-									data-bs-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">
-									<i class="ti ti-dots-vertical ti-sm text-muted"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-end"
-									aria-labelledby="supportTrackerMenu">
-									<a class="dropdown-item" href="javascript:void(0);">View
-										More</a> <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="row ">
-								<div class="col-12 col-sm-4 col-md-12 col-lg-4 ">
-									<ul class="p-0 mt-3">
-										<li
-											class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-											<div class="badge rounded bg-label-primary p-1">
-												<i class="ti ti-ticket ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">발전소 수</h6>
-												<small class="text-muted">14,232</small>
-											</div>
-										</li>
-										<li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
-											<div class="badge rounded bg-label-info p-1">
-												<i class="ti ti-circle-check ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
-												<small class="text-muted">28,200</small>
-											</div>
-										</li>
-										<li class="d-flex mt-5 gap-3 align-items-center pb-1">
-											<div class="badge rounded bg-label-warning p-1">
-												<i class="ti ti-clock ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
-												<small class="text-muted">30,200</small>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="col-12 col-sm-8 col-md-12 col-lg-8">
-									<div id="sh-drilldown"></div>
-								</div>
-							</div>
-						</div>
-						<div class="card-body" style="margin-top: -50px;">
-							<div class="row">
-								<div class="rounded">
-									<div class="row gap-4 gap-sm-0 d-flex justify-content-center">
-										<div class="col-12 col-sm-4 mx-3">
-											<div class="d-flex gap-2 align-items-center">
-												<div class="badge rounded bg-label-primary">
-													<i class="ti ti-currency-dollar ti-sm"></i>
-												</div>
-												<h6 class="mb-0">실시간 SMP</h6>
-											</div>
-											<h4 class="my-2 pt-1">545.69</h4>
-											<div class="progress w-75" style="height: 4px">
-												<div class="progress-bar" role="progressbar"
-													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
-													aria-valuemax="100"></div>
-											</div>
-										</div>
-										<div class="col-12 col-sm-4 mx-3">
-											<div class="d-flex gap-2 align-items-center">
-												<div class="badge rounded bg-label-danger p-1">
-													<i class="ti ti-brand-paypal ti-sm"></i>
-												</div>
-												<h6 class="mb-0">실시간 REC(원)</h6>
-											</div>
-											<h4 class="my-2 pt-1">34,474.19</h4>
-											<div class="progress w-75" style="height: 4px">
-												<div class="progress-bar bg-danger" role="progressbar"
-													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
-													aria-valuemax="100"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="w-100 col-12 col-md-8 ">
-									<div id="sh-livedata"></div>
-									<div class="d-flex">
-										<div class="ld-row d-none">
-											<label class="ld-label d-none"> Enable Polling </label> <input
-												type="checkbox" checked="checked" id="enablePolling" />
-										</div>
-										<div class="ld-row d-none">
-											<label class="ld-label d-none"> Polling Time
-												(Seconds) </label> <input class="ld-time-input" type="number"
-												value="2" id="pollingTime" />
-										</div>
-									</div>
-									<div class="ld-row d-none">
-										<label class="ld-label d-none"> CSV URL </label> <input
-											class="ld-url-input" type="text" id="fetchURL" />
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card w-25 windy-right-table"
-						style="position: absolute; top: 30%; left: 3%;">
-						<div class="card-header d-flex justify-content-between pb-0">
-							<div class="card-title mb-0">
-								<h5 class="mb-0">2023년 10월 24일</h5>
-								<small class="text-muted">광주발전소</small>
-							</div>
-							<div class="dropdown">
-								<button class="btn p-0" type="button" id="supportTrackerMenu"
-									data-bs-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">
-									<i class="ti ti-dots-vertical ti-sm text-muted"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-end"
-									aria-labelledby="supportTrackerMenu">
-									<a class="dropdown-item" href="javascript:void(0);">View
-										More</a> <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="row ">
-								<div class="col-12 col-sm-4 col-md-12 col-lg-4 ">
-									<ul class="p-0 mt-3">
-										<li
-											class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-											<div class="badge rounded bg-label-primary p-1">
-												<i class="ti ti-ticket ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
-												<small class="text-muted">14,232</small>
-											</div>
-										</li>
-										<li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
-											<div class="badge rounded bg-label-info p-1">
-												<i class="ti ti-circle-check ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
-												<small class="text-muted">28,200</small>
-											</div>
-										</li>
-										<li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
-											<div class="badge rounded bg-label-info p-1">
-												<i class="ti ti-circle-check ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">발전시간(hr)</h6>
-												<small class="text-muted">16</small>
-											</div>
-										</li>
-										<li class="d-flex mt-5 gap-3 align-items-center pb-1">
-											<div class="badge rounded bg-label-warning p-1">
-												<i class="ti ti-clock ti-sm"></i>
-											</div>
-											<div>
-												<h6 class="mb-0 text-nowrap">예상 수익금(원)</h6>
-												<small class="text-muted">105200</small>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="col-12 col-sm-8 col-md-12 col-lg-8">
-									<div id="sh-drilldown-per"></div>
-								</div>
-							</div>
-						</div>
-					</div><!--/ Content -->
-					<div class="content-backdrop fade"></div>
-				</div><!--/ Content wrapper -->
-			</div><!--/ Layout container -->
-		</div><!-- Content wrapper -->
-	</div><!-- Layout wrapper -->
+               <!-- Content -->
+               <div id="windy" class="w-100 vh-95 windy"
+                  style="position: relative;"></div>
+               <div class="card w-25  windy-right-table"
+                  style="position: absolute; top: 8.5%; right: 3%;">
+                  <div class="card-header d-flex justify-content-between pb-0">
+                     <div class="card-title mb-0">
+                        <h5 class="mb-0">2023년 10월 24일</h5>
+                        <small class="text-muted">대한민국</small>
+                     </div>
+                     <div class="dropdown">
+                        <button class="btn p-0" type="button" id="supportTrackerMenu"
+                           data-bs-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                           <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end"
+                           aria-labelledby="supportTrackerMenu">
+                           <a class="dropdown-item" href="javascript:void(0);">View
+                              More</a> <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body">
+                     <div class="row ">
+                        <div class="col-12 col-sm-4 col-md-12 col-lg-4 ">
+                           <ul class="p-0 mt-3">
+                              <li
+                                 class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+                                 <div class="badge rounded bg-label-primary p-1">
+                                    <i class="ti ti-ticket ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">발전소 수</h6>
+                                    <small class="text-muted">14,232</small>
+                                 </div>
+                              </li>
+                              <li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
+                                 <div class="badge rounded bg-label-info p-1">
+                                    <i class="ti ti-circle-check ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
+                                    <small class="text-muted">28,200</small>
+                                 </div>
+                              </li>
+                              <li class="d-flex mt-5 gap-3 align-items-center pb-1">
+                                 <div class="badge rounded bg-label-warning p-1">
+                                    <i class="ti ti-clock ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
+                                    <small class="text-muted">30,200</small>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                           <div id="sh-drilldown"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body" style="margin-top: -50px;">
+                     <div class="row">
+                        <div class="rounded">
+                           <div class="row gap-4 gap-sm-0 d-flex justify-content-center">
+                              <div class="col-12 col-sm-4 mx-3">
+                                 <div class="d-flex gap-2 align-items-center">
+                                    <div class="badge rounded bg-label-primary">
+                                       <i class="ti ti-currency-dollar ti-sm"></i>
+                                    </div>
+                                    <h6 class="mb-0">실시간 SMP</h6>
+                                 </div>
+                                 <h4 class="my-2 pt-1">545.69</h4>
+                                 <div class="progress w-75" style="height: 4px">
+                                    <div class="progress-bar" role="progressbar"
+                                       style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                       aria-valuemax="100"></div>
+                                 </div>
+                              </div>
+                              <div class="col-12 col-sm-4 mx-3">
+                                 <div class="d-flex gap-2 align-items-center">
+                                    <div class="badge rounded bg-label-danger p-1">
+                                       <i class="ti ti-brand-paypal ti-sm"></i>
+                                    </div>
+                                    <h6 class="mb-0">실시간 REC(원)</h6>
+                                 </div>
+                                 <h4 class="my-2 pt-1">34,474.30</h4>
+                                 <div class="progress w-75" style="height: 4px">
+                                    <div class="progress-bar bg-danger" role="progressbar"
+                                       style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                       aria-valuemax="100"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="w-100 col-12 col-md-8 ">
+                           <div id="sh-livedata"></div>
+                           <div class="d-flex">
+                              <div class="ld-row d-none">
+                                 <label class="ld-label d-none"> Enable Polling </label> <input
+                                    type="checkbox" checked="checked" id="enablePolling" />
+                              </div>
+                              <div class="ld-row d-none">
+                                 <label class="ld-label d-none"> Polling Time
+                                    (Seconds) </label> <input class="ld-time-input" type="number"
+                                    value="2" id="pollingTime" />
+                              </div>
+                           </div>
+                           <div class="ld-row d-none">
+                              <label class="ld-label d-none"> CSV URL </label> <input
+                                 class="ld-url-input" type="text" id="fetchURL" />
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="card w-25 windy-right-table"
+                  style="position: absolute; top: 30%; left: 3%; display:none">
+                  <div class="card-header d-flex justify-content-between pb-0">
+                     <div class="card-title mb-0">
+                        <h5 class="mb-0">2023년 10월 24일</h5>
+                        <small class="text-muted">광주발전소</small>
+                     </div>
+                     <div class="dropdown">
+                        <button class="btn p-0" type="button" id="supportTrackerMenu"
+                           data-bs-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                           <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end"
+                           aria-labelledby="supportTrackerMenu">
+                           <a class="dropdown-item" href="javascript:void(0);">View
+                              More</a> <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body">
+                     <div class="row ">
+                        <div class="col-12 col-sm-4 col-md-12 col-lg-4 ">
+                           <ul class="p-0 mt-3">
+                              <li
+                                 class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+                                 <div class="badge rounded bg-label-primary p-1">
+                                    <i class="ti ti-ticket ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
+                                    <small class="text-muted">14,232</small>
+                                 </div>
+                              </li>
+                              <li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
+                                 <div class="badge rounded bg-label-info p-1">
+                                    <i class="ti ti-circle-check ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
+                                    <small class="text-muted">28,200</small>
+                                 </div>
+                              </li>
+                              <li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
+                                 <div class="badge rounded bg-label-info p-1">
+                                    <i class="ti ti-circle-check ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">발전시간(hr)</h6>
+                                    <small class="text-muted">16</small>
+                                 </div>
+                              </li>
+                              <li class="d-flex mt-5 gap-3 align-items-center pb-1">
+                                 <div class="badge rounded bg-label-warning p-1">
+                                    <i class="ti ti-clock ti-sm"></i>
+                                 </div>
+                                 <div>
+                                    <h6 class="mb-0 text-nowrap">예상 수익금(원)</h6>
+                                    <small class="text-muted">105200</small>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                           <div id="sh-drilldown-per"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div><!--/ Content -->
+               <div class="content-backdrop fade"></div>
+            </div><!--/ Content wrapper -->
+         </div><!--/ Layout container -->
+      </div><!-- Content wrapper -->
+   </div><!-- Layout wrapper -->
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
@@ -365,5 +332,17 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
     <script src="/assets/js/sh-main-windy.js"></script>
+    
+    <!-- high chart -->
+   <script src="/assets/code/highcharts.js"></script>
+   <script src="/assets/code/modules/data.js"></script>
+   <script src="/assets/code/modules/exporting.js"></script>
+   <script src="/assets/code/modules/export-data.js"></script>
+   <script src="/assets/code/modules/accessibility.js"></script>
+   <script src="/assets/code/modules/drilldown.js"></script>
+   
+   <!-- shine chart js-->
+   <script src="/assets/vendor/js/sh-highchart.js"></script>
+   <script type="text/javascript"></script>
   </body>
 </html>
