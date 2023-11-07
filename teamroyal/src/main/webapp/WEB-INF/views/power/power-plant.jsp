@@ -267,7 +267,6 @@
               
               <div class="col-12">
                 <!-- About User -->
-                <c:forEach items="" var="">
                 <div class="card">
                   <div class="card-body ">
                     <div class="d-flex">
@@ -343,7 +342,6 @@
                     </div>
                   </div>
                 </div> <!-- Agout User-->
-                </c:forEach>
               </div> <!-- Left side -->
             </div> <!--/ container box-->
             <!-- Footer -->
