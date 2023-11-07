@@ -73,22 +73,24 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a class="nav-item nav-link active" href="/user/index">MAIN</a>
+							<a href="#" class="d-flex align-items-center w-px-30"
+								style="text-decoration: none;"> <img alt=""
+								src="/assets/img/branding/logo.png" class="w-100">SHINE
+							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
-							<a class="nav-item nav-link" href="/community/email">MAIL</a>
-							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
 							<li class="nav-item"><a class="nav-link"
-								href="/user/login/userProfile"><i
-									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> 
-									Profile</a>
+								href="/user/login/userProfile/${user.userNick}"><i
+									class="tf-icons navbar-icon ti ti-user ti-xs me-1"></i> Profile</a>
 							</li>
 							<!-- <li class="nav-item"><a class="nav-link" href="/login"><i
-									class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
-									Login</a></li> -->
+                           class="tf-icons navbar-icon ti ti-lock-open-off ti-xs me-1"></i>
+                           Login</a></li> -->
 							<li class="nav-item"><a class="nav-link" href="/logout"><i
 									class="tf-icons navbar-icon ti ti-lock-open ti-xs me-1"></i>
 									Logout</a></li>
