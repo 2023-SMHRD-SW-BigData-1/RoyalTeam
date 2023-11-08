@@ -109,7 +109,7 @@
         </nav>
         <!-- / Navbar -->
 
-        <!-- Layout container -->
+        <!-- Layout container --->
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
