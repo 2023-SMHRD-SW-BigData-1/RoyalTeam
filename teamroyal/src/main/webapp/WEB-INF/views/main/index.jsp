@@ -85,12 +85,14 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
-							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
-							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30"
+								style="text-decoration: none;"> <img alt=""
+								src="/assets/img/branding/logo.png" class="w-100">SHINE
+							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
-							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
+								class="nav-item nav-link" href="/community/email">MAIL</a> <a
+								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -219,7 +221,13 @@
 									</div>
 								</div>
 								<div class="w-100 col-12 col-md-8 ">
-									<div id="sh-symbols"></div>
+									<div id="sh-symbols-kr"></div>
+									
+									
+									
+									
+									
+									
 									<div class="d-flex">
 										<div class="ld-row d-none">
 											<label class="ld-label d-none"> Enable Polling </label> <input
@@ -305,7 +313,8 @@
 
 
 									<div class="col-12 w-100">
-										<div id="sh-drilldown-per"></div>
+										
+										<div id="sh-symbols-per"></div>
 									</div>
 								</div>
 							</div>
