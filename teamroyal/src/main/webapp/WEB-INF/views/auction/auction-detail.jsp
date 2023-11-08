@@ -272,7 +272,7 @@
                   <div class="card academy-content shadow-none border">
                     <div class="p-2">
                       <div class="cursor-pointer">
-                      <div style="width:300px;">
+                      <div style="width:500px; height:500px;">
                         <img class="w-100" alt="" src="${adMap.getMarketImgPath()}">
                         </div>
                       </div>

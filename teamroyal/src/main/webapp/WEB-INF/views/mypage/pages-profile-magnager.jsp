@@ -77,6 +77,24 @@
   		});
   	}
     </script>
+    <style type="text/css">
+    	@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.delayed-fade-in {
+  opacity: 0; /* 초기 상태는 투명하게 */
+  animation-name: fadeIn; /* 애니메이션 이름 지정 */
+  animation-duration: 1s; /* 애니메이션 지속 시간 */
+  animation-fill-mode: forwards; /* 애니메이션 종료 후 상태 유지 */
+  animation-delay: 0.5s; /* 애니메이션 시작 전 지연 시간 */
+}
+    </style>
   </head>
 
   <body>
@@ -124,7 +142,7 @@
 			<!----------------------------------------- Navbar ----------------------------------------->
 			
 			<!-- Layout container -->
-        <div class="layout-page">
+        <div class="layout-page delayed-fade-in">
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->

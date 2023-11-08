@@ -140,11 +140,11 @@
 														<div class="card-body text-start p-0">
 															<div class="w-100">
 															
-																<img src="${aPartMap.getMarketImgPath() }" class="w-100 " alt="">
+																<img src="${aPartMap.getMarketImgPath() }" class="w-100 " style="width:100px; height:160px;">
 															</div>
 															<div class="mx-2">
-																<h5 class="my-2">${aPartMap.getMarketTitle() }</h5>
-																<p>${aPartMap.getMarketText() }</p>
+																<h5 class="my-2" style="white-space : nowrap; overflow : hidden; text-overflow : ellipsis;">${aPartMap.getMarketTitle() }</h5>
+																<h5 class="my-2">${aPartMap.getMarketPrice() } 원</h5>
 															</div>
 														</div>
 													</div>

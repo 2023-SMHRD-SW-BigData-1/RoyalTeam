@@ -269,7 +269,7 @@
                   <div class="card-body ">
                     <div class="d-flex">
                       <h4 class="card-text text-uppercase w-25">${user.userNick }</h4>
-                      <h4 class="card-text text-uppercase w-20">데이터</h4>
+                      <h4 class="card-text text-uppercase w-20">내 발전소</h4>
                       <h4 class="card-text text-uppercase w-50">차트</h4>
                     </div>
                     <div class="d-flex">
@@ -334,7 +334,7 @@
                       </ul>
                       <ul class="list-unstyled mb-4 mt-3 w-50 ">
                         <li class="d-flex align-items-center mb-3">
-                          <div id="sh-drilldown" class="w-100"></div>
+                          <div id="sh-symbols-per" style="width:700px; height:300px;"></div>
                         </li>
                       </ul>
                     </div>

@@ -85,14 +85,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -125,9 +123,8 @@
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
 								<h5 class="mb-0">2023년 10월 24일</h5>
-								<small class="text-muted">대한민국</small>
 							</div>
-							<div class="dropdown">
+							<div class="dropdown" style="margin-top: 20px;">
 								<button class="btn p-0" type="button" id="supportTrackerMenu"
 									data-bs-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">
@@ -177,16 +174,14 @@
 									</div>
 
 
-									<div class="col-12 w-100">
-										<div id="sh-drilldown"></div>
+									<div class="col-12 w-100" style="margin-top: -20px;">
+										<div id="sh-drilldown" style="width:400px; height:240px"></div>
 									</div>
 								</div>
 
-
-
 							</div>
 						</div>
-						<div class="card-body" style="margin-top: -50px;">
+						<div class="card-body" style="margin-top: -20px;">
 							<div class="row">
 								<div class="rounded">
 									<div class="row gap-4 gap-sm-0 d-flex justify-content-center">
@@ -197,7 +192,7 @@
 												</div>
 												<h6 class="mb-0">실시간 SMP</h6>
 											</div>
-											<h4 class="my-2 pt-1">545.69</h4>
+											<p class="my-2 pt-1">545.69</p>
 											<div class="progress w-75" style="height: 4px">
 												<div class="progress-bar" role="progressbar"
 													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
@@ -206,12 +201,12 @@
 										</div>
 										<div class="col-12 col-sm-4 mx-3">
 											<div class="d-flex gap-2 align-items-center">
-												<div class="badge rounded bg-label-danger p-1">
+												<div class="badge rounded bg-label-danger">
 													<i class="ti ti-brand-paypal ti-sm"></i>
 												</div>
 												<h6 class="mb-0">실시간 REC(원)</h6>
 											</div>
-											<h4 class="my-2 pt-1">34,474.30</h4>
+											<p class="my-2 pt-1">34,474.30</p>
 											<div class="progress w-75" style="height: 4px">
 												<div class="progress-bar bg-danger" role="progressbar"
 													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
@@ -220,8 +215,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="w-100 col-12 col-md-8 ">
-									<div id="sh-symbols-kr"></div>
+								<div class="w-100 col-12 col-md-8 " style="margin-top: 20px;">
+									<div id="sh-symbols-kr" style="width:400px; height:280px"></div>
 									
 									
 									
@@ -312,7 +307,7 @@
 									</div>
 
 
-									<div class="col-12 w-100">
+									<div class="col-12 w-100" >
 										
 										<div id="sh-symbols-per"></div>
 									</div>
