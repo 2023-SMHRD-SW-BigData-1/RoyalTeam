@@ -19,70 +19,13 @@ $(function () {
   }
 
   // Variable declaration for table
-  var phoneNumbers = []; // 전화번호를 담을 배열
-
-for (var i = 1; i < 51; i++) {
-  var randomNumber = '010-' + getRandomNumber(1000, 9999) + '-' + getRandomNumber(1000, 9999);
-  phoneNumbers.push(randomNumber); // 랜덤 전화번호를 배열에 추가
-}
-
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
   var dt_user_table = $('.datatables-users'),
     select2 = $('.select2'),
     userView = 'app-user-view-account.html',
     statusObj = {
-      1: { title: phoneNumbers[1], class: 'bg-label-secondary' },
-      2: { title:  phoneNumbers[2], class: 'bg-label-secondary' },
-      3: { title:  phoneNumbers[3], class: 'bg-label-secondary' },
-      4: { title: phoneNumbers[4], class: 'bg-label-secondary'},
-      5: {title: phoneNumbers[5], class: 'bg-label-secondary'},
-      6: { title: phoneNumbers[6], class: 'bg-label-secondary' },
-      7: { title:  phoneNumbers[7], class: 'bg-label-secondary' },
-      8: { title:  phoneNumbers[8], class: 'bg-label-secondary' },
-      9: { title: phoneNumbers[9], class: 'bg-label-secondary'},
-      10: {title: phoneNumbers[10], class: 'bg-label-secondary'},
-      11: { title: phoneNumbers[11], class: 'bg-label-secondary' },
-      12: { title:  phoneNumbers[12], class: 'bg-label-secondary' },
-      13: { title:  phoneNumbers[13], class: 'bg-label-secondary' },
-      14: { title: phoneNumbers[14], class: 'bg-label-secondary'},
-      15: {title: phoneNumbers[15], class: 'bg-label-secondary'},
-      16: { title: phoneNumbers[16], class: 'bg-label-secondary' },
-      17: { title:  phoneNumbers[17], class: 'bg-label-secondary' },
-      18: { title:  phoneNumbers[18], class: 'bg-label-secondary' },
-      19: { title: phoneNumbers[19], class: 'bg-label-secondary'},
-      20: {title: phoneNumbers[20], class: 'bg-label-secondary'},
-      21: { title: phoneNumbers[21], class: 'bg-label-secondary' },
-      22: { title:  phoneNumbers[22], class: 'bg-label-secondary' },
-      23: { title:  phoneNumbers[23], class: 'bg-label-secondary' },
-      24: { title: phoneNumbers[24], class: 'bg-label-secondary'},
-      25: {title: phoneNumbers[25], class: 'bg-label-secondary'},
-      26: { title: phoneNumbers[26], class: 'bg-label-secondary' },
-      27: { title:  phoneNumbers[27], class: 'bg-label-secondary' },
-      28: { title:  phoneNumbers[28], class: 'bg-label-secondary' },
-      29: { title: phoneNumbers[29], class: 'bg-label-secondary'},
-      30: {title: phoneNumbers[30], class: 'bg-label-secondary'},
-      31: { title: phoneNumbers[31], class: 'bg-label-secondary' },
-      32: { title:  phoneNumbers[32], class: 'bg-label-secondary' },
-      33: { title:  phoneNumbers[33], class: 'bg-label-secondary' },
-      34: { title: phoneNumbers[34], class: 'bg-label-secondary'},
-      35: {title: phoneNumbers[35], class: 'bg-label-secondary'},
-      36: { title: phoneNumbers[36], class: 'bg-label-secondary' },
-      37: { title:  phoneNumbers[37], class: 'bg-label-secondary' },
-      38: { title:  phoneNumbers[38], class: 'bg-label-secondary' },
-      39: { title: phoneNumbers[39], class: 'bg-label-secondary'},
-      40: {title: phoneNumbers[40], class: 'bg-label-secondary'},
-      41: { title: phoneNumbers[41], class: 'bg-label-secondary' },
-      42: { title:  phoneNumbers[42], class: 'bg-label-secondary' },
-      43: { title:  phoneNumbers[43], class: 'bg-label-secondary' },
-      44: { title: phoneNumbers[44], class: 'bg-label-secondary'},
-      45: {title: phoneNumbers[45], class: 'bg-label-secondary'},
-      46: { title: phoneNumbers[46], class: 'bg-label-secondary' },
-      47: { title:  phoneNumbers[47], class: 'bg-label-secondary' },
-      48: { title:  phoneNumbers[48], class: 'bg-label-secondary' },
-      49: { title: phoneNumbers[49], class: 'bg-label-secondary'},
-      50: {title: phoneNumbers[50], class: 'bg-label-secondary'},
+      1: { title: 'Pending', class: 'bg-label-warning' },
+      2: { title: 'Active', class: 'bg-label-success' },
+      3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
   if (select2.length) {
@@ -156,7 +99,7 @@ function getRandomNumber(min, max) {
               $name +
               '</span></a>' +
               '<small class="text-muted">' +
-           ''+
+              $email +
               '</small>' +
               '</div>' +
               '</div>';
@@ -168,7 +111,6 @@ function getRandomNumber(min, max) {
           targets: 2,
           render: function (data, type, full, meta) {
             var $role = full['role'];
-            var $email = full['email'];
             var roleBadgeObj = {
               Subscriber:
                 '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="ti ti-user ti-sm"></i></span>',
@@ -180,11 +122,11 @@ function getRandomNumber(min, max) {
                 '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="ti ti-edit ti-sm"></i></span>',
               Admin:
                 '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="ti ti-device-laptop ti-sm"></i></span>'
-            };   // 수정사항
-            return "<span class='text-truncate d-flex align-items-center'>" + $email + $role + '</span>';
+            };
+            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
           }
         },
-        { 
+        {
           // Plans
           targets: 3,
           render: function (data, type, full, meta) {
@@ -268,7 +210,7 @@ function getRandomNumber(min, max) {
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('user-name')) {
                         result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === '') {
+                      } else if (item.innerText === undefined) {
                         result = result + item.textContent;
                       } else result = result + item.innerText;
                     });
@@ -305,7 +247,7 @@ function getRandomNumber(min, max) {
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('user-name')) {
                         result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === '') {
+                      } else if (item.innerText === undefined) {
                         result = result + item.textContent;
                       } else result = result + item.innerText;
                     });
@@ -322,14 +264,14 @@ function getRandomNumber(min, max) {
                 columns: [1, 2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
-                  body: function (inner, coldex, rowdex) { 
+                  body: function (inner, coldex, rowdex) {
                     if (inner.length <= 0) return inner;
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('user-name')) {
                         result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === '') {
+                      } else if (item.innerText === undefined) {
                         result = result + item.textContent;
                       } else result = result + item.innerText;
                     });
@@ -353,7 +295,7 @@ function getRandomNumber(min, max) {
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('user-name')) {
                         result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === '') {
+                      } else if (item.innerText === undefined) {
                         result = result + item.textContent;
                       } else result = result + item.innerText;
                     });
@@ -377,7 +319,7 @@ function getRandomNumber(min, max) {
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('user-name')) {
                         result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === '') {
+                      } else if (item.innerText === undefined) {
                         result = result + item.textContent;
                       } else result = result + item.innerText;
                     });

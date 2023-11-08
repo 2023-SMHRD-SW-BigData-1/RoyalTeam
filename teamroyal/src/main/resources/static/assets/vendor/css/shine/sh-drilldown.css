@@ -51,10 +51,3 @@
 {
     display: none;
 }
-
-/*****highchart******/
-.highcharts-title,
-.highcharts-subtitle,
-.highcharts-credits {
-  display: none;
-}

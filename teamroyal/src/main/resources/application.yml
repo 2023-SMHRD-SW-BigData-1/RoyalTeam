@@ -21,6 +21,19 @@ spring:
       location: C:\\royal\\commuImg
       max-file-size: 50MB
       max-request-size: 50MB
+     
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shineweb1110@gmail.com
+    password: yjstkxegxmsizaeq
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 mybatis:
   mapper-locations: mappers/**/*.xml

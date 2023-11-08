@@ -12441,6 +12441,10 @@ html:not([dir=rtl]) .card .card-separator {
   margin-right: auto !important;
 }
 
+.ml-6 {
+	margin-left: 3rem !important;
+}
+
 .my-0 {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -12497,12 +12501,7 @@ html:not([dir=rtl]) .card .card-separator {
 }
 
 .mt-5 {
-  margin-top: 2rem !important;
-}
-
-
-.mt-6 {
-  margin-top: 2rem !important;
+  margin-top: 3rem !important;
 }
 
 .mt-auto {
@@ -12553,10 +12552,6 @@ html:not([dir=rtl]) .card .card-separator {
   margin-left: 3rem !important;
 }
 
-.ml-6 {
-  margin-left: 5rem !important;
-}
-
 .mr-1 {
   margin-right: 0.25rem !important;
 }
@@ -12599,21 +12594,6 @@ html:not([dir=rtl]) .card .card-separator {
 
 .m-n5 {
   margin: -3rem !important;
-}
-.mt-n1 {
-  margin-top: -0.25rem !important;
-}
-.mt-n2 {
-  margin-top: 0.5rem !important;
-}
-.mt-n3 {
-  margin-top: -1rem !important;
-}
-.mt-n4 {
-  margin-top: -1.5rem !important;
-}
-.mt-n5 {
-  margin-top: -3rem !important;
 }
 
 .mx-n1 {
@@ -24302,14 +24282,4 @@ a.bg-vimeo:hover, a.bg-vimeo:focus {
   border: 1px solid black;
 }
 
-.t-a-l {
-	text-align : left;
-}
 
-.t-a-c {
-	text-align : center;
-}
-
-.t-a-r {
-	text-align : right;
-}
