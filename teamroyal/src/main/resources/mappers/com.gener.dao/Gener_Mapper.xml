@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.gener.dao.UserDao">
+	
+	 <select id="getData" resultType="java.util.HashMap">
+        SELECT COUNT(*) AS cs FROM SOLAR_POWER_ARIA
+
+    </select>
+    
+<select id="getAllGener" resultType="java.util.HashMap">
+   <![CDATA[
+   SELECT A.IPPT, A.IPPTNM, A.HOGI, SUM(A.QPOWER) AS SUMM, AVG(A.QPOWER) AS FULL_AVG, ROUND(SUM(A.QPOWER) * (SELECT SMP_AVG FROM (SELECT * FROM ROYAL.TB_SMP_LAND ORDER BY SMP_DATE DESC) WHERE ROWNUM <= 1), 0) AS gain FROM ROYAL.SOLAR_POWER_TIME A WHERE A.DGENYMD = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND A.DGENHMS <= TO_CHAR(SYSDATE, 'hh24:mi:ss') GROUP BY A.IPPT, A.IPPTNM, A.HOGI ORDER BY A.IPPTNM
+   ]]>
+</select>
+
+<select id="getSmp" resultType="java.util.HashMap">
+<![CDATA[
+ SELECT SMP_AVG FROM ( SELECT * FROM ROYAL.TB_SMP_LAND ORDER BY SMP_DATE DESC ) WHERE ROWNUM <= 1
+   ]]>
+</select>
+
+<select id="getRec" resultType="java.util.HashMap">
+<![CDATA[
+SELECT REC_LANDAVG, REC_JEJUAVG FROM ( SELECT * FROM ROYAL.TB_REC  ORDER BY REC_AT DESC ) WHERE ROWNUM <= 1
+]]>
+</select>
+
+<select id="getChartTop" resultType="java.util.HashMap">
+<![CDATA[
+SELECT * FROM (SELECT A.IPPT, A.IPPTNM, A.HOGI, SUM(A.QPOWER) AS SUMM , AVG(A.QPOWER) , ROUND(SUM(A.QPOWER) * (SELECT SMP_AVG FROM ( SELECT * FROM ROYAL.TB_SMP_LAND ORDER BY SMP_DATE DESC ) WHERE ROWNUM <= 1),0)  FROM ROYAL.SOLAR_POWER_TIME A WHERE A.DGENYMD = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND A.DGENHMS <= TO_CHAR(SYSDATE, 'hh24:mi:ss') GROUP BY A.IPPT, A.IPPTNM, A.HOGI ORDER BY SUM(A.QPOWER) DESC) WHERE ROWNUM <= 7
+]]>
+</select>
+ 
+
+    
+<select id="processDateData" parameterType="String" resultType="java.util.HashMap">
+    SELECT IPPT, IPPTNM, HOGI, QSUM, Q01, Q02, Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18, Q19, Q20, Q21, Q22, Q23, Q24 
+    FROM SOLAR_POWER_MST
+    WHERE DGENYMD = '${dateString}' AND IPPT = '85S1'
+</select>
+
+<select id="getPreData" parameterType="String" resultType="java.util.HashMap">
+SELECT * FROM TB_GENPREDICT WHERE PRE_DATE = '${dateString}' AND IPPT = '85S1'
+</select>
+
+<select id="getAllGen" parameterType="String" resultType="java.util.HashMap">
+SELECT
+    DGENYMD,
+    SUM(Q01) AS Q01_Total,
+    SUM(Q02) AS Q02_Total,
+    SUM(Q03) AS Q03_Total,
+    SUM(Q04) AS Q04_Total,
+    SUM(Q05) AS Q05_Total,
+    SUM(Q06) AS Q06_Total,
+    SUM(Q07) AS Q07_Total,
+    SUM(Q08) AS Q08_Total,
+    SUM(Q09) AS Q09_Total,
+    SUM(Q10) AS Q10_Total,
+    SUM(Q11) AS Q11_Total,
+    SUM(Q12) AS Q12_Total,
+    SUM(Q13) AS Q13_Total,
+    SUM(Q14) AS Q14_Total,
+    SUM(Q15) AS Q15_Total,
+    SUM(Q16) AS Q16_Total,
+    SUM(Q17) AS Q17_Total,
+    SUM(Q18) AS Q18_Total,
+    SUM(Q19) AS Q19_Total,
+    SUM(Q20) AS Q20_Total,
+    SUM(Q21) AS Q21_Total,
+    SUM(Q22) AS Q22_Total,
+    SUM(Q23) AS Q23_Total,
+    SUM(Q24) AS Q24_Total
+FROM
+    SOLAR_POWER_MST
+WHERE
+    DGENYMD = '2023-09-08'
+GROUP BY
+    DGENYMD
+</select>
+
+<select id="getAllPre" parameterType="String" resultType="java.util.HashMap">
+SELECT
+    PRE_DATE,
+    SUM(P1) AS P1_Total,
+    SUM(P2) AS P2_Total,
+    SUM(P3) AS P3_Total,
+    SUM(P4) AS P4_Total,
+    SUM(P5) AS P5_Total,
+    SUM(P6) AS P6_Total,
+    SUM(P7) AS P7_Total,
+    SUM(P8) AS P8_Total,
+    SUM(P9) AS P9_Total,
+    SUM(P10) AS P10_Total,
+    SUM(P11) AS P11_Total,
+    SUM(P12) AS P12_Total,
+    SUM(P13) AS P13_Total,
+    SUM(P14) AS P14_Total,
+    SUM(P15) AS P15_Total,
+    SUM(P16) AS P16_Total,
+    SUM(P17) AS P17_Total,
+    SUM(P18) AS P18_Total,
+    SUM(P19) AS P19_Total,
+    SUM(P20) AS P20_Total,
+    SUM(P21) AS P21_Total,
+    SUM(P22) AS P22_Total,
+    SUM(P23) AS P23_Total,
+    SUM(P24) AS P24_Total
+FROM
+    TB_GENPREDICT
+WHERE
+    PRE_DATE = '09/08/2023'
+GROUP BY
+    PRE_DATE
+    
+</select>
+</mapper>    
