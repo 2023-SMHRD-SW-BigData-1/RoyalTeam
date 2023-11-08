@@ -28,10 +28,10 @@ public interface UserDAO {
 	//회원정보 수정
 	void userUpdate(UserVO userVo);
 	
-	// 사용자 삭제
-	int userInfoDelete(UserVO userVo);
-	
 	// 사용자 비밀번호 조회
 	void userFindPw(UserVO userVo);
+
+	// 사용자 삭제
+	void userDelete(UserVO userVo);
 
 }

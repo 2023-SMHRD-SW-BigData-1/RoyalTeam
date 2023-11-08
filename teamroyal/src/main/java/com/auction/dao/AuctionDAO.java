@@ -41,6 +41,6 @@ public interface AuctionDAO {
 
 	void auctionDelete(AuctionVO auctionVo);
 
-	List<AuctionVO> auctionPostPart(String marketCreateNm);
+	List<AuctionVO> auctionPostPart(ParamVO paramVo);
 
 }

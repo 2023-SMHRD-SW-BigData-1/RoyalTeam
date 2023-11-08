@@ -35,16 +35,14 @@ public class AuctionController {
 
 	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public String auctionEnter(@ModelAttribute AuctionVO auctionVo, @ModelAttribute ParamVO paramVo, Model model) {
-		
-		String defaultImg = "'/fpics/'||652803e80e5d4496ae78a971b52295d5||.png";
-		
-		model.addAttribute("defaultImg", defaultImg);
 
 		List<AuctionVO> auctionMap = auctionService.auctionListPost(auctionVo);
 
 		model.addAttribute("auctionMap", auctionMap);
 
-		System.out.println(auctionMap.size());
+		System.out.println(":::::::::::::::::::::::::::::");
+		System.out.println(auctionMap);
+		System.out.println(":::::::::::::::::::::::::::::");
 
 		return "/auction/auction";
 	}
@@ -100,10 +98,10 @@ public class AuctionController {
 
 	// 특정 매매글 조회
 	@RequestMapping(value = "/list/part/{marketCreateNm}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String commuPart(@PathVariable("marketCreateNm") String marketCreateNm, @ModelAttribute AuctionVO auctionVo,
-			@ModelAttribute ParamVO paramVo, Model model) {
+	public String commuPart(@PathVariable("marketCreateNm") String marketCreateNm, @ModelAttribute AuctionVO auctionVo, @ModelAttribute ParamVO paramVo, Model model) {
 
-		List<AuctionVO> aPartMap = auctionService.auctionPostPart(marketCreateNm);
+		System.out.println("::::::::::::::::::::::::::" + marketCreateNm);
+		List<AuctionVO> aPartMap = auctionService.auctionPostPart(paramVo);
 
 		model.addAttribute("aPartMap", aPartMap);
 

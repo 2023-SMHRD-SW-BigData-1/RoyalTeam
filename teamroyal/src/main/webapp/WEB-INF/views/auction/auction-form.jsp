@@ -68,7 +68,10 @@
         formData.append("marketText", $("#marketText").val());
         formData.append("marketCreateNm", userNick);
         formData.append("marketPrice", $("#marketPrice").val());
-        formData.append("mtFile", $("#mtFile")[0].files[0]); // 파일 객체 직접 추가
+        var fileInput = document.getElementById('mtFile');
+        if (fileInput.files.length > 0) {
+            formData.append("mtFile", fileInput.files[0]);
+        }
 
         $.ajax({
             url : "/auction/registration",
@@ -103,14 +106,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">

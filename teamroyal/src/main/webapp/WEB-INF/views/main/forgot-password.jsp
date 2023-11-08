@@ -101,7 +101,7 @@
                 <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일을 입력하세요"
                   autofocus />
               </div>
-              <button onclick="findPw" class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
+              <button onclick="findPw()" class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
             <div class="text-center">
               <a href="/user/login/main" class="d-flex align-items-center justify-content-center">
                 <i class="ti ti-chevron-left scaleX-n1-rtl"></i>

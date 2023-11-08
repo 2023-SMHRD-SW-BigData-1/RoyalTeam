@@ -30,6 +30,9 @@ public class UserVO {
 	private String userModifyNm; //수정자
 	private String userRole; //권한
 	
+	private String adminEmail;
+	private String emailText;
+	private String emailTitle;
 
 }
 	

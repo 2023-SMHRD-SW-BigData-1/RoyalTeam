@@ -27,11 +27,11 @@ public interface UserService {
 	//회원정보 수정
 	ResultVO userUpdate(UserVO userVo);
 	
-	//사용자 삭제
-	Map<String, Object> userInfoDelete(UserVO userVo);
-	
 	//사용자 비밀번호 초기화
 	ResultVO userFindPw(UserVO userVo);
+
+	// 사용자 삭제
+	ResultVO userDelete(UserVO userVo);
 	
 	
 }

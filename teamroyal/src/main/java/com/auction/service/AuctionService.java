@@ -32,6 +32,6 @@ public interface AuctionService {
 
 	ResultVO auctionDelete(AuctionVO auctionVo);
 
-	List<AuctionVO> auctionPostPart(String marketCreateNm);
+	List<AuctionVO> auctionPostPart(ParamVO paramVo);
 
 }

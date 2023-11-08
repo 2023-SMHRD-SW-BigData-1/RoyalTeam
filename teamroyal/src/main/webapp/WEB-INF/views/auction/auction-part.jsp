@@ -71,7 +71,6 @@
 			<!----------------------------------------- Navbar ----------------------------------------->
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
 						<span class="navbar-toggler-icon"></span>
@@ -79,14 +78,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">

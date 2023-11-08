@@ -69,48 +69,6 @@ public class CommuController {
 		return "/community/community-form";
 	}
 
-	/**
-	 * 게시판 글쓰기
-	 * 
-	 * @param CommuVO     commuVo
-	 * @param HttpSession session
-	 * @param Principal   principal
-	 * @param Map<String, Object>
-	 * @return List<CommuVO> ------------ 이력 ------------ 2023.10.27 / 정윤지 / 최초 적용
-	 */
-	@RequestMapping(value = "/list/post/write", method = RequestMethod.POST)
-	public String postWrite(@ModelAttribute CommuVO commuVo, Principal principal) {
-		
-		commuVo.setLoginUser(principal.getName().toString());
-		
-		System.out.println("::::::::::::::::::::::::::::");
-		System.out.println(commuVo.getCommuTitle());
-		System.out.println("::::::::::::::::::::::::::::");
-		System.out.println(commuVo.getCommuText());
-		System.out.println("::::::::::::::::::::::::::::");
-		System.out.println(commuVo.getMtFile());
-		System.out.println("::::::::::::::::::::::::::::");
-		
-		Map<String, Object> writeMap = commuService.commuWrite(commuVo);
-		
-		//Map<String, Object> imgMap = commuSerivce.commuWriteImg(commuVo);
-		
-		String reString = writeMap.get("writeCode").toString();
-		
-		//String imgString = imgMap.get("imgCode").toString();
-		
-		if (reString.equals("20")) {
-			System.out.println("글쓰기 성공");
-			return "redirect:/community/list";
-		} else if (reString.equals("01")) {
-			System.out.println("필수값 오류");
-			return "redirect:/community/list";
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-			return "redirect:/community/list";
-		}
-	}
-
 	//커뮤니티 리스트
 	@PostMapping("/search")
 	public ResponseEntity<Object> commuSearch(@ModelAttribute ParamVO paramVo) {

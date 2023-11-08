@@ -3,6 +3,7 @@
 
 <mapper namespace="com.community.dao.CommuDAO">
 
+	<!-- 게시글 조회 (매핑테이블 이용) -->
 	<select id="commuSelectList" parameterType="com.cmmn.vo.ParamVO" resultType="com.community.vo.CommuVO">
 		SELECT 
 			COMMU_NO AS commuNo
@@ -24,6 +25,14 @@
 		</if>
 	</select>
 	
+	<!-- 매핑테이블 조회 -->
+	<select id="commuImgPathSelect" parameterType="Integer" resultType="String">
+		SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS commuImgPath 
+		FROM ROYAL.IMG_MASTER A 
+		WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_COMMU_MAPPING B WHERE B.COMMU_NO = ${commuNo})
+	</select>
+	
+	<!-- 게시글 등록 -->
 	<insert id="commuInsert" parameterType="com.community.vo.CommuVO">
 		INSERT INTO ROYAL.TB_COMMU(
 			USER_NICK
@@ -45,6 +54,7 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 게시글 이미지 등록 -->
 	<insert id="commuFileInsert" parameterType="com.cmmn.vo.FileVO">
 		INSERT INTO ROYAL.IMG_MASTER(
 			IMG_PATH
@@ -68,6 +78,7 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 게시글 매핑 테이블 등록 -->
 	<insert id="commuFileMapInsert" parameterType="com.community.vo.CommuVO">
 		INSERT INTO ROYAL.TB_COMMU_MAPPING(COMMU_NO, IMG_NO)VALUES(${commuNo}, ${commuImgNo})
 	</insert>
@@ -223,9 +234,7 @@
 		ORDER BY COMMU_NO DESC
 	</select>
 	
-	<select id="commuImgPathSelect" parameterType="Integer" resultType="String">
-		SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS commuImgPath FROM ROYAL.IMG_MASTER A WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_COMMU_MAPPING B WHERE B.COMMU_NO = ${commuNo})
-	</select>
+	
 	
 	<!-- 이미지 조회 -->
 	<select id="commuListPostImg" parameterType="com.community.vo.CommuVO" resultType="com.community.vo.CommuVO">

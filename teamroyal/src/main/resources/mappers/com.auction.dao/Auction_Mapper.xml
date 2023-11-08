@@ -34,6 +34,7 @@
 			,MARKET_CREATE_AT AS marketCreateAt
 			,MARKET_CREATE_NAME AS marketCreateNm
 			,MARKET_PRICE AS marketPrice
+			,NVL((SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS marketImgPath FROM ROYAL.IMG_MASTER A WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_MAKET_MAPPING B WHERE B.MARKET_NO = ROYAL.TB_MARKET.MARKET_NO)), '/fpics/mainlogo.png') AS marketImgPath 
 		FROM ROYAL.TB_MARKET
 		WHERE 1=1
 		<if test="marketNo != null and marketNo != ''">
@@ -109,6 +110,7 @@
 		<if test="marketNo != null and marketNo != ''">
 			AND MARKET_NO = ${marketNo}
 		</if>
+		
 	</select>
 	
 	<select id="auctionImgPathSelect" parameterType="Integer" resultType="String">
@@ -130,7 +132,7 @@
 	</select>
 	
 	<!-- 특정 매매글 조회 -->
-	<select id="auctionPostPart" resultType="com.auction.vo.AuctionVO" parameterType="com.auction.vo.AuctionVO">
+	<select id="auctionPostPart" resultType="com.auction.vo.AuctionVO" parameterType="com.cmmn.vo.ParamVO">
 		SELECT 
 			MARKET_NO AS marketNo
 			,USER_NICK AS userNick
@@ -140,9 +142,10 @@
 			,MARKET_CREATE_AT AS marketCreateAt
 			,MARKET_CREATE_NAME AS marketCreateNm
 			,MARKET_PRICE AS marketPrice
+			,NVL((SELECT '/fpics/'||A.IMG_UUID||A.IMG_EXTENSION AS marketImgPath FROM ROYAL.IMG_MASTER A WHERE A.IMG_NO = (SELECT B.IMG_NO  FROM ROYAL.TB_MAKET_MAPPING B WHERE B.MARKET_NO = ROYAL.TB_MARKET.MARKET_NO)), '/fpics/mainlogo.png') AS marketImgPath
 		FROM ROYAL.TB_MARKET
 		WHERE 1=1
-		<if test="marketNo != null and marketNo != ''">
+		<if test="marketCreateNm != null and marketCreateNm != ''">
 			AND MARKET_CREATE_NAME = #{marketCreateNm}
 		</if>
 		

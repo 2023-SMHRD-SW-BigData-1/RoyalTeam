@@ -109,8 +109,8 @@ public class AuctionServiceImp implements AuctionService {
 
 	// 특정 매매글 조회
 	@Override
-	public List<AuctionVO> auctionPostPart(String marketCreateNm) {
-		return auctionDao.auctionPostPart(marketCreateNm);
+	public List<AuctionVO> auctionPostPart(ParamVO paramVo) {
+		return auctionDao.auctionPostPart(paramVo);
 	}
 
 	// 매매글 수정

@@ -24,9 +24,6 @@ public interface CommuService {
 	//커뮤니티 삭제
 	ResultVO commuDelete(CommuVO commuVo);
 	
-	// 게시판 글쓰기
-	Map<String, Object> commuWrite(CommuVO commuVo);
-	
 	// 게시판 이미지등록
 	Map<String, Object> commuWriteImg(CommuVO commuVo);
 	
@@ -38,9 +35,6 @@ public interface CommuService {
 	
 	// 게시판 이미지 조회
 	CommuVO commuListPostImg(CommuVO commuVo);
-	
-	// 게시판 글수정
-	Map<String, Object> commuModify(CommuVO commuVo);
 	
 	// 게시판 댓글조회
 	List<CommuVO> replyList(CommuVO commuVo);

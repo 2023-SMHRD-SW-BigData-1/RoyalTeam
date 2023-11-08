@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,9 @@ import com.user.vo.UserVO;
 
 @Service
 public class UserServiceImp implements UserService {
+
+	@Autowired
+	private JavaMailSender emailSender;
 
 	@Autowired
 	private PasswordEncoder passencoder;
@@ -134,31 +139,26 @@ public class UserServiceImp implements UserService {
 
 	// 사용자 삭제
 	@Override
-	public Map<String, Object> userInfoDelete(UserVO userVo) {
-		Map<String, Object> deleteMap = new HashMap<String, Object>();
-		if (userVo.getUserEmail() != null && userVo.getUserRole() != null) {
-			System.out.println(userVo.getUserNick() + "회원삭제");
-			int deleteDataCnt = userDao.userInfoDelete(userVo);
-			if (deleteDataCnt == 1) {
-				deleteMap.put("deleteReMsg", "삭제 완료");
-				deleteMap.put("deleteReCode", "33");
-			} else {
-				deleteMap.put("deleteReMsg", "삭제 실패");
-				deleteMap.put("deleteReCode", "66");
-			}
-		} else {
-			deleteMap.put("deleteReMsg", "필수값 오류");
-			deleteMap.put("deleteReCode", "01");
-		}
-		return deleteMap;
+	public ResultVO userDelete(UserVO userVo) {
+	    try {
+	    	if(userVo.getUserNick() != null) {
+	    		userDao.userDelete(userVo);
+	    	}else{
+	    		return new ResultVO("02");
+	    	}
+	        return new ResultVO("00");
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	        return new ResultVO("99");
+	    }
 	}
 
 	// 사용자 비밀번호 초기화
 	@Override
 	public ResultVO userFindPw(UserVO userVo) {
 		try {
-			if (userVo.getUserNick() != null) {
-
+			if (userVo.getUserEmail() != null) {
+				
 				String pwSt = "";
 
 				char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
@@ -173,6 +173,14 @@ public class UserServiceImp implements UserService {
 
 				userVo.setUserPw(passencoder.encode(pwSt));
 				
+				userDao.userFindPw(userVo);
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+		    	message.setSubject("shineweb1110@gmail.com");
+		    	message.setTo(userVo.getUserEmail());
+		    	message.setText("안녕하세요. SHINE입니다. 임시비밀번호를 발급했습니다. "+pwSt+" 로 로그인하세요.");
+		        emailSender.send(message);
+
 			} else {
 				return new ResultVO("02");
 			}
@@ -182,4 +190,6 @@ public class UserServiceImp implements UserService {
 			return new ResultVO("99");
 		}
 	}
+
+
 }

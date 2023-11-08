@@ -4,11 +4,13 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -160,20 +162,13 @@ public class UserController {
 	 * @return Map<String, Object> ------------이력------------ 2023.10.24 / 정윤지 / 최초
 	 *         적용
 	 */
-	@RequestMapping(value = "/login/userDelete/{userNick}")
-	public Map<String, Object> delete(@PathVariable("userNick") String userNick, @ModelAttribute UserVO userVo) {
-
-		Map<String, Object> deleteMap = userService.userInfoDelete(userVo);
-
-		String reString = deleteMap.get("deleteReCode").toString();
-		if (reString.equals("33")) {
-			System.out.println("회원삭제 성공");
-		} else if (reString.equals("01")) {
-			System.out.println("회원삭제 필수값 오류");
-		} else {
-			System.out.println("관리자 확인이 필요합니다.");
-		}
-		return deleteMap;
+	@PostMapping("/delete")
+	public ResponseEntity<Object> userDelete(@ModelAttribute UserVO userVo,Principal principal) {
+		System.out.println("========== 회원 삭제 진입");
+		System.out.println(userVo);
+		Gson gson = new GsonBuilder().create();
+		ResultVO resultVo =  userService.userDelete(userVo);
+	    return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
 	}
 
 	// 비밀번호 찾기 페이지로 이동
@@ -194,10 +189,8 @@ public class UserController {
 	public ResponseEntity<Object> userFindPw(@ModelAttribute UserVO userVo) {
 		System.out.println("====> 비밀번호 찾기 진입");
 		Gson gson = new GsonBuilder().create();
-		ResultVO resultVo = userService.userUpdate(userVo);
+		ResultVO resultVo = userService.userFindPw(userVo);
 		return ResponseEntity.ok(new resultResponse(gson.toJson(resultVo)));
-
-		
 	}
 
 	// 상세 notification 페이지 이동
@@ -208,7 +201,11 @@ public class UserController {
 
 	// 관리자 manager 페이지 이동
 	@RequestMapping(value = "/login/userProfile/manager", method = RequestMethod.GET)
-	public String userProfileManager() {
+	public String userProfileManager(@ModelAttribute String userNick, Model model) {
+		
+		List<UserVO> userMap = userService.userSelectList(userNick);
+		
+		model.addAttribute("userMap", userMap);
 		return "/mypage/pages-profile-magnager";
 	}
 }

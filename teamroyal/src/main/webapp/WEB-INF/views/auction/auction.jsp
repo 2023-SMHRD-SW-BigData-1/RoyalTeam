@@ -50,7 +50,7 @@
 
 <!-- Page CSS -->
 <!-- shine-CSS-->
-    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+<link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 
 <!-- Helpers -->
 <script src="/assets/vendor/js/helpers.js"></script>
@@ -59,21 +59,25 @@
 <script src="/assets/vendor/js/template-customizer.js"></script>
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="/assets/js/config.js"></script>
+<style type="text/css">
+    	@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-<script type="text/javascript">
-var marketNo = ${adlMap.getMarketNo()}; // 이 값은 애플리케이션 로직에 따라 동적으로 설정되어야 합니다.
+.delayed-fade-in {
+  opacity: 0; /* 초기 상태는 투명하게 */
+  animation-name: fadeIn; /* 애니메이션 이름 지정 */
+  animation-duration: 1s; /* 애니메이션 지속 시간 */
+  animation-fill-mode: forwards; /* 애니메이션 종료 후 상태 유지 */
+  animation-delay: 0.5s; /* 애니메이션 시작 전 지연 시간 */
+}
+    </style>
 
-$.ajax({
-    url: "/main/" + marketNo,
-    type: "GET",
-    success: function(response) {
-        // 성공 처리
-    },
-    error: function(xhr, status, error) {
-        // 오류 처리
-    }
-});
-</script>
 </head>
 
 <body>
@@ -92,14 +96,12 @@ $.ajax({
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -121,7 +123,7 @@ $.ajax({
 			<!----------------------------------------- Navbar ----------------------------------------->
 
 			<!-- Layout container -->
-			<div class="layout-page">
+			<div class="layout-page delayed-fade-in">
 				<!-- Content wrapper -->
 				<div class="content-wrapper">
 					<!-- Content -->
@@ -149,28 +151,26 @@ $.ajax({
 	transform: scale(1.02)
 }
 </style>
-										<c:forEach items="${auctionMap }" var="auctionMap" >
-											<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test"><a
-												href="/auction/list/${auctionMap.getMarketNo() }">
-													<div class="card border shadow-none">
-														<div class="card-body text-start p-0">
-														<c:if test='${auctionMap.getMarketImgPath() == "null" }'>
-															<div class="w-100">
-																<img src="${defaultImg }" class="w-100 " alt="">
-															</div>
-														</c:if>
-															<div class="w-100">
-																<img src="${auctionMap.getMarketImgPath() }" class="w-100 " alt="">
-															</div>
-															<div class="mx-2">
-																<h5 class="my-2">${auctionMap.getMarketTitle() }</h5>
-																<p>${auctionMap.getMarketText() }</p>
+										<table id="example">
+											<c:forEach items="${auctionMap}" var="auctionMap">
+												<li class="col-md-2-5 mb-md-0 mb-4 mt-3 sh-test">
+													<a href="/auction/list/${auctionMap.getMarketNo() }">
+														<div class="card border shadow-none">
+															<div class="card-body text-start p-0">
+																<div class="w-100">
+																	<img src="${auctionMap.getMarketImgPath() }" class="w-100 " style="width:100px; height:160px;">
+																</div>
+																
+																<div class="mx-2 mt-3">
+																	<h5 class="my-2" style="white-space : nowrap; overflow : hidden; text-overflow : ellipsis;">${auctionMap.getMarketTitle() }</h5>
+																	<h5 class="my-2">${auctionMap.getMarketPrice() } 원</h5>
+																</div>
 															</div>
 														</div>
-													</div>
-											</a></li>
-										</c:forEach>
-
+													</a>
+												</li>
+											</c:forEach>
+											</table>
 										</ul>
 									</div>
 								</div>
@@ -237,5 +237,15 @@ $.ajax({
 	<script src="/assets/js/main.js"></script>
 
 	<!-- Page JS -->
+	<script type="text/javascript">
+      $(window).on('load', function() {
+          var table = $('#example').DataTable();
+
+          $('#example tbody').on('click', 'td:first-child', function() {
+              var cellData = table.cell(this).data();
+          });
+      });
+      
+    </script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <html
@@ -33,7 +32,6 @@
     <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/assets/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="/assets/vendor/fonts/flag-icons.css" />
-    
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
@@ -44,11 +42,13 @@
     <link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="/assets/vendor/DataTables/datatables.min.css">
 
     <!-- Page CSS -->
 
-    <!-- shine-CSS-->
+    <!-- Shin-CSS -->
     <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
+    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-comm.css">
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -56,6 +56,27 @@
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
+    
+    <script type="text/javascript">
+    function userDelete(userNick){
+		var userNick = $("#userNick").text();
+  		$.ajax({
+  			
+  			url : "/user/delete",
+  			data : {
+  				"userNick" : userNick
+  			},
+  			type : "POST",
+  			success : function(result) {
+  				alert("회원 삭제 성공")
+  				window.location.href = "/user/login/userProfile/manager";
+  			},
+  			error : function(){
+  				alert("회원 삭제 실패")
+  			}
+  		});
+  	}
+    </script>
   </head>
 
   <body>
@@ -63,6 +84,9 @@
     <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
       <div class="layout-container">
         <!----------------------------------------- Navbar ----------------------------------------->
+        
+        
+        
 			<nav class="navbar navbar-expand-lg bg-navbar-theme">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -73,14 +97,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -100,8 +122,8 @@
 			</nav>
 			<!-- / Navbar -->
 			<!----------------------------------------- Navbar ----------------------------------------->
-
-        <!-- Layout container -->
+			
+			<!-- Layout container -->
         <div class="layout-page">
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -133,11 +155,11 @@
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
-                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
                       Community</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
                       Auction</a>
                     </li>
                   <c:if test="${user.userNick == 'admin' }">
@@ -151,70 +173,42 @@
             </div>
             <!--/ Navbar pills -->
 
-            <div class="row g-4 mb-4">
-              <div class="col-sm-6 col-xl-3 m-auto mt-4">
-                <div class="card m-auto">
-                  <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between">
-                      <div class="content-left">
-                        <span>Session</span>
-                        <div class="d-flex align-items-center my-2">
-                          <h3 class="mb-0 me-2">21,459</h3>
-                          <p class="text-success mb-0">(+29%)</p>
-                        </div>
-                        <p class="mb-0">Total Users</p>
-                      </div>
-                      <div class="avatar">
-                        <span class="avatar-initial rounded bg-label-primary">
-                          <i class="ti ti-user ti-sm"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Users List Table -->
-              <div class="card">
-                <div class="card-header border-bottom">
-                  <h5 class="card-title mb-3">Search Filter</h5>
-                  <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <div class="col-md-4 user_role"></div>
-                    <div class="col-md-4 user_plan"></div>
-                    <div class="col-md-4 user_status"></div>
-                  </div>
-                </div>
-                <div class="card-datatable table-responsive">
-                  <table class="datatables-users table">
-                    <thead class="border-top">
-                      <tr>
-                        <th></th>
-                        <th>num</th>
-                        <th>닉네임</th>
-                        <th>이메일</th>
-                        <th>이름</th>
-                        <th>주소</th>
-                        <th>핸드폰번호</th>
-                      </tr>
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <!-- Invoice List Table -->
+                <div class="card w-100 vh-100">
+                    <div class="card-datatable table-responsives p-3">
+                        <table id="example" class="display w-100 sh-comm-table" >
+                        <a href="/user/join" class="btn btn-primary mb-3 waves-effect waves-light sh-comm-wright">회원등록</a>
+                    <thead>
+                        <tr >
+                            <th class="t-a-c">닉네임</th>
+                            <th>이메일</th>
+                            <th>주소</th>
+                            <th>번호</th>
+                            <th></th>
+                        </tr>
                     </thead>
-                     <tbody>
+                    <tbody>
                     	<c:forEach items="${userMap }" var="userMap">
-							<tr>
-								<td></td>
-								<td>${userMap.getUserNick() }</td>
-								<td>${userMap.getUserEmail() }</td>
-								<td>${userMap.getUserNm() }</td>
-								<td>${userMap.getUserAdd() }</td>
-								<td>${userMap.getUserPhone() }</td>							
+							<tr class="bdr">
+								<td class="t-a-c" style="height: 50px;"><a style="color:#444;" id="userNick" name="userNick" href="/user/login/userProfile/modify/${userMap.getUserNick() }">${userMap.getUserNick() }</a></td>
+								<td style="height: 50px;"><a style="color:#444;" href="/user/login/userProfile/modify/${userMap.getUserNick() }">${userMap.getUserEmail() }</a></td>
+								<td style="height: 50px;"><a style="color:#444;" href="/user/login/userProfile/modify/${userMap.getUserNick() }">${userMap.getUserAdd() }</a></td>
+								<td style="height: 50px;"><a style="color:#444;" href="/user/login/userProfile/modify/${userMap.getUserNick() }">${userMap.getUserPhone() }</a></td>							
+								<td style="height: 50px;"><button onclick="userDelete()" class="btn btn-primary mb-3 waves-effect waves-light sh-comm-wright">삭제</button>
 							</tr>			
 						</c:forEach>
                     </tbody>
-                  </table>
-                </div>
-                <!-- Offcanvas to add new user -->
+                </table>
                 
-              </div>
             </div>
-            </div>
+        </div>
+    </div>
             <!--/ Content -->
 
             <!-- Footer -->
@@ -235,13 +229,10 @@
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
-          </div>
-          <!--/ Content wrapper -->
-        </div>
-
-        <!--/ Layout container -->
-      </div>
-    </div>
+          </div><!--/ Content wrapper -->
+        </div><!--/ Layout container -->
+      </div><!-- Content wrapper -->
+    </div><!-- Layout container -->
 
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
@@ -267,20 +258,21 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="/assets/vendor/libs/moment/moment.js"></script>
-      <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-      <script src="/assets/vendor/libs/select2/select2.js"></script>
-      <script src="/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-      <script src="/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-      <script src="/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-      <script src="/assets/vendor/libs/cleavejs/cleave.js"></script>
-      <script src="/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-
-      
+    <script src="/assets/vendor/DataTables/datatables.min.js"></script>
+    
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
-    
+
     <!-- Page JS -->
-    <script src="/assets/js/app-user-list.js"></script>
+    <script>
+      
+      $(document).ready(function() {
+          var table = $('#example').DataTable();
+
+          $('#example tbody').on('click', 'td:first-child', function() {
+              var cellData = table.cell(this).data();
+          });
+      });
+    </script>
   </body>
 </html>

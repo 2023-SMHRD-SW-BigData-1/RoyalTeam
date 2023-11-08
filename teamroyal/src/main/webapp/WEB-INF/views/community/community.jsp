@@ -19,6 +19,9 @@
     <title>Typography - UI elements | Vuexy - Bootstrap Admin Template</title>
 
     <meta name="description" content="" />
+    
+    <!-- Shin-CSS -->
+    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
@@ -45,18 +48,34 @@
     <link rel="stylesheet" href="/assets/vendor/DataTables/datatables.min.css">
 
     <!-- Page CSS -->
+    <style type="text/css">
+    	@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-    <!-- Shin-CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-main.css">
-    <link rel="stylesheet" href="/assets/vendor/css/shine/sh-comm.css">
-    <!-- Helpers -->
+.delayed-fade-in {
+  opacity: 0; /* 초기 상태는 투명하게 */
+  animation-name: fadeIn; /* 애니메이션 이름 지정 */
+  animation-duration: 1s; /* 애니메이션 지속 시간 */
+  animation-fill-mode: forwards; /* 애니메이션 종료 후 상태 유지 */
+  animation-delay: 0.5s; /* 애니메이션 시작 전 지연 시간 */
+}
+    </style>
+    
+  </head>
+  <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
-  </head>
+    <script type="text/javascript"></script>
 
   <body>
     <!-- Layout wrapper -->
@@ -73,14 +92,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="#" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -102,7 +119,7 @@
 			<!----------------------------------------- Navbar ----------------------------------------->
 
         <!-- Layout container -->
-        <div class="layout-page">
+        <div class="layout-page delayed-fade-in">
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
@@ -124,7 +141,7 @@
                     	<c:forEach items="${listMap }" var="listMap">
 							<tr class="bdr">
 								<td class="t-a-c" style="height: 50px;">${listMap.getCommuNo() }</td>
-								<td style="height: 50px;"><a style="color:#444;" href="/community/list/detail/${listMap.getCommuNo() }">${listMap.getCommuTitle() }</a></td>
+								<td style="height: 50px;"><a style="color:#444; white-space : nowrap; overflow : hidden; text-overflow : ellipsis;" href="/community/list/detail/${listMap.getCommuNo() }">${listMap.getCommuTitle() }</a></td>
 								<td style="height: 50px;">${listMap.getCommuCreateNm() }</td>
 								<td style="height: 50px;">${listMap.getCommuCreateAt() }</td>							
 							</tr>			
@@ -169,19 +186,34 @@
     <!--/ Layout wrapper -->
 
     <!-- Core JS -->
+    
     <!-- build:js assets/vendor/js/core.js -->
 
     <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+    <!-- Page JS -->
+    <script type="text/javascript">
+      $(window).on('load', function() {
+          var table = $('#example').DataTable();
+
+          $('#example tbody').on('click', 'td:first-child', function() {
+              var cellData = table.cell(this).data();
+          });
+      });
+      
+    </script>
     <script src="/assets/vendor/libs/popper/popper.js"></script>
     <script src="/assets/vendor/js/bootstrap.js"></script>
     <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/assets/vendor/libs/hammer/hammer.js"></script>
+    
     <script src="/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    
     <script src="/assets/vendor/js/menu.js"></script>
 
     <!-- endbuild -->
+
 
     <!-- Vendors JS -->
     <script src="/assets/vendor/DataTables/datatables.min.js"></script>
@@ -189,16 +221,6 @@
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
-    <!-- Page JS -->
-    <script>
-      
-      $(document).ready(function() {
-          var table = $('#example').DataTable();
-
-          $('#example tbody').on('click', 'td:first-child', function() {
-              var cellData = table.cell(this).data();
-          });
-      });
-    </script>
+    
   </body>
 </html>

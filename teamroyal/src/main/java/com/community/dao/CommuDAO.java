@@ -13,9 +13,6 @@ public interface CommuDAO {
 
 	// 게시판 조회
 	List<CommuVO> commuListPost(CommuVO commuVo);
-
-	// 게시판 글등록
-	int commuWrite(CommuVO commuVo);
 	
 	// 게시판 이미지등록
 	int commuWriteImg(FileVO fileVo);
@@ -40,9 +37,6 @@ public interface CommuDAO {
 	
 	// 게시판 매핑테이블
 	int commuWriteMap(CommuVO commuVo);
-		
-	// 게시판 글수정
-	int commuModify(CommuVO commuVo);
 	
 	// 게시판 글삭제
 	void commuDelete(CommuVO commuVo);

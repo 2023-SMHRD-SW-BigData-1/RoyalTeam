@@ -109,15 +109,17 @@
 	</update>
 	
 	<!-- 회원 삭제 -->
-	<delete id="userInfoDelete" parameterType="com.user.vo.UserVO">
+	<delete id="userDelete" parameterType="com.user.vo.UserVO">
 		DELETE FROM ROYAL.TB_USER
-		WHERE USER_NICK = #{userNick};
+		WHERE USER_NICK = #{userNick}
 	</delete>
 	
 	<!-- 비밀번호 찾기 -->
 	<update id="userFindPw" parameterType="com.user.vo.UserVO">
 		UPDATE ROYAL.TB_USER SET 
 		USER_PW = #{userPw}
+		, USER_MODIFY_AT = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		, USER_MODIFY_NAME = 'ADMIN'
 		WHERE USER_EMAIL = #{userEmail}
 	</update>
 	

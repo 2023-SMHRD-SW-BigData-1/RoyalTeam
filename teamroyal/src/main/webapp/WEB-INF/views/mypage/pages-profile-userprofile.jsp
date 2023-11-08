@@ -80,14 +80,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -140,11 +138,11 @@
                         class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
                   </li> -->
                   <li class="nav-item">
-                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
                       Community</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-bell me-1"></i>
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
                       Auction</a>
                     </li>
                   <c:if test="${user.userNick == 'admin' }">
@@ -231,7 +229,7 @@
                   <!-- About User -->
                   <div class="card mb-4">
                     <div class="card-body">
-                      <small class="card-text text-uppercase">About</small>
+                      <h4 style="font-weight:bolder;" class="card-text text-uppercase">회원정보</h4>
                       <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3">
                           <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">별명:</span>
@@ -256,282 +254,12 @@
                       </ul>
                     </div>
                   </div> <!-- Agout User-->
-                  <!-- chat-->
-                  <div class="card card-action mb-4">
-                    <!-- min Chatt-->
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <div>
-                        <a href="/html/community/chat.html">
-                          <h5 class="card-action-title mb-0 sh-profile-card-header">채팅</h5>
-                        </a>
-                      </div>
-                      <div class="card-action-element">
-                        <div class="dropdown">
-                          <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="ti ti-dots-vertical text-muted"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="javascript:void(0);">Share connections</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                            <li>
-                              <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <ul class="list-unstyled mb-0">
-                        <li class="mb-3">
-                          <div class="d-flex align-items-start">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">김민준</h6>
-                                <small class="text-muted">45 Connections</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="/html/community/chat.html" class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-message ti-xs"></i>
-                              </a>
-                              <a href="/html/mypage/pages-profile-email.html"
-                                class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-mail ti-xs"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-start">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">박예은</h6>
-                                <small class="text-muted">1.32k Connections</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="/html/community/chat.html" class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-message ti-xs"></i>
-                              </a>
-                              <a href="/html/mypage/pages-profile-email.html"
-                                class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-mail ti-xs"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-start">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/avatars/10.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">장환익</h6>
-                                <small class="text-muted">125 Connections</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="/html/community/chat.html" class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-message ti-xs"></i>
-                              </a>
-                              <a href="/html/mypage/pages-profile-email.html"
-                                class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-mail ti-xs"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-start">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">정병인</h6>
-                                <small class="text-muted">456 Connections</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="/html/community/chat.html" class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-message ti-xs"></i>
-                              </a>
-                              <a href="/html/mypage/pages-profile-email.html"
-                                class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-mail ti-xs"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-start">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/avatars/12.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">정윤지</h6>
-                                <small class="text-muted">1.2k Connections</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="/html/community/chat.html" class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-message ti-xs"></i>
-                              </a>
-                              <a href="/html/mypage/pages-profile-email.html"
-                                class="btn btn-label-primary btn-icon btn-sm">
-                                <i class="ti ti-mail ti-xs"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="text-end">
-                          <a href="/html/community/chat.html">View all connections</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <!--/ min Chatt-->
-                  <!--/ min POWER-->
-                  <div class="card card-action mb-4 ">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <div>
-                        <a href="/html/power/power-plant.html">
-                          <h5 class="card-action-title mb-0 sh-profile-card-header">내 발전소</h5>
-                        </a>
-                      </div>
-                      <div class="card-action-element">
-                        <div class="dropdown">
-                          <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="ti ti-dots-vertical text-muted"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="javascript:void(0);">Share teams</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                            <li>
-                              <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <ul class="list-unstyled mb-0">
-                        <li class="mb-3">
-                          <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/icons/brands/react-label.png" alt="Avatar"
-                                  class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">React Developers</h6>
-                                <small class="text-muted">72 Members</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/icons/brands/support-label.png" alt="Avatar"
-                                  class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">Support Team</h6>
-                                <small class="text-muted">122 Members</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="javascript:;"><span class="badge bg-label-primary">Support</span></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/icons/brands/figma-label.png" alt="Avatar"
-                                  class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">UI Designers</h6>
-                                <small class="text-muted">7 Members</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="javascript:;"><span class="badge bg-label-info">Designer</span></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/icons/brands/vue-label.png" alt="Avatar" class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">Vue.js Developers</h6>
-                                <small class="text-muted">289 Members</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="javascript:;"><span class="badge bg-label-danger">Developer</span></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="mb-3">
-                          <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-start">
-                              <div class="avatar me-2">
-                                <img src="/assets/img/icons/brands/twitter-label.png" alt="Avatar"
-                                  class="rounded-circle" />
-                              </div>
-                              <div class="me-2 ms-1">
-                                <h6 class="mb-0">Digital Marketing</h6>
-                                <small class="text-muted">24 Members</small>
-                              </div>
-                            </div>
-                            <div class="ms-auto">
-                              <a href="javascript:;"><span class="badge bg-label-secondary">Marketing</span></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="text-end">
-                          <a href="/html/power/power-plant.html">View More Power Plant</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <!--/ min POWER-->
-                </div> <!-- Left side -->
-
-
-
-                <!-- right side-->
-                <div class="col-xl-8 col-lg-7 col-md-7 ">
                   <!-- min notification -->
                   <div class="card card-action mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <div>
                         <a href="/html/mypage/pages-profile-notifications.html">
-                          <h5 class="card-action-title mb-0 sh-profile-card-header">알림</h5>
+                          <h5 style="font-weight:bolder;" class="card-action-title mb-0 sh-profile-card-header">알림</h5>
                         </a>
                       </div>
                       <div class="card-action-element">
@@ -599,219 +327,20 @@
                       </ul>
                     </div>
                   </div> <!--/ min notification -->
-                  <!-- min profit -->
-                  <div class="card card-action mb-4 ">
-                    <div class="card-header d-flex justify-content-between align-items-center sh-profile-card-header">
-                      <div>
-                          <a href="/html/community/community-mail.html">
-                            <h5 class="card-action-title mb-0 sh-profile-card-header">이메일</h5>
-                          </a>
-                      </div>
-                      <div class="card-action-element">
-                        <div class="dropdown">
-                          <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
-                          aria-expanded="false">
-                          <i class="ti ti-dots-vertical text-muted"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="javascript:void(0);">Share timeline</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                          
-                            <li>
-                              <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-body pb-0">
-                      <div class="email-list pt-0">
-                        <ul class="list-unstyled m-0">
-                          <li
-                            class="email-list-item"
-                            data-starred="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                              <img
-                                src="/assets/img/avatars/1.png"
-                                alt="user-avatar"
-                                class="d-block flex-shrink-0 rounded-circle me-sm-3 me-2"
-                                height="32"
-                                width="32" />
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Chandler Bing</span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Focused impactful open issues from the project of GitHub</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
-                                  data-label="private"></span>
-                                <small class="email-list-item-time text-muted">08:40 AM</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li
-                            class="email-list-item email-marked-read"
-                            data-sent="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                            
-                              <img
-                                src="/assets/img/avatars/2.png"
-                                alt="user-avatar"
-                                class="d-block flex-shrink-0 rounded-circle me-sm-3 me-2"
-                                height="32"
-                                width="32" />
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Ross Geller</span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Hey Katy, Dessert soufflé tootsie roll soufflé carrot cake halvah jelly.</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-info d-none d-md-inline-block me-2"
-                                  data-label="important"></span>
-                                <small class="email-list-item-time text-muted">10:12 AM</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li
-                            class="email-list-item"
-                            data-draft="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm d-block flex-shrink-0 me-sm-3 me-2">
-                                <span class="avatar-initial rounded-circle bg-label-success">BS</span>
-                              </div>
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Barney Stinson</span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Hey Katy, Soufflé apple pie caramels soufflé tiramisu bear claw.</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-attachment ti ti-paperclip ti-xs cursor-pointer me-2 float-end float-sm-none"></span>
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                  data-label="company"></span>
-                                <small class="email-list-item-time text-muted">12:44 AM</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li
-                            class="email-list-item email-marked-read"
-                            data-starred="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                              
-                              <img
-                                src="/assets/img/avatars/3.png"
-                                alt="user-avatar"
-                                class="d-block flex-shrink-0 rounded-circle me-sm-3 me-2"
-                                height="32"
-                                width="32" />
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Pheobe Buffay</span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Hey Katy, Tart croissant jujubes gummies macaroon Icing sweet.</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-success d-none d-md-inline-block me-2"
-                                  data-label="work"></span>
-                                <small class="email-list-item-time text-muted">Yesterday</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li
-                            class="email-list-item email-marked-read"
-                            data-spam="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                              <img
-                                src="/assets/img/avatars/4.png"
-                                alt="user-avatar"
-                                class="d-block flex-shrink-0 rounded-circle me-sm-3 me-2"
-                                height="32"
-                                width="32" />
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Ted Mosby</span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Hey Katy, I love Pudding cookie chocolate sweet tiramisu jujubes I love danish.</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                  data-label="company"></span>
-                                <small class="email-list-item-time text-muted">Yesterday</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li
-                            class="email-list-item email-marked-read"
-                            data-trash="true"
-                            data-bs-toggle="sidebar"
-                            data-target="#app-email-view">
-                            <div class="d-flex align-items-center">
-                              <img
-                                src="/assets/img/avatars/9.png"
-                                alt="user-avatar"
-                                class="d-block flex-shrink-0 rounded-circle me-sm-3 me-2"
-                                height="32"
-                                width="32" />
-                              <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                <span class="h6 email-list-item-username me-2">Alistair Crowley </span>
-                                <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  Hey Katy, I love danish. Cupcake I love carrot cake sugar plum I love.</span
-                                >
-                              </div>
-                              <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                <span
-                                  class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                  data-label="company"></span>
-                                <small class="email-list-item-time text-muted">25 Feb</small>
-                                
-                              </div>
-                            </div>
-                          </li>
-                          <li class="text-end mb-4">
-                            <a href="/html/power/power-plant.html">View More Power Plant</a>
-                          </li>
-                        </ul>
-                        <ul class="list-unstyled m-0">
-                          <li class="email-list-empty text-end d-none">No items found.</li>
-                        </ul>
-                      </div>
+                  
+                </div> <!-- Left side -->
 
 
-                      
-                    </div>
-                  </div> <!--/ min profit -->
 
-
+                <!-- right side-->
+                <div class="col-xl-8 col-lg-7 col-md-7 ">
+                  
                   <!-- min profit -->
                   <div class="card card-action mb-4 ">
                     <div class="card-header d-flex justify-content-between align-items-center sh-profile-card-header">
                       <div>
                           <a href="/html/power/power-plant.html">
-                        <h5 class="card-action-title mb-0 sh-profile-card-header">내 발전량</h5>
+                        <h5 style="font-weight:bolder;" class="card-action-title mb-0 sh-profile-card-header">내 발전량</h5>
                           </a>
                       </div>
                       <div class="card-action-element">

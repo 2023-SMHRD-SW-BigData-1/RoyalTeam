@@ -190,14 +190,12 @@
 
 					<div class="collapse navbar-collapse" id="navbar-ex-5">
 						<div class="navbar-nav me-auto">
-							<a href="/user/index" class="d-flex align-items-center w-px-30"
-								style="text-decoration: none;"> <img alt=""
-								src="/assets/img/branding/logo.png" class="w-100">SHINE
-							</a> <a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
+							<a href="/user/index" class="d-flex align-items-center w-px-30" style="text-decoration: none;">
+							<img alt="" src="/assets/img/branding/logo.png" class="w-100">SHINE</a> 
+							<a class="nav-item nav-link ml-6 active" href="/user/index">MAIN</a>
 							<a class="nav-item nav-link" href="/community/list">COMMUNITY</a>
-							<a class="nav-item nav-link" href="/community/chat">CHAT</a> <a
-								class="nav-item nav-link" href="/community/email">MAIL</a> <a
-								class="nav-item nav-link active" href="/auction/main">AUCTION</a>
+							<a class="nav-item nav-link" href="/community/chat">CHAT</a> 
+							<a class="nav-item nav-link active" href="/auction/main">AUCTION</a>
 							<a class="nav-item nav-link" href="/power/main">POWER PLANT</a>
 						</div>
 						<ul class="navbar-nav ms-lg-auto">
@@ -231,6 +229,8 @@
                   <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
                     <div class="me-1">
                       <h5 class="mb-1" style="font-weight:bolder; font-size:2rem;">${adMap.getMarketTitle() }</h5>
+                      <br>
+                      <h3 class="mb-1 ml-3" style="font-weight:bolder; font-size:1.2rem;">${adMap.getMarketPrice() } 원</h3>
                     </div>
                     
                     <c:if test="${adMap.getMarketCreateNm() == user.userNick }">
@@ -260,14 +260,14 @@
                         <i class="ti ti-message ti-sm"></i>채팅
                         
                       </a>
-                      <a href="chat.html" class="d-flex mx-2 btn btn-primary bg-transparent border-none btn-no-boxshadow">
-                        <i class="ti ti-mail ti-sm"></i>메일
-                      </a>
                       <a href="/auction/list/part/${adMap.getMarketCreateNm()}" class="d-flex mx-2 btn btn-primary bg-transparent border-none btn-no-boxshadow">
                         <i class="ti ti-bookmarks ti-sm"></i>${adMap.getMarketCreateNm()}님의 게시글더보기 >
                       </a>
                     </div>
                   </div><br><!-- user info -->
+                    <div>
+                    
+                  </div>
                   <!-- user content-->
                   <div class="card academy-content shadow-none border">
                     <div class="p-2">

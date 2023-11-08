@@ -41,11 +41,10 @@ public class CommuServiceImp implements CommuService {
 	@Override
 	public ResultVO commuInsert(CommuVO commuVo) {
 		try {
-			if (commuVo.getUserNick() != null && commuVo.getCommuTitle() != null && commuVo.getCommuText() != null
-					&& commuVo.getMtFile() != null) {
+			if (commuVo.getUserNick() != null && commuVo.getCommuTitle() != null && commuVo.getCommuText() != null) {
 				// 커뮤니티 등록
 				commuDao.commuInsert(commuVo);
-				if (commuVo.getCommuNo() != null) {
+				if (commuVo.getMtFile() != null) {
 					FileVO fileVo = new FileVO();
 					MultipartFile mtFile = commuVo.getMtFile();
 
@@ -142,63 +141,6 @@ public class CommuServiceImp implements CommuService {
 		return commuDao.commuListPost(commuVo);
 	}
 
-	// 게시판 글쓰기
-	@Override
-	public Map<String, Object> commuWrite(CommuVO commuVo) {
-		Map<String, Object> writeMap = new HashMap<String, Object>();
-		if (commuVo.getCommuTitle() != null) {
-
-			int WriteDataCnt = commuDao.commuWrite(commuVo);
-
-			try {
-
-				FileVO fileVo = new FileVO();
-				MultipartFile mtFile = commuVo.getMtFile();
-				
-				System.out.println("========>"+mtFile);
-
-				String path = attachRoot;
-				String uId = cmmnService.getUuid();
-				String orgfNm = mtFile.getOriginalFilename();
-				String[] fileNm = orgfNm.split("\\.");
-
-				fileVo.setIntId(commuVo.getCommuNo());
-				fileVo.setFileName(orgfNm);
-				fileVo.setFileExt("." + fileNm[1]);
-				fileVo.setFileUuName(uId);
-				fileVo.setFilePath(path + uId);
-				fileVo.setSize(mtFile.getSize());
-				fileVo.setLoginUser(commuVo.getLoginUser());
-				System.out.println("::::::::::::::::이미지 등록 시작::::::::::::::::");
-				// 커뮤니티 이미지 등록
-				System.out.println(fileVo.getLoginUser());
-				commuDao.commuFileInsert(fileVo);
-				commuVo.setCommuImgNo(fileVo.getFileNo());
-
-				System.out.println("::::::::::::::::::::::" + commuVo.getCommuNo());
-				System.out.println("::::::::::::::::::::::" + commuVo.getCommuImgNo());
-				// 커뮤니티 이미지 매핑 등록
-				commuDao.commuFileMapInsert(commuVo);
-
-				mtFile.transferTo(new File(attachRoot, uId + "." + fileNm[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			if (WriteDataCnt == 1) {
-				writeMap.put("writeMsg", "글등록 완료");
-				writeMap.put("writeCode", "20");
-			} else {
-				writeMap.put("writeMsg", "글등록 실패");
-				writeMap.put("writeCode", "80");
-			}
-		} else {
-			writeMap.put("writeMsg", "필수값 오류");
-			writeMap.put("writeCode", "01");
-		}
-		return writeMap;
-	}
-
 	// 게시판 이미지 등록
 	@Override
 	public Map<String, Object> commuWriteImg(CommuVO commuVo) {
@@ -293,28 +235,6 @@ public class CommuServiceImp implements CommuService {
 	@Override
 	public List<CommuVO> commuPostPart(String commuCreateNm) {
 		return commuDao.commuPostPart(commuCreateNm);
-	}
-
-	// 게시판 글수정
-	@Override
-	public Map<String, Object> commuModify(CommuVO commuVo) {
-		Map<String, Object> modifyMap = new HashMap<String, Object>();
-		if (commuVo.getCommuTitle() != null) {
-			System.out.println(commuVo.getCommuTitle() + "글 수정");
-
-			int modifyDataCnt = commuDao.commuWrite(commuVo);
-			if (modifyDataCnt == 1) {
-				modifyMap.put("modifyMsg", "글수정 완료");
-				modifyMap.put("modifyCode", "30");
-			} else {
-				modifyMap.put("modifyMsg", "글수정 실패");
-				modifyMap.put("modifyCode", "70");
-			}
-		} else {
-			modifyMap.put("modifyMsg", "필수값 오류");
-			modifyMap.put("modifyCode", "01");
-		}
-		return modifyMap;
 	}
 
 	//커뮤니티 삭제
