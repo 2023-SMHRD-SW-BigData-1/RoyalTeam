@@ -161,7 +161,7 @@
 												</div>
 												<div style="padding-left:-20px;">
 													<p class="mb-0 text-nowrap" style="font-size:0.9rem;">현재 발전량(Kw)</p>
-													<small class="text-muted" id="allgener">28,200</small>
+													<small class="text-muted" id="allgener"></small>
 												</div>
 											</li>
 											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:15px;">
@@ -170,7 +170,7 @@
 												</div>
 												<div>
 													<h6 class="mb-0 text-nowrap"  style="font-size:0.9rem;">예측 발전량(Kw)</h6>
-													<small class="text-muted">30,200</small>
+													<small class="text-muted" id="premodal"></small>
 												</div>
 											</li>
 										</ul>
@@ -380,7 +380,10 @@
 	<script src="/assets/vendor/js/sh-highchart.js"></script>
 	<script type="text/javascript"></script>
 	
-	<script>
+	    <script>
+    
+  
+    
    $.ajax({
 	    url: "/user/login/api/data",
 	    method: "GET",
@@ -424,7 +427,7 @@
    		   console.log(smp_data[0].SMP_AVG)
    		   
    		   var smpdata = document.getElementById("smp_data");
-   		   smpdata.innerText = '실시간 SMP '+smp_data[0].SMP_AVG;
+   		   smpdata.innerText = '실시간 SMP '+ smp_data[0].SMP_AVG;
    	   }
    })
    
@@ -435,8 +438,24 @@
 	 success : function(rec_data){
 		 
 		 var recdata = document.getElementById("rec_data");
-	recdata.innerText = '실시간 REC(원) '+	 rec_data[0].REC_LANDAVG;
+	recdata.innerText =	'실시간 REC(원) '+ rec_data[0].REC_LANDAVG;
 	 }
+   })
+   
+   $.ajax({
+	   url : "/user/login/api/allpre",
+   	   method : "GET",
+   	   dataType : "json",
+   	   success : function(allpre){
+   		   
+   		   console.log(allpre);
+   		  var premodal = document.getElementById("premodal");
+   		 premodal.innerText = allpre[0].TOTAL;
+   	   },
+   	   error : function(error) {
+   		   
+   		   console.log(error);
+   	   }
    })
 
    </script>

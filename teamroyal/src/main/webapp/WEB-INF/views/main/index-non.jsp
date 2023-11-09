@@ -120,7 +120,7 @@
                   style="position: absolute; top: 6.5%; right: 3%;">
                   <div class="card-header d-flex justify-content-between pb-0">
                      <div class="card-title mb-0">
-                        <h5 class="mb-0">2023년 10월 24일</h5>
+                        <h5 class="mb-0" id="now_date"></h5>
                         <small class="text-muted">대한민국</small>
                      </div>
                      <div class="dropdown">
@@ -349,6 +349,23 @@
    <script type="text/javascript"></script>
    
     <script>
+    
+    let now = new Date();
+    let nyun = now.getFullYear();
+    let wal = now.getMonth() + 1; // 월은 0부터 시작하기 때문에 1을 더해줍니다.
+    let il = now.getDate();
+
+    // 각 월과 일이 한 자리수일 경우 앞에 0을 붙여줍니다.
+    wal = wal < 10 ? '0' + wal : wal;
+    il = il < 10 ? '0' + il : il;
+
+    let dateS = nyun + '년 ' + wal + '월 ' + il + '일';
+    console.log(dateS);
+
+    
+    var dateTag = document.getElementById("now_date");
+    dateTag.innerText = dateS;
+    
    $.ajax({
 	    url: "/user/login/api/data",
 	    method: "GET",
