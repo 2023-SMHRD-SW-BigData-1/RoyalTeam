@@ -147,7 +147,7 @@
                                  </div>
                                  <div>
                                     <h6 class="mb-0 text-nowrap">발전소 수</h6>
-                                    <small class="text-muted">14,232</small>
+                                    <small class="text-muted" id="cs"></small>
                                  </div>
                               </li>
                               <li class="d-flex mt-5 gap-3 align-items-center mb-lg-3 pb-1">
@@ -156,7 +156,7 @@
                                  </div>
                                  <div>
                                     <h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
-                                    <small class="text-muted">28,200</small>
+                                    <small class="text-muted" id="allgener"></small>
                                  </div>
                               </li>
                               <li class="d-flex mt-5 gap-3 align-items-center pb-1">
@@ -186,7 +186,7 @@
                                     </div>
                                     <h6 class="mb-0">실시간 SMP</h6>
                                  </div>
-                                 <h4 class="my-2 pt-1">545.69</h4>
+                                 <h4 class="my-2 pt-1" id="smp_data"></h4>
                                  <div class="progress w-75" style="height: 4px">
                                     <div class="progress-bar" role="progressbar"
                                        style="width: 65%" aria-valuenow="65" aria-valuemin="0"
@@ -200,7 +200,7 @@
                                     </div>
                                     <h6 class="mb-0">실시간 REC(원)</h6>
                                  </div>
-                                 <h4 class="my-2 pt-1">34,474.30</h4>
+                                 <h4 class="my-2 pt-1" id="rec_data"></h4>
                                  <div class="progress w-75" style="height: 4px">
                                     <div class="progress-bar bg-danger" role="progressbar"
                                        style="width: 65%" aria-valuenow="65" aria-valuemin="0"
@@ -347,5 +347,66 @@
    <!-- shine chart js-->
    <script src="/assets/vendor/js/sh-highchart.js"></script>
    <script type="text/javascript"></script>
+   
+    <script>
+   $.ajax({
+	    url: "/user/login/api/data",
+	    method: "GET",
+	    dataType: "json",
+	    success: function(data) {
+	        var outputElements = document.getElementById("cs");
+            outputElements.innerText = data[0].CS;
+	    },
+	    error: function(error) {
+	        console.error(error);
+	    }
+	});
+   
+   $.ajax({
+	   url: "/user/login/api/allgener",
+	   method : "GET",
+	   dataType : "json",
+	   success: function(allgener){
+	     
+		   
+			  let res_sum = 0;
+			   for (var i = 0; i < allgener.length; i++) {
+		           var summ = allgener[i].SUMM;
+		           res_sum += summ;
+			   }
+			   
+		        var allgenerE = document.getElementById("allgener");
+		        allgenerE.innerText = res_sum;
+				
+	   },
+	   error: function(error){
+		   console.error(error);
+	   }
+   });
+   
+   $.ajax({
+	   url: "/user/login/api/smp",
+   	   method : "GET",
+   	   dataType : "json",
+   	   success : function(smp_data){
+   		   console.log(smp_data[0].SMP_AVG)
+   		   
+   		   var smpdata = document.getElementById("smp_data");
+   		   smpdata.innerText = smp_data[0].SMP_AVG;
+   	   }
+   })
+   
+   $.ajax({
+	 url : "/user/login/api/rec",
+	 method : "GET",
+	 dataType : "json",
+	 success : function(rec_data){
+		 
+		 var recdata = document.getElementById("rec_data");
+	recdata.innerText =	 rec_data[0].REC_LANDAVG;
+	 }
+   })
+
+   </script>
   </body>
 </html>
