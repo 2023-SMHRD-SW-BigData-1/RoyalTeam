@@ -73,4 +73,10 @@ public class GenerDaoImp implements GenerDao {
 		
 		return sqlSession.selectList("com.gener.dao.UserDao.getAllPre", dateString);
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> getAllPreModal(){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getAllPreModal");
+	}
 }

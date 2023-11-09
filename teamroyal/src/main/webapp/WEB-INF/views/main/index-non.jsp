@@ -165,7 +165,7 @@
                                  </div>
                                  <div>
                                     <h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
-                                    <small class="text-muted">30,200</small>
+                                    <small class="text-muted" id="premodal"></small>
                                  </div>
                               </li>
                            </ul>
@@ -405,6 +405,22 @@
 		 var recdata = document.getElementById("rec_data");
 	recdata.innerText =	 rec_data[0].REC_LANDAVG;
 	 }
+   })
+   
+   $.ajax({
+	   url : "/user/login/api/allpre",
+   	   method : "GET",
+   	   dataType : "json",
+   	   success : function(allpre){
+   		   
+   		   console.log(allpre);
+   		  var premodal = document.getElementById("premodal");
+   		 premodal.innerText = allpre[0].TOTAL;
+   	   },
+   	   error : function(error) {
+   		   
+   		   console.log(error);
+   	   }
    })
 
    </script>
