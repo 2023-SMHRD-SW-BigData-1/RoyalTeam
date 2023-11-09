@@ -60,6 +60,14 @@
 /*****highchart******/
 .highcharts-title,
 .highcharts-subtitle,
-.highcharts-credits {
+.highcharts-credits,
+.highcharts-label {
   display: none;
 }
+.highcharts-label,
+.highcharts-series-label,
+.highcharts-series-label-0, 
+.highcharts-color-0 text {
+	display :none;
+	}
+	

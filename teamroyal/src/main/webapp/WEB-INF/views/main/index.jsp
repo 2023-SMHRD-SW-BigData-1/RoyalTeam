@@ -70,6 +70,9 @@
 </head>
 
 <body>
+<c:set var="today" value="<%=new java.util.Date()%>" />
+<!-- 현재날짜 -->
+<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set> 
 	<!-- Layout wrapper -->
 	<div
 		class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
@@ -122,7 +125,7 @@
 						style="position: absolute; top: 8.5%; right: 3%;">
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
-								<h5 class="mb-0">2023년 10월 24일</h5>
+								<h5 class="mb-0"><c:out value="${date}" />
 							</div>
 							<div class="dropdown" style="margin-top: 20px;">
 								<button class="btn p-0" type="button" id="supportTrackerMenu"
@@ -143,30 +146,30 @@
 
 									<div class="w-100">
 										<ul class="p-0 d-flex">
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-												<div class="badge rounded bg-label-primary p-1">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" >
+												<div class="badge rounded bg-label-primary p-1"  style="padding-right:-20px;">
 													<i class="ti ti-ticket ti-sm"></i>
 												</div>
 												<div>
-													<h6 class="mb-0 text-nowrap">발전소 수</h6>
+													<h6 class="mb-0 text-nowrap"  style="font-size:0.9rem;">발전소 수</h6>
 													<small class="text-muted">14,232</small>
 												</div>
 											</li>
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-												<div class="badge rounded bg-label-info p-1">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:15px;">
+												<div class="badge rounded bg-label-info p-1" style="padding-right:-20px;">
 													<i class="ti ti-circle-check ti-sm"></i>
 												</div>
-												<div>
-													<h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
+												<div style="padding-left:-20px;">
+													<p class="mb-0 text-nowrap" style="font-size:0.9rem;">현재 발전량(Kw)</p>
 													<small class="text-muted">28,200</small>
 												</div>
 											</li>
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-												<div class="badge rounded bg-label-warning p-1">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:15px;">
+												<div class="badge rounded bg-label-warning p-1"  style="padding-right:-20px;">
 													<i class="ti ti-clock ti-sm"></i>
 												</div>
 												<div>
-													<h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
+													<h6 class="mb-0 text-nowrap"  style="font-size:0.9rem;">예측 발전량(Kw)</h6>
 													<small class="text-muted">30,200</small>
 												</div>
 											</li>
@@ -174,7 +177,7 @@
 									</div>
 
 
-									<div class="col-12 w-100" style="margin-top: -20px;">
+									<div class="col-12 w-100" style="margin-top: -10px;">
 										<div id="sh-drilldown" style="width:400px; height:240px"></div>
 									</div>
 								</div>
@@ -185,37 +188,37 @@
 							<div class="row">
 								<div class="rounded">
 									<div class="row gap-4 gap-sm-0 d-flex justify-content-center">
-										<div class="col-12 col-sm-4 mx-3">
-											<div class="d-flex gap-2 align-items-center">
+										<div class="col-12 col-sm-4 mx-3" style="width:190px;">
+											<div class="d-flex gap-2 align-items-center" style="padding-bottom:10px;">
 												<div class="badge rounded bg-label-primary">
-													<i class="ti ti-currency-dollar ti-sm"></i>
+													<i class="ti ti-brand-paypal ti-sm"></i>
 												</div>
-												<h6 class="mb-0">실시간 SMP</h6>
+												<h6 class="mb-0">실시간 SMP 545.69</h6>
 											</div>
-											<p class="my-2 pt-1">545.69</p>
-											<div class="progress w-75" style="height: 4px">
-												<div class="progress-bar" role="progressbar"
-													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+											
+											<div class="progress" style="height: 4px">
+												<div class="progress-bar  bg-danger" role="progressbar"
+													style="width: 50%" aria-valuenow="65" aria-valuemin="0"
 													aria-valuemax="100"></div>
 											</div>
 										</div>
-										<div class="col-12 col-sm-4 mx-3">
-											<div class="d-flex gap-2 align-items-center">
+										<div class="col-12 col-sm-4 mx-3" style="width:190px;">
+											<div class="d-flex gap-2 align-items-center" style="padding-bottom:10px;">
 												<div class="badge rounded bg-label-danger">
-													<i class="ti ti-brand-paypal ti-sm"></i>
+													<i class="ti ti-currency-dollar ti-sm"></i>
 												</div>
-												<h6 class="mb-0">실시간 REC(원)</h6>
+												<h6 class="mb-0">실시간 REC(원) 34,474.30</h6>
 											</div>
-											<p class="my-2 pt-1">34,474.30</p>
-											<div class="progress w-75" style="height: 4px">
+											
+											<div class="progress" style="height: 4px">
 												<div class="progress-bar bg-danger" role="progressbar"
-													style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+													style="width: 50%;" aria-valuenow="65" aria-valuemin="0"
 													aria-valuemax="100"></div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="w-100 col-12 col-md-8 " style="margin-top: 20px;">
+								<div class="w-100 col-12 col-md-8 " style="margin-top: 40px;">
 									<div id="sh-symbols-kr" style="width:400px; height:280px"></div>
 									
 									
@@ -243,7 +246,7 @@
 						</div>
 					</div>
 					<div class="card windy-right-table"
-						style="position: absolute; top: 30%; left: 3%; width:700px;">
+						style="position: absolute; top: 30%; left: 3%; width:550px; ">
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
 								<h5 class="mb-0">광주발전소</h5>
@@ -267,7 +270,8 @@
 
 									<div class="w-100" >
 										<ul class="p-0 d-flex">
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+										<div style="">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:60px;">
 												<div class="badge rounded bg-label-primary p-1">
 													<i class="ti ti-ticket ti-sm"></i>
 												</div>
@@ -276,7 +280,7 @@
 													<small class="text-muted">14,232</small>
 												</div>
 											</li>
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:60px;">
 												<div class="badge rounded bg-label-info p-1">
 													<i class="ti ti-circle-check ti-sm"></i>
 												</div>
@@ -285,7 +289,9 @@
 													<small class="text-muted">28,200</small>
 												</div>
 											</li>
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+											</div>
+											<div>
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:30px;">
 												<div class="badge rounded bg-label-info p-1">
 													<i class="ti ti-circle-check ti-sm"></i>
 												</div>
@@ -294,7 +300,7 @@
 													<small class="text-muted">16</small>
 												</div>
 											</li>
-											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:30px;">
 												<div class="badge rounded bg-label-warning p-1">
 													<i class="ti ti-clock ti-sm"></i>
 												</div>
@@ -303,13 +309,14 @@
 													<small class="text-muted">105200</small>
 												</div>
 											</li>
+											</div>
 										</ul>
 									</div>
 
 
-									<div class="col-12 w-100" >
+									<div class="col-12 w-100">
 										
-										<div id="sh-symbols-per"></div>
+										<div id="sh-symbols-per" style="width:500px; height:300px;"></div>
 									</div>
 								</div>
 							</div>

@@ -51,3 +51,8 @@
 {
     display: none;
 }
+.highcharts-title,
+.highcharts-subtitle,
+.highcharts-credits {
+  display: none;
+}
