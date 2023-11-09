@@ -49,10 +49,10 @@ public class AuctionServiceImp implements AuctionService {
 	public ResultVO auctionInsert(AuctionVO auctionVo) {
 		try {
 			if (auctionVo.getUserNick() != null && auctionVo.getMarketTitle() != null
-					&& auctionVo.getMarketText() != null && auctionVo.getMtFile() != null) {
+					&& auctionVo.getMarketText() != null) {
 				// 커뮤니티 등록
 				auctionDao.auctionInsert(auctionVo);
-				if (auctionVo.getMarketNo() != null) {
+				if (auctionVo.getMtFile() != null) {
 					FileVO fileVo = new FileVO();
 					MultipartFile mtFile = auctionVo.getMtFile();
 
