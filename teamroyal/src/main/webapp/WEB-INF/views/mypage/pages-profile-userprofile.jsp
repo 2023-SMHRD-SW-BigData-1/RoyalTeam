@@ -362,31 +362,20 @@
                     </div>
                     <div class="card-body pb-0">
                       <figure class="highcharts-figure">
-                        <div id="containers"></div>
+                        <div id="sh-symbols-per"></div>
                       </figure>
                       <div class="ld-row">
-                        <label class="ld-label">
-                          Enable Polling
-                        </label>
-                        <input type="checkbox" checked="checked" id="enablePolling" />
+                        
                       </div>
                       <div class="ld-row">
-                        <label class="ld-label">
-                          Polling Time (Seconds)
-                        </label>
-                        <input class="ld-time-input" type="number" value="2" id="pollingTime" />
+                        
                       </div>
                       <div class="ld-row">
-                        <label class="ld-label">
-                          CSV URL
-                        </label>
-                        <input class="ld-url-input" type="text" id="fetchURL" />
+                        
                       </div>
                       
                     </div>
-                    <div class="text-end mb-4">
-                      <a href="/html/power/power-plant.html">View More Power Plant</a>
-                    </div>
+                   
                   </div> <!--/ min profit -->
 
                   
@@ -451,6 +440,9 @@
   <!-- Page JS -->
   <script src="/assets/js/pages-auth.js"></script>
   <script type="text/javascript"></script>
+  
+  <script src="/assets/vendor/js/sh-highchart.js"></script>
+	<script type="text/javascript"></script>
 </body>
 
 </html>
