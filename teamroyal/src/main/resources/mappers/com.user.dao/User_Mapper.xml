@@ -18,6 +18,7 @@
 			, USER_MODIFY_AT AS userModifyAt
 			, USER_MODIFY_NAME AS userModifyNm
 			, USER_ROLE AS userRole
+			, IPPT AS ippt
 		FROM ROYAL.TB_USER
 		WHERE 1=1
 		<if test="userNick != null and userNick != ''">

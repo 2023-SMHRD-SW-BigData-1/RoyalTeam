@@ -120,4 +120,39 @@ SELECT SUM(P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10 + P11 + P12 + P13 + 
 FROM TB_GENPREDICT
 WHERE PRE_DATE = '08/09/2023'
 </select>
+
+<select id="getPersGenName" parameterType="String" resultType="java.util.HashMap">
+SELECT DISTINCT IPPTNM
+FROM SOLAR_POWER_MST
+WHERE IPPT = '${dataString}'
+</select>
+
+<select id="getPersNow" parameterType="String" resultType="java.util.HashMap">
+<![CDATA[
+SELECT A.DGENHMS, A.IPPT, A.IPPTNM, A.HOGI, A.QPOWER, ROUND(A.QPOWER * (SELECT SMP_AVG FROM ( SELECT * FROM ROYAL.TB_SMP_LAND ORDER BY SMP_DATE DESC ) WHERE ROWNUM <= 1),0) FROM ROYAL.SOLAR_POWER_TIME A WHERE A.DGENYMD = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND A.DGENHMS <= TO_CHAR(SYSDATE, 'hh24:mi:ss') AND A.IPPT = '${dataString}' ORDER BY A.DGENHMS
+]]>
+</select>
+
+<select id="getPersTime" parameterType="String" resultType="java.util.HashMap">
+<![CDATA[
+SELECT A.IPPT, A.IPPTNM, A.HOGI, COUNT(A.IPPT) AS TIMER FROM ROYAL.SOLAR_POWER_TIME A WHERE A.DGENYMD = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND A.DGENHMS <= TO_CHAR(SYSDATE, 'hh24:mi:ss') AND A.QPOWER > 0 AND A.IPPT = '${dataString}' GROUP BY A.IPPT, A.IPPTNM, A.HOGI ORDER BY A.IPPTNM
+]]>
+</select>
+
+<select id="getPersPre" parameterType="String" resultType="java.util.HashMap">
+<![CDATA[
+SELECT SUM(P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10 + P11 + P12 + P13 + P14 + P15 + P16 + P17 + P18 + P19 + P20 + P21 + P22 + P23 + P24) AS Total
+FROM TB_GENPREDICT
+WHERE PRE_DATE = '08/09/2023' AND IPPT = '${dataString}'
+]]>
+</select>
+
+<select id="getPersGain" parameterType="String" resultType="java.util.HashMap">
+<![CDATA[
+SELECT A.IPPT, A.IPPTNM, A.HOGI, SUM(A.QPOWER) , AVG(A.QPOWER) , ROUND(SUM(A.QPOWER) * (SELECT SMP_AVG FROM ( SELECT * FROM ROYAL.TB_SMP_LAND ORDER BY SMP_DATE DESC ) WHERE ROWNUM <= 1),0) AS GAIN  FROM ROYAL.SOLAR_POWER_TIME A WHERE A.DGENYMD = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND A.DGENHMS <= TO_CHAR(SYSDATE, 'hh24:mi:ss') AND A.IPPT = '${dataString}' GROUP BY A.IPPT, A.IPPTNM, A.HOGI ORDER BY A.IPPTNM
+
+]]>
+</select>
+
+
 </mapper>    

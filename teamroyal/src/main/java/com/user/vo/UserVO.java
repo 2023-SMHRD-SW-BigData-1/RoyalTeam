@@ -29,6 +29,7 @@ public class UserVO {
 	private String userModifyAt; //수정일
 	private String userModifyNm; //수정자
 	private String userRole; //권한
+	private String ippt;
 	
 	private String adminEmail;
 	private String emailText;

@@ -79,4 +79,35 @@ public class GenerDaoImp implements GenerDao {
 		
 		return sqlSession.selectList("com.gener.dao.UserDao.getAllPreModal");
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> getPersGenName(String dataString){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getPersGenName", dataString);
+	}
+	@Override
+	public List<HashMap<String, Object>> getPersNow(String dataString){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getPersNow", dataString);
+	}
+	@Override
+	public List<HashMap<String, Object>> getPersTime(String dataString){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getPersTime", dataString);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getPersPre(String dataString){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getPersPre", dataString);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getPersGain(String dataString){
+		
+		return sqlSession.selectList("com.gener.dao.UserDao.getPersGain", dataString);
+	}
+
+	
+	
 }

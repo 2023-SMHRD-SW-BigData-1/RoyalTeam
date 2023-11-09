@@ -249,7 +249,7 @@
 						style="position: absolute; top: 30%; left: 3%; width:550px; ">
 						<div class="card-header d-flex justify-content-between pb-0">
 							<div class="card-title mb-0">
-								<h5 class="mb-0">광주발전소</h5>
+								<h5 class="mb-0" id="generName"></h5>
 							</div>
 							<div class="dropdown">
 								<button class="btn p-0" type="button" id="supportTrackerMenu"
@@ -277,7 +277,7 @@
 												</div>
 												<div>
 													<h6 class="mb-0 text-nowrap">현재 발전량(Kw)</h6>
-													<small class="text-muted">14,232</small>
+													<small class="text-muted" id="nowpower"></small>
 												</div>
 											</li>
 											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:60px;">
@@ -286,7 +286,7 @@
 												</div>
 												<div>
 													<h6 class="mb-0 text-nowrap">예측 발전량(Kw)</h6>
-													<small class="text-muted">28,200</small>
+													<small class="text-muted" id="generperspre"></small>
 												</div>
 											</li>
 											</div>
@@ -297,7 +297,7 @@
 												</div>
 												<div>
 													<h6 class="mb-0 text-nowrap">발전시간(hr)</h6>
-													<small class="text-muted">16</small>
+													<small class="text-muted" id="genertime"></small>
 												</div>
 											</li>
 											<li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1" style="padding-left:30px;">
@@ -306,7 +306,7 @@
 												</div>
 												<div>
 													<h6 class="mb-0 text-nowrap">예상 수익금(원)</h6>
-													<small class="text-muted">105200</small>
+													<small class="text-muted" id="pregain"></small>
 												</div>
 											</li>
 											</div>
@@ -383,7 +383,7 @@
 	    <script>
     
   
-    
+    // 발전소 수 
    $.ajax({
 	    url: "/user/login/api/data",
 	    method: "GET",
@@ -396,7 +396,7 @@
 	        console.error(error);
 	    }
 	});
-   
+   // 대한민국 하루 발전 총량
    $.ajax({
 	   url: "/user/login/api/allgener",
 	   method : "GET",
@@ -419,6 +419,8 @@
 	   }
    });
    
+   // 실시간 smp
+   
    $.ajax({
 	   url: "/user/login/api/smp",
    	   method : "GET",
@@ -431,6 +433,7 @@
    	   }
    })
    
+   // 실시간 rec
    $.ajax({
 	 url : "/user/login/api/rec",
 	 method : "GET",
@@ -441,6 +444,8 @@
 	recdata.innerText =	'실시간 REC(원) '+ rec_data[0].REC_LANDAVG;
 	 }
    })
+   
+   // 대한민국 전체 예측 발전량
    
    $.ajax({
 	   url : "/user/login/api/allpre",
@@ -457,7 +462,123 @@
    		   console.log(error);
    	   }
    })
+	
+   var userIppt = "${user.ippt}";
+   console.log(userIppt);
+   // 개인 발전소 이름
+   $.ajax({
+		url: '/user/index/api/persgenname', // 서버의 RestController 엔드포인트 경로
+		method: 'POST', // 또는 'GET' 등 HTTP 메서드 지정
+		anync : false,
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 서버로 전달할 데이터
+		data: {
+			dataString : userIppt
+		},
+		success: function(response) {
+			// 서버 응답을 처리합니다.
 
+			
+			
+		const firstItem = response.dataList[0];
+		console.log(firstItem.IPPTNM);
+			var generNameTag = document.getElementById("generName");
+			generNameTag.innerText = firstItem.IPPTNM;
+		},
+		error : function(error){
+			
+		}
+		})
+		
+		// 개인 발전소 발전량
+		$.ajax({
+		url: '/user/index/api/persnow', // 서버의 RestController 엔드포인트 경로
+		method: 'POST', // 또는 'GET' 등 HTTP 메서드 지정
+		anync : false,
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 서버로 전달할 데이터
+		data: {
+			dataString : userIppt
+		},
+		success: function(response) {
+			// 서버 응답을 처리합니다.
+
+			
+			
+		const firstItem = response.dataList[0];
+		var nowPower = document.getElementById("nowpower");
+		nowPower.innerText = firstItem.QPOWER;
+			
+		},
+		error : function(error){
+			
+		}
+		})
+		
+		// 개인 발전소 발전 시간
+		$.ajax({
+			url : '/user/index/api/perstime',
+			method : 'POST',
+			anync : false,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 서버로 전달할 데이터
+			data: {
+				dataString : userIppt
+			},
+			success : function(response){
+				const firstItem = response.dataList[0];
+			console.log(firstItem.TIMER);
+			
+			var generTimeTag = document.getElementById("genertime");
+			generTimeTag.innerText = firstItem.TIMER;
+			},
+			error : function(error){
+				console.error(error);
+			}
+		})
+		
+		// 개인 발전소 예측 발전량
+		$.ajax({
+			url : '/user/index/api/perspre',
+			method : 'POST',
+			anync : false,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 서버로 전달할 데이터
+			data: {
+				dataString : userIppt
+			},
+			success : function(response){
+				
+				
+				const firstItem = response.dataList[0];
+				var generPersPre = document.getElementById("generperspre");
+				generPersPre.innerText = firstItem.TOTAL;
+				
+
+			},
+			error : function(error){
+				console.error(error);
+			}
+		})
+  
+		// 개인 발전소 예측 수익량 
+		
+				$.ajax({
+			url : '/user/index/api/persgain',
+			method : 'POST',
+			anync : false,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 서버로 전달할 데이터
+			data: {
+				dataString : userIppt
+			},
+			success : function(response){
+				
+				const firstItem = response.dataList[0];
+				var preGain = document.getElementById("pregain");
+				preGain.innerText = firstItem.GAIN;
+
+			},
+			error : function(error){
+				console.error(error);
+			}
+		})
+   
    </script>
 </body>
 </html>

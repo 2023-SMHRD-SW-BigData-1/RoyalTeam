@@ -25,4 +25,18 @@ public interface GenerService {
 	List<HashMap<String, Object>> getAllPre(String dateString);
 	
 	List<HashMap<String, Object>> getAllPreModal();
+	
+	List<HashMap<String,Object>> getPersGenName(String dataString);
+	
+	List<HashMap<String,Object>> getPersNow(String dataString);
+	
+	List<HashMap<String, Object>> getPersTime(String dataString);
+	
+	List<HashMap<String, Object>> getPersPre(String dataString);
+	
+	List<HashMap<String, Object>> getPersGain(String dataString);
+
+	
+
+	
 }

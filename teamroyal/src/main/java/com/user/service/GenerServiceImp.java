@@ -64,4 +64,34 @@ public	List<HashMap<String, Object>> processDateData(String dateString){
 		
 		return generDao.getAllPreModal();
 	}
+	@Override
+	public List<HashMap<String, Object>> getPersGenName(String dataString){
+		
+		return generDao.getPersGenName(dataString);
+	
+	}
+	@Override
+	public List<HashMap<String, Object>> getPersNow(String dataString){
+		
+		return generDao.getPersNow(dataString);
+	}
+	@Override
+	public List<HashMap<String, Object>> getPersTime(String dataString){
+		
+		return generDao.getPersTime(dataString);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getPersPre(String dataString){
+		
+		return generDao.getPersPre(dataString);
+	}
+	@Override
+	public List<HashMap<String, Object>> getPersGain(String dataString){
+		
+		return generDao.getPersGain(dataString);
+	}
+	
+	
+	
 }
