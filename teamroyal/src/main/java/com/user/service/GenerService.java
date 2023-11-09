@@ -23,4 +23,6 @@ public interface GenerService {
 	List<HashMap<String, Object>> getAllGen(String dateString);
 	
 	List<HashMap<String, Object>> getAllPre(String dateString);
+	
+	List<HashMap<String, Object>> getAllPreModal();
 }

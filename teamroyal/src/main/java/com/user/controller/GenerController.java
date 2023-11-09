@@ -1,5 +1,6 @@
 package com.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,12 @@ public class GenerController {
     public List<Map<String,Object>> getRec(){
     	List<Map<String,Object>> rec_data = generService.getRec();
     	return rec_data;
+    	
+    }
+    @GetMapping("/allpre")
+    public List<HashMap<String,Object>> getAllPreModal(){
+    	List<HashMap<String,Object>> allpre  = generService.getAllPreModal();
+    	return allpre;
     	
     }
     

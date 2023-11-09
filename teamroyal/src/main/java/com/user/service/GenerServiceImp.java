@@ -59,5 +59,9 @@ public	List<HashMap<String, Object>> processDateData(String dateString){
 		
 		return generDao.getAllPre(dateString);
 	}
-	
+	@Override
+	public List<HashMap<String, Object>> getAllPreModal(){
+		
+		return generDao.getAllPreModal();
+	}
 }
