@@ -210,7 +210,7 @@
                            </div>
                         </div>
                         <div class="w-100 col-12 col-md-8 ">
-                           <div id="sh-symbols">f</div>
+                           <div id="sh-symbols-kr"></div>
                            <div class="d-flex">
                               <div class="ld-row d-none">
                                  <label class="ld-label d-none"> Enable Polling </label> <input

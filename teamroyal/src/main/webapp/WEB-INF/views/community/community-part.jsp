@@ -107,6 +107,50 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Invoice List Table -->
+                
+                 <!-- Navbar pills -->
+            <div class="row">
+             <div class="col-md-12">
+                <ul class="nav nav-pills flex-column flex-sm-row mb-4">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/user/login/userProfile"><i
+                        class="ti-xs ti ti-user-check me-1"></i>
+                      Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/user/login/userProfile/notification"><i class="ti-xs ti ti-bell me-1"></i>
+                      Notification</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                      <a class="nav-link" href="./pages-profile-email.html"><i class="ti-xs ti ti-mail me-1"></i>
+                        email</a>
+                    </li> -->
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="./pages-profile-teams.html"><i class="ti-xs ti ti-users me-1"></i>
+                      Teams</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./pages-profile-projects.html"><i
+                        class="ti-xs ti ti-layout-grid me-1"></i>Projects</a>
+                  </li> -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="/community/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
+                      Community</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/auction/list/part/${user.userNick }"><i class="ti-xs ti ti-users me-1"></i>
+                      Auction</a>
+                    </li>
+                  <c:if test="${user.userNick == 'admin' }">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/user/login/userProfile/manager"><i
+                        class="ti-xs ti ti-map-pins me-1"></i>Manager</a>
+                  </li>
+                  </c:if>
+                </ul>
+              </div>
+            </div>
+            <!--/ Navbar pills -->
                 <div class="card w-100 vh-100">
                     <div class="card-datatable table-responsives p-3">
                         <table id="example" class="display w-100 sh-comm-table" >

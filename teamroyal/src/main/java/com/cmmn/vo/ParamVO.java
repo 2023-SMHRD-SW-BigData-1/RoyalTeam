@@ -13,4 +13,5 @@ public class ParamVO {
 	private String searchTwo;
 
 	private String marketCreateNm;
+	private String loginUserNick;
 }

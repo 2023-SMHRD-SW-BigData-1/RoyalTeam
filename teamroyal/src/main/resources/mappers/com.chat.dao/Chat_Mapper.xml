@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.chat.dao.ChatDAO">
+
+	<select id="roomSelectList" parameterType="com.cmmn.vo.ParamVO" resultType="com.chat.vo.RoomVO" >
+		SELECT 
+			ROOMID AS roomId
+			, ROOMNAME AS roomName
+			, USERCOUNT AS userCount
+		FROM ROYAL.TB_COM_ROOM
+	</select>
+	
+	<insert id="roomInfoInsert" parameterType="com.chat.vo.RoomVO">
+		INSERT INTO ROYAL.TB_COM_ROOM (ROOMID, ROOMNAME, USERCOUNT) VALUES('${roomId}', '${roomName}', 0)
+	</insert>
+
+</mapper>
